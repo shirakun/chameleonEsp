@@ -51,10 +51,10 @@ namespace DirectX12Interface {
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-    if (ImGui::GetCurrentContext() && ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
+    if (ImGui::GetCurrentContext() && ImGui::GetIO().BackendPlatformUserData && ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
         return true;
 
-    if (cfg->bMenuOpen && ImGui::GetCurrentContext() && ImGui::GetIO().WantCaptureMouse)
+    if (cfg->bMenuOpen && ImGui::GetCurrentContext() && ImGui::GetIO().BackendPlatformUserData && ImGui::GetIO().WantCaptureMouse)
     {
         switch (uMsg)
         {
