@@ -102,16 +102,16 @@ HRESULT __stdcall hkPresent(IDXGISwapChain3* pSwapChain, UINT SyncInterval, UINT
                 cfg.OversampleH = 1;
                 cfg.OversampleV = 1;
 
-                if (io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\segoeui.ttf", 13.0f, &cfg, io.Fonts->GetGlyphRangesDefault()))
+                if (io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\segoeui.ttf", 15.0f, &cfg, io.Fonts->GetGlyphRangesDefault()))
                 {
                     cfg.MergeMode = true;
-                    io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\segoeui.ttf", 13.0f, &cfg, io.Fonts->GetGlyphRangesCyrillic());
-                    io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\segoeui.ttf", 13.0f, &cfg, io.Fonts->GetGlyphRangesGreek());
+                    io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\segoeui.ttf", 15.0f, &cfg, io.Fonts->GetGlyphRangesCyrillic());
+                    io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\segoeui.ttf", 15.0f, &cfg, io.Fonts->GetGlyphRangesGreek());
                     static const ImWchar arabic_ranges[] = { 0x0600, 0x06FF, 0xFB50, 0xFDFF, 0xFE70, 0xFEFF, 0 };
-                    io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\segoeui.ttf", 13.0f, &cfg, arabic_ranges);
-                    io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\msyh.ttc",    13.0f, &cfg, io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
-                    io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\meiryo.ttc",  13.0f, &cfg, io.Fonts->GetGlyphRangesJapanese());
-                    io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\malgun.ttf",  13.0f, &cfg, io.Fonts->GetGlyphRangesKorean());
+                    io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\segoeui.ttf", 15.0f, &cfg, arabic_ranges);
+                    io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\msyh.ttc",    15.0f, &cfg, io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
+                    io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\meiryo.ttc",  15.0f, &cfg, io.Fonts->GetGlyphRangesJapanese());
+                    io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\malgun.ttf",  15.0f, &cfg, io.Fonts->GetGlyphRangesKorean());
                 }
             }
 
