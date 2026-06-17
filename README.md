@@ -4,5 +4,10 @@ credits to [Dumper7](https://github.com/Encryqed/Dumper-7), [Unreal-Internal-Bas
 
 inject with your favorite injector, i use [Xenos](https://github.com/darthton/xenos)
 
-<img width="1282" height="752" alt="PenguinHotel-Win64-Shipping_kJkLaVgomX" src="https://github.com/user-attachments/assets/c00a08d4-678e-48e5-be38-5c208dcda308" />
+### notes
 
+the majority of sessions i've had using this have been working fine.
+
+i've noticed issues such as ESP not showing at some players or some rare game crashes, but i haven't been able to reproduce them consistently for now.
+
+<img width="1282" height="752" alt="PenguinHotel-Win64-Shipping_kJkLaVgomX" src="https://github.com/user-attachments/assets/c00a08d4-678e-48e5-be38-5c208dcda308" />
