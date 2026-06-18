@@ -260,10 +260,11 @@ HRESULT __stdcall hkPresent(IDXGISwapChain3* pSwapChain, UINT SyncInterval, UINT
 
     // Wait for the GPU to finish the last frame that used this context's allocator before
     // resetting it — resetting an allocator with in-flight commands is undefined behaviour.
+    // Bounded wait so a wedged/removed GPU can't hard-hang the game's render thread.
     if (DirectX12Interface::Fence->GetCompletedValue() < CurrentFrameContext.FenceValue)
     {
         DirectX12Interface::Fence->SetEventOnCompletion(CurrentFrameContext.FenceValue, DirectX12Interface::FenceEvent);
-        WaitForSingleObject(DirectX12Interface::FenceEvent, INFINITE);
+        WaitForSingleObject(DirectX12Interface::FenceEvent, 2000);
     }
 
     CurrentFrameContext.CommandAllocator->Reset();
@@ -302,10 +303,25 @@ void __stdcall hkExecuteCommandLists(ID3D12CommandQueue* queue, UINT NumCommandL
 {
     // Only capture the DIRECT (graphics) queue — the game also runs copy/compute queues, and
     // submitting our graphics command list to one of those would be an invalid submission and
-    // remove the device. Filtering by queue type avoids grabbing the wrong one.
+    // remove the device. When the device is already known, also require the queue to belong to
+    // it, so on a multi-adapter machine (iGPU + dGPU) we don't grab a DIRECT queue from the
+    // wrong device. (Best effort: ExecuteCommandLists often fires before Present sets Device,
+    // in which case we fall back to capturing the first DIRECT queue, as before.)
     if (!DirectX12Interface::CommandQueue && queue && queue->GetDesc().Type == D3D12_COMMAND_LIST_TYPE_DIRECT)
     {
-        DirectX12Interface::CommandQueue = queue;
+        bool sameDevice = true;
+        if (DirectX12Interface::Device)
+        {
+            ID3D12Device* queueDevice = nullptr;
+            if (SUCCEEDED(queue->GetDevice(IID_PPV_ARGS(&queueDevice))))
+            {
+                sameDevice = (queueDevice == DirectX12Interface::Device);
+                queueDevice->Release();
+            }
+        }
+
+        if (sameDevice)
+            DirectX12Interface::CommandQueue = queue;
     }
 
     return oExecuteCommandLists(queue, NumCommandLists, ppCommandLists);
