@@ -182,6 +182,31 @@ public:
 };
 DUMPER7_ASSERTS_SteamWorkshopMapSubsystem_SubmitWorkshopItemUpdate;
 
+// Function SteamWorkshopMaps.SteamWorkshopMapSubsystem.CleanAllSubscribedWorkshopItemFoldersForMount
+// 0x0028 (0x0028 - 0x0000)
+struct SteamWorkshopMapSubsystem_CleanAllSubscribedWorkshopItemFoldersForMount final
+{
+public:
+	TArray<class FString>                         DeletedFiles;                                      // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, NativeAccessSpecifierPublic)
+	class FString                                 ErrorMessage;                                      // 0x0010(0x0010)(Parm, OutParm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          ReturnValue;                                       // 0x0020(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_21[0x7];                                       // 0x0021(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+DUMPER7_ASSERTS_SteamWorkshopMapSubsystem_CleanAllSubscribedWorkshopItemFoldersForMount;
+
+// Function SteamWorkshopMaps.SteamWorkshopMapSubsystem.CleanWorkshopItemFolderForMount
+// 0x0038 (0x0038 - 0x0000)
+struct SteamWorkshopMapSubsystem_CleanWorkshopItemFolderForMount final
+{
+public:
+	class FString                                 ItemId;                                            // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<class FString>                         DeletedFiles;                                      // 0x0010(0x0010)(Parm, OutParm, ZeroConstructor, NativeAccessSpecifierPublic)
+	class FString                                 ErrorMessage;                                      // 0x0020(0x0010)(Parm, OutParm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          ReturnValue;                                       // 0x0030(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_31[0x7];                                       // 0x0031(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+DUMPER7_ASSERTS_SteamWorkshopMapSubsystem_CleanWorkshopItemFolderForMount;
+
 // Function SteamWorkshopMaps.SteamWorkshopMapSubsystem.GetPakMountDiagnostics
 // 0x0068 (0x0068 - 0x0000)
 struct SteamWorkshopMapSubsystem_GetPakMountDiagnostics final

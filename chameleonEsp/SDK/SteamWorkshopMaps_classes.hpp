@@ -107,6 +107,8 @@ public:
 	bool RequestWorkshopItemDetails(const class FString& ItemId, int32 MaxAgeSeconds, class FString* ErrorMessage);
 	bool SubmitWorkshopItemUpdate(const class FString& ItemId, const struct FSteamWorkshopSubmitOptions& Options, class FString* ErrorMessage);
 
+	bool CleanAllSubscribedWorkshopItemFoldersForMount(TArray<class FString>* DeletedFiles, class FString* ErrorMessage) const;
+	bool CleanWorkshopItemFolderForMount(const class FString& ItemId, TArray<class FString>* DeletedFiles, class FString* ErrorMessage) const;
 	void GetPakMountDiagnostics(const class FString& PakFilePath, struct FSteamWorkshopPakMountDiagnostics* OutDiagnostics) const;
 	bool GetSubscribedWorkshopItems(TArray<struct FSteamWorkshopItemInfo>* OutItems, class FString* ErrorMessage) const;
 	bool GetWorkshopItemInstallInfo(const class FString& ItemId, struct FSteamWorkshopItemInstallInfo* OutInfo, class FString* ErrorMessage) const;

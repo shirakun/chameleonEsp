@@ -243,16 +243,22 @@ void ABP_FirstPersonCharacter_cLeon_Character_C::Provocation_Local_()
 
 
 // Function BP_FirstPersonCharacter_cLeon_Character.BP_FirstPersonCharacter_cLeon_Character_C.ShowAllSurvivors(Local)
-// (Net, NetReliable, NetClient, BlueprintCallable, BlueprintEvent)
+// (Net, NetReliable, HasOutParams, NetClient, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// const TArray<class ABP_FirstPersonPlayerState_Online_cLeon_C*>&LivePlayerStates                                       (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
 
-void ABP_FirstPersonCharacter_cLeon_Character_C::ShowAllSurvivors_Local_()
+void ABP_FirstPersonCharacter_cLeon_Character_C::ShowAllSurvivors_Local_(const TArray<class ABP_FirstPersonPlayerState_Online_cLeon_C*>& LivePlayerStates)
 {
 	static class UFunction* Func = nullptr;
 
 	if (Func == nullptr)
 		Func = Class->GetFunction("BP_FirstPersonCharacter_cLeon_Character_C", "ShowAllSurvivors(Local)");
 
-	UObject::ProcessEvent(Func, nullptr);
+	Params::BP_FirstPersonCharacter_cLeon_Character_C_ShowAllSurvivors_Local_ Parms{};
+
+	Parms.LivePlayerStates = std::move(LivePlayerStates);
+
+	UObject::ProcessEvent(Func, &Parms);
 }
 
 

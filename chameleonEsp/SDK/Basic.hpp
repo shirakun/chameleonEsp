@@ -59,11 +59,11 @@ using namespace UC;
 */
 namespace Offsets
 {
-	constexpr int32 GObjects          = 0x09F1EBD0;
-	constexpr int32 AppendString      = 0x013B2FB0;
-	constexpr int32 GNames            = 0x09E02578;
-	constexpr int32 GWorld            = 0x09C68620;
-	constexpr int32 ProcessEvent      = 0x015D07F0;
+	constexpr int32 GObjects          = 0x09F1DBD0;
+	constexpr int32 AppendString      = 0x013B2F70;
+	constexpr int32 GNames            = 0x09E01578;
+	constexpr int32 GWorld            = 0x09C67620;
+	constexpr int32 ProcessEvent      = 0x015D07B0;
 	constexpr int32 ProcessEventIdx   = 0x0000004C;
 }
 
@@ -614,7 +614,7 @@ DUMPER7_ASSERTS_FTopLevelAssetPath;
 
 // ScriptStruct CoreUObject.SoftObjectPath
 // 0x0020 (0x0020 - 0x0000)
-struct alignas(0x08) FSoftObjectPath
+struct FSoftObjectPath
 {
 public:
 	struct FTopLevelAssetPath                     AssetPath;                                         // 0x0000(0x0010)(NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)

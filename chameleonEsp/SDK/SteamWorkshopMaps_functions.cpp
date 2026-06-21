@@ -496,6 +496,75 @@ bool USteamWorkshopMapSubsystem::SubmitWorkshopItemUpdate(const class FString& I
 }
 
 
+// Function SteamWorkshopMaps.SteamWorkshopMapSubsystem.CleanAllSubscribedWorkshopItemFoldersForMount
+// (Final, Native, Public, HasOutParams, BlueprintCallable, BlueprintPure, Const)
+// Parameters:
+// TArray<class FString>*                  DeletedFiles                                           (Parm, OutParm, ZeroConstructor, NativeAccessSpecifierPublic)
+// class FString*                          ErrorMessage                                           (Parm, OutParm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// bool                                    ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+
+bool USteamWorkshopMapSubsystem::CleanAllSubscribedWorkshopItemFoldersForMount(TArray<class FString>* DeletedFiles, class FString* ErrorMessage) const
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("SteamWorkshopMapSubsystem", "CleanAllSubscribedWorkshopItemFoldersForMount");
+
+	Params::SteamWorkshopMapSubsystem_CleanAllSubscribedWorkshopItemFoldersForMount Parms{};
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	Func->FunctionFlags = Flgs;
+
+	if (DeletedFiles != nullptr)
+		*DeletedFiles = std::move(Parms.DeletedFiles);
+
+	if (ErrorMessage != nullptr)
+		*ErrorMessage = std::move(Parms.ErrorMessage);
+
+	return Parms.ReturnValue;
+}
+
+
+// Function SteamWorkshopMaps.SteamWorkshopMapSubsystem.CleanWorkshopItemFolderForMount
+// (Final, Native, Public, HasOutParams, BlueprintCallable, BlueprintPure, Const)
+// Parameters:
+// const class FString&                    ItemId                                                 (Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// TArray<class FString>*                  DeletedFiles                                           (Parm, OutParm, ZeroConstructor, NativeAccessSpecifierPublic)
+// class FString*                          ErrorMessage                                           (Parm, OutParm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// bool                                    ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+
+bool USteamWorkshopMapSubsystem::CleanWorkshopItemFolderForMount(const class FString& ItemId, TArray<class FString>* DeletedFiles, class FString* ErrorMessage) const
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("SteamWorkshopMapSubsystem", "CleanWorkshopItemFolderForMount");
+
+	Params::SteamWorkshopMapSubsystem_CleanWorkshopItemFolderForMount Parms{};
+
+	Parms.ItemId = std::move(ItemId);
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	Func->FunctionFlags = Flgs;
+
+	if (DeletedFiles != nullptr)
+		*DeletedFiles = std::move(Parms.DeletedFiles);
+
+	if (ErrorMessage != nullptr)
+		*ErrorMessage = std::move(Parms.ErrorMessage);
+
+	return Parms.ReturnValue;
+}
+
+
 // Function SteamWorkshopMaps.SteamWorkshopMapSubsystem.GetPakMountDiagnostics
 // (Final, Native, Public, HasOutParams, BlueprintCallable, BlueprintPure, Const)
 // Parameters:

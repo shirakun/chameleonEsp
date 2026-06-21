@@ -684,6 +684,26 @@ void ABP_FirstPersonCharacter_cLeon_Character_Hunter_C::InpActEvt_IA_Crouch_K2No
 }
 
 
+// Function BP_FirstPersonCharacter_cLeon_Character_Hunter.BP_FirstPersonCharacter_cLeon_Character_Hunter_C.HitSuccess
+// (Net, NetReliable, NetClient, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// class ABP_FirstPersonCharacter_cLeon_Character_C*FirstPersonCharacter                                   (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+
+void ABP_FirstPersonCharacter_cLeon_Character_Hunter_C::HitSuccess(class ABP_FirstPersonCharacter_cLeon_Character_C* FirstPersonCharacter)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("BP_FirstPersonCharacter_cLeon_Character_Hunter_C", "HitSuccess");
+
+	Params::BP_FirstPersonCharacter_cLeon_Character_Hunter_C_HitSuccess Parms{};
+
+	Parms.FirstPersonCharacter = FirstPersonCharacter;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
 // Function BP_FirstPersonCharacter_cLeon_Character_Hunter.BP_FirstPersonCharacter_cLeon_Character_Hunter_C.ExecuteUbergraph_BP_FirstPersonCharacter_cLeon_Character_Hunter
 // (Final, UbergraphFunction, HasDefaults)
 // Parameters:
@@ -775,6 +795,28 @@ void ABP_FirstPersonCharacter_cLeon_Character_Hunter_C::ChangeViewEnd()
 		Func = Class->GetFunction("BP_FirstPersonCharacter_cLeon_Character_Hunter_C", "ChangeViewEnd");
 
 	UObject::ProcessEvent(Func, nullptr);
+}
+
+
+// Function BP_FirstPersonCharacter_cLeon_Character_Hunter.BP_FirstPersonCharacter_cLeon_Character_Hunter_C.AntiChatTrace
+// (Net, NetReliable, NetServer, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// const struct FVector&                   End                                                    (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+// class ABP_FirstPersonCharacter_cLeon_Character_C*Target                                                 (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+
+void ABP_FirstPersonCharacter_cLeon_Character_Hunter_C::AntiChatTrace(const struct FVector& End, class ABP_FirstPersonCharacter_cLeon_Character_C* Target)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("BP_FirstPersonCharacter_cLeon_Character_Hunter_C", "AntiChatTrace");
+
+	Params::BP_FirstPersonCharacter_cLeon_Character_Hunter_C_AntiChatTrace Parms{};
+
+	Parms.End = std::move(End);
+	Parms.Target = Target;
+
+	UObject::ProcessEvent(Func, &Parms);
 }
 
 

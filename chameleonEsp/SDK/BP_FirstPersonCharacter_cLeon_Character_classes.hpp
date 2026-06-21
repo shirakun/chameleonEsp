@@ -11,9 +11,9 @@
 #include "Basic.hpp"
 
 #include "CoreUObject_structs.hpp"
+#include "BP_FirstPersonCharacter_Main_classes.hpp"
 #include "Engine_structs.hpp"
 #include "Mover_structs.hpp"
-#include "BP_FirstPersonCharacter_Main_classes.hpp"
 #include "ST_ItemCoreDatas_structs.hpp"
 #include "SlateCore_structs.hpp"
 
@@ -95,7 +95,7 @@ public:
 	void SpawnDeathSplash();
 	void PastDecal(int32 DecalIndex);
 	void Provocation_Local_();
-	void ShowAllSurvivors_Local_();
+	void ShowAllSurvivors_Local_(const TArray<class ABP_FirstPersonPlayerState_Online_cLeon_C*>& LivePlayerStates);
 	void SetupPlayerState();
 	void Provocation_Client_();
 	void Provocation_Server_();

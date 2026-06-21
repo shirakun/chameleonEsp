@@ -70,11 +70,13 @@ public:
 	void InpActEvt_IA_Shot_K2Node_EnhancedInputActionEvent_2(const struct FInputActionValue& ActionValue, float ElapsedTime, float TriggeredTime, const class UInputAction* SourceAction);
 	void InpActEvt_IA_Jump_K2Node_EnhancedInputActionEvent_0(const struct FInputActionValue& ActionValue, float ElapsedTime, float TriggeredTime, const class UInputAction* SourceAction);
 	void InpActEvt_IA_Crouch_K2Node_EnhancedInputActionEvent_1(const struct FInputActionValue& ActionValue, float ElapsedTime, float TriggeredTime, const class UInputAction* SourceAction);
+	void HitSuccess(class ABP_FirstPersonCharacter_cLeon_Character_C* FirstPersonCharacter);
 	void ExecuteUbergraph_BP_FirstPersonCharacter_cLeon_Character_Hunter(int32 EntryPoint);
 	void CheckViewInSurvivor();
 	void CheckViewInPlayers(class ABP_FirstPersonCharacter_cLeon_Character_Survivor_C* TargetCharacter, int32* Rezult);
 	void ChangeViewMode(class FName ModeName_ChangeViewMode, bool Quick_ChangeViewMode);
 	void ChangeViewEnd();
+	void AntiChatTrace(const struct FVector& End, class ABP_FirstPersonCharacter_cLeon_Character_C* Target);
 	void AddtoViewDatas_Server_(const TArray<class ABP_FirstPersonPlayerState_Online_cLeon_C*>& PlayerStates, const TArray<int32>& Points);
 
 public:

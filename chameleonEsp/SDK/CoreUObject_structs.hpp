@@ -830,7 +830,7 @@ DUMPER7_ASSERTS_FTopLevelAssetPath;
 
 // ScriptStruct CoreUObject.SoftObjectPath
 // 0x0020 (0x0020 - 0x0000)
-struct alignas(0x08) FSoftObjectPath
+struct FSoftObjectPath
 {
 public:
 	struct FTopLevelAssetPath                     AssetPath;                                         // 0x0000(0x0010)(NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
