@@ -10,12 +10,12 @@
 
 #include "Basic.hpp"
 
+#include "Engine_structs.hpp"
+#include "ST_ItemCoreDatas_structs.hpp"
 #include "CoreUObject_structs.hpp"
 #include "BP_FirstPersonCharacter_Main_classes.hpp"
-#include "Engine_structs.hpp"
-#include "Mover_structs.hpp"
-#include "ST_ItemCoreDatas_structs.hpp"
 #include "SlateCore_structs.hpp"
+#include "Mover_structs.hpp"
 
 
 SDK_NAMESPACE_START
@@ -85,7 +85,7 @@ public:
 	void EEYANChange();
 	void SetStencilValue_Force_(int32 StencilValue);
 	void ResetRagdoll();
-	void GameEndResetState(bool IsLive);
+	void GameEndResetState(bool IsLive_0);
 	void GameEndMoveStop();
 	void GoToSpectate(bool CanBackSpectate);
 	void ForceShowBody();
@@ -109,20 +109,20 @@ public:
 	void ShowDeathWidget();
 	void DashCancel();
 	void PaintModeCancel();
-	void SetCastShadow_Server_(bool BodyShadow);
-	void SetCastShadow(bool BodyShadow);
+	void SetCastShadow_Server_(bool BodyShadow_0);
+	void SetCastShadow(bool BodyShadow_0);
 	void PaintTick();
 	void SelectEmote(class UClass* EmoteData, int32 Index_0);
-	void ChangeViewMode(class FName ModeName_ChangeViewMode, bool Quick_ChangeViewMode);
+	void ChangeViewMode(class FName ModeName, bool Quick);
 	void PlayerControllerSetup();
 	void DeathPlayer();
 	void ReceiveRestarted();
-	void ReceiveTick(float DeltaSeconds_ReceiveTick);
+	void ReceiveTick(float DeltaSeconds);
 	void ReceiveBeginPlay();
 	void DeltaUpdate();
-	void CustomCrouch_Server_(double Height, bool Is_Crouching_Input);
-	void SetIsClimbing(bool IsClimbing);
-	void CustomCrouch_Client_(double Height, bool Is_Crouching_Input);
+	void CustomCrouch_Server_(double Height, bool Is_Crouching_Input_0);
+	void SetIsClimbing(bool IsClimbing_0);
+	void CustomCrouch_Client_(double Height, bool Is_Crouching_Input_0);
 	void BndEvt__BP_FirstPersonCharacter_cLeon_Character_ExtendedPhysicsCharacterMoverComponent_K2Node_ComponentBoundEvent_0_Mover_OnStanceChanged__DelegateSignature(EStanceMode OldStance, EStanceMode NewStance);
 	void InpActEvt_Five_K2Node_InputKeyEvent_0(const struct FKey& Key);
 	void InpActEvt_Two_K2Node_InputKeyEvent_1(const struct FKey& Key);
@@ -152,17 +152,17 @@ public:
 	void InpActEvt_IA_Zoom_K2Node_EnhancedInputActionEvent_21(const struct FInputActionValue& ActionValue, float ElapsedTime, float TriggeredTime, const class UInputAction* SourceAction);
 	void InpActEvt_IA_Zoom_K2Node_EnhancedInputActionEvent_22(const struct FInputActionValue& ActionValue, float ElapsedTime, float TriggeredTime, const class UInputAction* SourceAction);
 	void InpActEvt_IA_Dash_K2Node_EnhancedInputActionEvent_23(const struct FInputActionValue& ActionValue, float ElapsedTime, float TriggeredTime, const class UInputAction* SourceAction);
-	void CanLook(bool* Rezult_CanLook);
+	void CanLook(bool* Rezult);
 	void Zoom(double PlusValue);
 	void PaintViewLookUpdate();
 	void OnRep_AnimationIndex();
-	void ProduceInput(int32 SimTimeMs_ProduceInput, struct FMoverInputCmdContext* InputCmdResult_ProduceInput);
+	void ProduceInput(int32 SimTimeMs, struct FMoverInputCmdContext* InputCmdResult);
 	void OnRep_BodyShadow();
 	bool CanDash();
 	void OnRep_BodyVisibility();
 	void AlpahUpdate();
 	void SetAlpha(bool IsVisibile);
-	void GetMoveSpeedMultiply(double* MultiplyValue_GetMoveSpeedMultiply);
+	void GetMoveSpeedMultiply(double* MultiplyValue);
 
 public:
 	static class UClass* StaticClass()

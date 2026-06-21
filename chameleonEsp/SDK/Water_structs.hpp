@@ -75,20 +75,19 @@ enum class EWaterBrushFalloffMode : uint8
 	EWaterBrushFalloffMode_MAX               = 2,
 };
 
-// ScriptStruct Water.WaterBodyWeightmapSettings
-// 0x0040 (0x0040 - 0x0000)
-struct FWaterBodyWeightmapSettings final
+// ScriptStruct Water.ShallowWaterSimulationGrid
+// 0x0058 (0x0058 - 0x0000)
+struct FShallowWaterSimulationGrid final
 {
 public:
-	float                                         FalloffWidth;                                      // 0x0000(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         EdgeOffset;                                        // 0x0004(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TSoftObjectPtr<class UTexture2D>              ModulationTexture;                                 // 0x0008(0x0028)(Edit, BlueprintVisible, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         TextureTiling;                                     // 0x0030(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         TextureInfluence;                                  // 0x0034(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         Midpoint;                                          // 0x0038(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         FinalOpacity;                                      // 0x003C(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FVector4>                       ArrayValues;                                       // 0x0000(0x0010)(ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FIntVector2                            NumCells;                                          // 0x0010(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FVector                                position;                                          // 0x0018(0x0018)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FVector2D                              Size;                                              // 0x0030(0x0010)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FVector2D                              Dx;                                                // 0x0040(0x0010)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UTexture2D*                             BakedTexture;                                      // 0x0050(0x0008)(ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic, TObjectPtr)
 };
-DUMPER7_ASSERTS_FWaterBodyWeightmapSettings;
+DUMPER7_ASSERTS_FShallowWaterSimulationGrid;
 
 // ScriptStruct Water.SphericalPontoon
 // 0x02D0 (0x02D0 - 0x0000)
@@ -120,20 +119,6 @@ public:
 	uint8                                         Pad_2C0[0x10];                                     // 0x02C0(0x0010)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 DUMPER7_ASSERTS_FSphericalPontoon;
-
-// ScriptStruct Water.ShallowWaterSimulationGrid
-// 0x0058 (0x0058 - 0x0000)
-struct FShallowWaterSimulationGrid final
-{
-public:
-	TArray<struct FVector4>                       ArrayValues;                                       // 0x0000(0x0010)(ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FIntVector2                            NumCells;                                          // 0x0010(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FVector                                position;                                          // 0x0018(0x0018)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FVector2D                              Size;                                              // 0x0030(0x0010)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FVector2D                              Dx;                                                // 0x0040(0x0010)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class UTexture2D*                             BakedTexture;                                      // 0x0050(0x0008)(ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic, TObjectPtr)
-};
-DUMPER7_ASSERTS_FShallowWaterSimulationGrid;
 
 // ScriptStruct Water.BuoyancyData
 // 0x0090 (0x0090 - 0x0000)
@@ -187,6 +172,21 @@ public:
 	double                                        SectionSize;                                       // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, AdvancedDisplay, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 DUMPER7_ASSERTS_FWaterBodyStaticMeshSettings;
+
+// ScriptStruct Water.WaterBodyWeightmapSettings
+// 0x0040 (0x0040 - 0x0000)
+struct FWaterBodyWeightmapSettings final
+{
+public:
+	float                                         FalloffWidth;                                      // 0x0000(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         EdgeOffset;                                        // 0x0004(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TSoftObjectPtr<class UTexture2D>              ModulationTexture;                                 // 0x0008(0x0028)(Edit, BlueprintVisible, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         TextureTiling;                                     // 0x0030(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         TextureInfluence;                                  // 0x0034(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         Midpoint;                                          // 0x0038(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         FinalOpacity;                                      // 0x003C(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+DUMPER7_ASSERTS_FWaterBodyWeightmapSettings;
 
 // ScriptStruct Water.WaterCurveSettings
 // 0x0020 (0x0020 - 0x0000)

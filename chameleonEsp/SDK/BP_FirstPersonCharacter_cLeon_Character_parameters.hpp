@@ -81,12 +81,12 @@ public:
 	double                                        Temp_real_Variable_0;                              // 0x01F0(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	double                                        Temp_real_Variable_1;                              // 0x01F8(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	double                                        Temp_real_Variable_2;                              // 0x0200(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	double                                        Temp_real_Variable_1_0;                            // 0x0208(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	double                                        Temp_real_Variable_1_3;                            // 0x0208(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	bool                                          Temp_bool_Variable;                                // 0x0210(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	uint8                                         Pad_211[0x7];                                      // 0x0211(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	double                                        Temp_real_Variable_1_1;                            // 0x0218(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	double                                        Temp_real_Variable_1_2;                            // 0x0220(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	double                                        Temp_real_Variable_1_3;                            // 0x0228(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	double                                        Temp_real_Variable_1_0;                            // 0x0218(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	double                                        Temp_real_Variable_1_1;                            // 0x0220(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	double                                        Temp_real_Variable_1_2;                            // 0x0228(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	class UWBP_EmoteMenu_C*                       CallFunc_Create_ReturnValue;                       // 0x0230(0x0008)(ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash)
 	TDelegate<void(class UClass* EmoteData, int32 Index_0)> K2Node_CreateDelegate_OutputDelegate;    // 0x0238(0x0010)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
 	bool                                          CallFunc_IsValid_ReturnValue_8;                    // 0x0248(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
@@ -101,9 +101,9 @@ public:
 	class UInputAction*                           Temp_object_Variable_2;                            // 0x0298(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
 	bool                                          CallFunc_Conv_InputActionValueToBool_ReturnValue_4; // 0x02A0(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	uint8                                         Pad_2A1[0x7];                                      // 0x02A1(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	double                                        Temp_real_Variable_2_0;                            // 0x02A8(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	double                                        Temp_real_Variable_2_1;                            // 0x02A8(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	double                                        Temp_real_Variable_3;                              // 0x02B0(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	double                                        Temp_real_Variable_2_1;                            // 0x02B8(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	double                                        Temp_real_Variable_2_0;                            // 0x02B8(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	double                                        Temp_real_Variable_3_0;                            // 0x02C0(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	bool                                          Temp_bool_Variable_1;                              // 0x02C8(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	uint8                                         Pad_2C9[0x7];                                      // 0x02C9(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
@@ -769,7 +769,7 @@ DUMPER7_ASSERTS_BP_FirstPersonCharacter_cLeon_Character_C_SetStencilValue_Force_
 struct BP_FirstPersonCharacter_cLeon_Character_C_GameEndResetState final
 {
 public:
-	bool                                          IsLive;                                            // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          IsLive_0;                                          // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 DUMPER7_ASSERTS_BP_FirstPersonCharacter_cLeon_Character_C_GameEndResetState;
 
@@ -823,7 +823,7 @@ DUMPER7_ASSERTS_BP_FirstPersonCharacter_cLeon_Character_C_SetStencilValue_Game_;
 struct BP_FirstPersonCharacter_cLeon_Character_C_SetCastShadow_Server_ final
 {
 public:
-	bool                                          BodyShadow;                                        // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          BodyShadow_0;                                      // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 DUMPER7_ASSERTS_BP_FirstPersonCharacter_cLeon_Character_C_SetCastShadow_Server_;
 
@@ -832,7 +832,7 @@ DUMPER7_ASSERTS_BP_FirstPersonCharacter_cLeon_Character_C_SetCastShadow_Server_;
 struct BP_FirstPersonCharacter_cLeon_Character_C_SetCastShadow final
 {
 public:
-	bool                                          BodyShadow;                                        // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          BodyShadow_0;                                      // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 DUMPER7_ASSERTS_BP_FirstPersonCharacter_cLeon_Character_C_SetCastShadow;
 
@@ -851,8 +851,8 @@ DUMPER7_ASSERTS_BP_FirstPersonCharacter_cLeon_Character_C_SelectEmote;
 struct BP_FirstPersonCharacter_cLeon_Character_C_ChangeViewMode final
 {
 public:
-	class FName                                   ModeName_ChangeViewMode;                           // 0x0000(0x0008)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	bool                                          Quick_ChangeViewMode;                              // 0x0008(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	class FName                                   ModeName;                                          // 0x0000(0x0008)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          Quick;                                             // 0x0008(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 DUMPER7_ASSERTS_BP_FirstPersonCharacter_cLeon_Character_C_ChangeViewMode;
 
@@ -861,7 +861,7 @@ DUMPER7_ASSERTS_BP_FirstPersonCharacter_cLeon_Character_C_ChangeViewMode;
 struct BP_FirstPersonCharacter_cLeon_Character_C_ReceiveTick final
 {
 public:
-	float                                         DeltaSeconds_ReceiveTick;                          // 0x0000(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	float                                         DeltaSeconds;                                      // 0x0000(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 DUMPER7_ASSERTS_BP_FirstPersonCharacter_cLeon_Character_C_ReceiveTick;
 
@@ -871,7 +871,7 @@ struct BP_FirstPersonCharacter_cLeon_Character_C_CustomCrouch_Server_ final
 {
 public:
 	double                                        Height;                                            // 0x0000(0x0008)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	bool                                          Is_Crouching_Input;                                // 0x0008(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          Is_Crouching_Input_0;                              // 0x0008(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 DUMPER7_ASSERTS_BP_FirstPersonCharacter_cLeon_Character_C_CustomCrouch_Server_;
 
@@ -880,7 +880,7 @@ DUMPER7_ASSERTS_BP_FirstPersonCharacter_cLeon_Character_C_CustomCrouch_Server_;
 struct BP_FirstPersonCharacter_cLeon_Character_C_SetIsClimbing final
 {
 public:
-	bool                                          IsClimbing;                                        // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          IsClimbing_0;                                      // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 DUMPER7_ASSERTS_BP_FirstPersonCharacter_cLeon_Character_C_SetIsClimbing;
 
@@ -890,7 +890,7 @@ struct BP_FirstPersonCharacter_cLeon_Character_C_CustomCrouch_Client_ final
 {
 public:
 	double                                        Height;                                            // 0x0000(0x0008)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	bool                                          Is_Crouching_Input;                                // 0x0008(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          Is_Crouching_Input_0;                              // 0x0008(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 DUMPER7_ASSERTS_BP_FirstPersonCharacter_cLeon_Character_C_CustomCrouch_Client_;
 
@@ -1235,11 +1235,11 @@ DUMPER7_ASSERTS_BP_FirstPersonCharacter_cLeon_Character_C_InpActEvt_IA_Dash_K2No
 struct BP_FirstPersonCharacter_cLeon_Character_C_CanLook final
 {
 public:
-	bool                                          Rezult_CanLook;                                    // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	bool                                          CallFunc_Not_PreBool_ReturnValue_CanLook;          // 0x0001(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          Rezult;                                            // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          CallFunc_Not_PreBool_ReturnValue;                  // 0x0001(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	bool                                          CallFunc_Not_PreBool_ReturnValue_1;                // 0x0002(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	bool                                          CallFunc_CanLook_Rezult;                           // 0x0003(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	bool                                          CallFunc_BooleanAND_ReturnValue_CanLook;           // 0x0004(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          CallFunc_BooleanAND_ReturnValue;                   // 0x0004(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	bool                                          CallFunc_BooleanAND_ReturnValue_1;                 // 0x0005(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 DUMPER7_ASSERTS_BP_FirstPersonCharacter_cLeon_Character_C_CanLook;
@@ -1289,9 +1289,9 @@ DUMPER7_ASSERTS_BP_FirstPersonCharacter_cLeon_Character_C_PaintViewLookUpdate;
 struct BP_FirstPersonCharacter_cLeon_Character_C_ProduceInput final
 {
 public:
-	int32                                         SimTimeMs_ProduceInput;                            // 0x0000(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	int32                                         SimTimeMs;                                         // 0x0000(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FMoverInputCmdContext                  InputCmdResult_ProduceInput;                       // 0x0008(0x0010)(Parm, OutParm)
+	struct FMoverInputCmdContext                  InputCmdResult;                                    // 0x0008(0x0010)(Parm, OutParm)
 	struct FMoverInputCmdContext                  CallFunc_ProduceInput_InputCmdResult;              // 0x0018(0x0010)()
 	TScriptInterface<class IDynamicCapsuleHeightControlInterface> K2Node_DynamicCast_AsDynamic_Capsule_Height_Control_Interface; // 0x0028(0x0010)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	bool                                          K2Node_DynamicCast_bSuccess;                       // 0x0038(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
@@ -1303,7 +1303,7 @@ DUMPER7_ASSERTS_BP_FirstPersonCharacter_cLeon_Character_C_ProduceInput;
 struct BP_FirstPersonCharacter_cLeon_Character_C_CanDash final
 {
 public:
-	bool                                          ReturnValue_CanDash;                               // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	bool                                          CallFunc_CanDash_ReturnValue;                      // 0x0001(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	bool                                          CallFunc_Not_PreBool_ReturnValue;                  // 0x0002(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	bool                                          CallFunc_BooleanAND_ReturnValue;                   // 0x0003(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
@@ -1344,7 +1344,7 @@ DUMPER7_ASSERTS_BP_FirstPersonCharacter_cLeon_Character_C_SetAlpha;
 struct BP_FirstPersonCharacter_cLeon_Character_C_GetMoveSpeedMultiply final
 {
 public:
-	double                                        MultiplyValue_GetMoveSpeedMultiply;                // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	double                                        MultiplyValue;                                     // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	double                                        CallFunc_GetMoveSpeedMultiply_MultiplyValue;       // 0x0008(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	double                                        CallFunc_Conv_BoolToDouble_ReturnValue;            // 0x0010(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	double                                        CallFunc_Multiply_DoubleDouble_ReturnValue;        // 0x0018(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)

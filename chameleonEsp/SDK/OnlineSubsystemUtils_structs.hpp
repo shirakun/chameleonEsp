@@ -126,15 +126,16 @@ enum class ESpectatorReservationResult : uint8
 	ESpectatorReservationResult_MAX          = 16,
 };
 
-// ScriptStruct OnlineSubsystemUtils.PartyBeaconCrossplayPlatformMapping
-// 0x0020 (0x0020 - 0x0000)
-struct FPartyBeaconCrossplayPlatformMapping final
+// ScriptStruct OnlineSubsystemUtils.InAppPurchaseProductRequest2
+// 0x0018 (0x0018 - 0x0000)
+struct FInAppPurchaseProductRequest2 final
 {
 public:
-	class FString                                 PlatformName;                                      // 0x0000(0x0010)(ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 PlatformType;                                      // 0x0010(0x0010)(ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 ProductIdentifier;                                 // 0x0000(0x0010)(BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bIsConsumable;                                     // 0x0010(0x0001)(BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
-DUMPER7_ASSERTS_FPartyBeaconCrossplayPlatformMapping;
+DUMPER7_ASSERTS_FInAppPurchaseProductRequest2;
 
 // ScriptStruct OnlineSubsystemUtils.InAppPurchaseReceiptInfo2
 // 0x0040 (0x0040 - 0x0000)
@@ -156,27 +157,6 @@ public:
 	uint8                                         Pad_0[0x120];                                      // 0x0000(0x0120)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 DUMPER7_ASSERTS_FBlueprintSessionResult;
-
-// ScriptStruct OnlineSubsystemUtils.InAppPurchaseProductInfo2
-// 0x00F8 (0x00F8 - 0x0000)
-struct FInAppPurchaseProductInfo2 final
-{
-public:
-	class FString                                 Identifier;                                        // 0x0000(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 TransactionIdentifier;                             // 0x0010(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 DisplayName;                                       // 0x0020(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 DisplayDescription;                                // 0x0030(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 DisplayPrice;                                      // 0x0040(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         RawPrice;                                          // 0x0050(0x0004)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_54[0x4];                                       // 0x0054(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 CurrencyCode;                                      // 0x0058(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 CurrencySymbol;                                    // 0x0068(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 DecimalSeparator;                                  // 0x0078(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 GroupingSeparator;                                 // 0x0088(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 ReceiptData;                                       // 0x0098(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TMap<class FString, class FString>            DynamicFields;                                     // 0x00A8(0x0050)(BlueprintVisible, BlueprintReadOnly, NativeAccessSpecifierPublic)
-};
-DUMPER7_ASSERTS_FInAppPurchaseProductInfo2;
 
 // ScriptStruct OnlineSubsystemUtils.OnlineProxyStoreOffer
 // 0x00E8 (0x00E8 - 0x0000)
@@ -202,16 +182,26 @@ public:
 };
 DUMPER7_ASSERTS_FOnlineProxyStoreOffer;
 
-// ScriptStruct OnlineSubsystemUtils.InAppPurchaseProductRequest2
-// 0x0018 (0x0018 - 0x0000)
-struct FInAppPurchaseProductRequest2 final
+// ScriptStruct OnlineSubsystemUtils.InAppPurchaseProductInfo2
+// 0x00F8 (0x00F8 - 0x0000)
+struct FInAppPurchaseProductInfo2 final
 {
 public:
-	class FString                                 ProductIdentifier;                                 // 0x0000(0x0010)(BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bIsConsumable;                                     // 0x0010(0x0001)(BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	class FString                                 Identifier;                                        // 0x0000(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 TransactionIdentifier;                             // 0x0010(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 DisplayName;                                       // 0x0020(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 DisplayDescription;                                // 0x0030(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 DisplayPrice;                                      // 0x0040(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         RawPrice;                                          // 0x0050(0x0004)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_54[0x4];                                       // 0x0054(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 CurrencyCode;                                      // 0x0058(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 CurrencySymbol;                                    // 0x0068(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 DecimalSeparator;                                  // 0x0078(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 GroupingSeparator;                                 // 0x0088(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 ReceiptData;                                       // 0x0098(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TMap<class FString, class FString>            DynamicFields;                                     // 0x00A8(0x0050)(BlueprintVisible, BlueprintReadOnly, NativeAccessSpecifierPublic)
 };
-DUMPER7_ASSERTS_FInAppPurchaseProductRequest2;
+DUMPER7_ASSERTS_FInAppPurchaseProductInfo2;
 
 // ScriptStruct OnlineSubsystemUtils.InAppPurchaseRestoreInfo2
 // 0x0030 (0x0030 - 0x0000)
@@ -262,6 +252,16 @@ public:
 	TArray<struct FPlayerReservation>             RemovedPartyMembers;                               // 0x0048(0x0010)(ZeroConstructor, Transient, NativeAccessSpecifierPublic)
 };
 DUMPER7_ASSERTS_FPartyReservation;
+
+// ScriptStruct OnlineSubsystemUtils.PartyBeaconCrossplayPlatformMapping
+// 0x0020 (0x0020 - 0x0000)
+struct FPartyBeaconCrossplayPlatformMapping final
+{
+public:
+	class FString                                 PlatformName;                                      // 0x0000(0x0010)(ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 PlatformType;                                      // 0x0010(0x0010)(ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+DUMPER7_ASSERTS_FPartyBeaconCrossplayPlatformMapping;
 
 // ScriptStruct OnlineSubsystemUtils.SpectatorReservation
 // 0x0088 (0x0088 - 0x0000)

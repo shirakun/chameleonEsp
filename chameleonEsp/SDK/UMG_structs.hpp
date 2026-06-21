@@ -221,16 +221,15 @@ public:
 };
 DUMPER7_ASSERTS_FEventReply;
 
-// ScriptStruct UMG.SlateChildSize
-// 0x0008 (0x0008 - 0x0000)
-struct FSlateChildSize final
+// ScriptStruct UMG.UIComponentTarget
+// 0x0010 (0x0010 - 0x0000)
+struct FUIComponentTarget final
 {
 public:
-	float                                         Value;                                             // 0x0000(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	ESlateSizeRule                                SizeRule;                                          // 0x0004(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	class FName                                   TargetName;                                        // 0x0000(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	class UUIComponent*                           Component;                                         // 0x0008(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, PersistentInstance, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate, TObjectPtr)
 };
-DUMPER7_ASSERTS_FSlateChildSize;
+DUMPER7_ASSERTS_FUIComponentTarget;
 
 // ScriptStruct UMG.WidgetTransform
 // 0x0038 (0x0038 - 0x0000)
@@ -245,6 +244,17 @@ public:
 };
 DUMPER7_ASSERTS_FWidgetTransform;
 
+// ScriptStruct UMG.WidgetAnimationHandle
+// 0x0010 (0x0010 - 0x0000)
+struct FWidgetAnimationHandle final
+{
+public:
+	TWeakObjectPtr<class UUserWidget>             WeakUserWidget;                                    // 0x0000(0x0008)(ExportObject, ZeroConstructor, InstancedReference, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	int32                                         StateIndex;                                        // 0x0008(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	uint32                                        StateSerial;                                       // 0x000C(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+};
+DUMPER7_ASSERTS_FWidgetAnimationHandle;
+
 // ScriptStruct UMG.ShapedTextOptions
 // 0x0003 (0x0003 - 0x0000)
 struct FShapedTextOptions final
@@ -256,6 +266,17 @@ public:
 	ETextFlowDirection                            TextFlowDirection;                                 // 0x0002(0x0001)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, AdvancedDisplay, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 DUMPER7_ASSERTS_FShapedTextOptions;
+
+// ScriptStruct UMG.SlateChildSize
+// 0x0008 (0x0008 - 0x0000)
+struct FSlateChildSize final
+{
+public:
+	float                                         Value;                                             // 0x0000(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	ESlateSizeRule                                SizeRule;                                          // 0x0004(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+DUMPER7_ASSERTS_FSlateChildSize;
 
 // ScriptStruct UMG.PaintContext
 // 0x0030 (0x0030 - 0x0000)
@@ -278,27 +299,6 @@ public:
 	float                                         SectorCentralAngle;                                // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 DUMPER7_ASSERTS_FRadialBoxSettings;
-
-// ScriptStruct UMG.UIComponentTarget
-// 0x0010 (0x0010 - 0x0000)
-struct FUIComponentTarget final
-{
-public:
-	class FName                                   TargetName;                                        // 0x0000(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-	class UUIComponent*                           Component;                                         // 0x0008(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, PersistentInstance, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate, TObjectPtr)
-};
-DUMPER7_ASSERTS_FUIComponentTarget;
-
-// ScriptStruct UMG.WidgetAnimationHandle
-// 0x0010 (0x0010 - 0x0000)
-struct FWidgetAnimationHandle final
-{
-public:
-	TWeakObjectPtr<class UUserWidget>             WeakUserWidget;                                    // 0x0000(0x0008)(ExportObject, ZeroConstructor, InstancedReference, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-	int32                                         StateIndex;                                        // 0x0008(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-	uint32                                        StateSerial;                                       // 0x000C(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-};
-DUMPER7_ASSERTS_FWidgetAnimationHandle;
 
 // ScriptStruct UMG.WidgetChild
 // 0x0010 (0x0010 - 0x0000)

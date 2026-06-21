@@ -130,6 +130,13 @@ public:
 };
 DUMPER7_ASSERTS_FDataflowMathOneInputOperatorNode;
 
+// ScriptStruct DataflowCore.DataflowMathTruncNode
+// 0x0000 (0x0290 - 0x0290)
+struct FDataflowMathTruncNode final : public FDataflowMathOneInputOperatorNode
+{
+};
+DUMPER7_ASSERTS_FDataflowMathTruncNode;
+
 // ScriptStruct DataflowCore.DataflowMathNegateNode
 // 0x0000 (0x0290 - 0x0290)
 struct FDataflowMathNegateNode final : public FDataflowMathOneInputOperatorNode
@@ -154,6 +161,16 @@ public:
 	uint8                                         Pad_0[0x1];                                        // 0x0000(0x0001)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 DUMPER7_ASSERTS_FDataflowArrayTypes;
+
+// ScriptStruct DataflowCore.DataflowMathMaximumNode_v2
+// 0x0018 (0x0298 - 0x0280)
+struct FDataflowMathMaximumNode_v2 final : public FDataflowNode
+{
+public:
+	TArray<struct FDataflowNumericTypes>          Inputs;                                            // 0x0280(0x0010)(ZeroConstructor, NativeAccessSpecifierPrivate)
+	struct FDataflowNumericTypes                  Result;                                            // 0x0290(0x0008)(NoDestructor, NativeAccessSpecifierPrivate)
+};
+DUMPER7_ASSERTS_FDataflowMathMaximumNode_v2;
 
 // ScriptStruct DataflowCore.DataflowVectorTypes
 // 0x0020 (0x0020 - 0x0000)
@@ -188,13 +205,6 @@ public:
 	bool                                          Value;                                             // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 DUMPER7_ASSERTS_FDataflowBoolTypes;
-
-// ScriptStruct DataflowCore.DataflowMathSquareRootNode
-// 0x0000 (0x0290 - 0x0290)
-struct FDataflowMathSquareRootNode final : public FDataflowMathOneInputOperatorNode
-{
-};
-DUMPER7_ASSERTS_FDataflowMathSquareRootNode;
 
 // ScriptStruct DataflowCore.DataflowTransformTypes
 // 0x0060 (0x0060 - 0x0000)
@@ -241,6 +251,13 @@ public:
 };
 DUMPER7_ASSERTS_FDataflowSelectionTypes;
 
+// ScriptStruct DataflowCore.DataflowMathFloorNode
+// 0x0000 (0x0290 - 0x0290)
+struct FDataflowMathFloorNode final : public FDataflowMathOneInputOperatorNode
+{
+};
+DUMPER7_ASSERTS_FDataflowMathFloorNode;
+
 // ScriptStruct DataflowCore.DataflowVectorArrayTypes
 // 0x0010 (0x0010 - 0x0000)
 struct FDataflowVectorArrayTypes final : public FDataflowAnyType
@@ -250,6 +267,16 @@ public:
 };
 DUMPER7_ASSERTS_FDataflowVectorArrayTypes;
 
+// ScriptStruct DataflowCore.ConvertVectorArrayTypesDataflowNode
+// 0x0020 (0x02A0 - 0x0280)
+struct FConvertVectorArrayTypesDataflowNode final : public FDataflowNode
+{
+public:
+	struct FDataflowVectorArrayTypes              In;                                                // 0x0280(0x0010)(NativeAccessSpecifierPrivate)
+	struct FDataflowVectorArrayTypes              Out;                                               // 0x0290(0x0010)(NativeAccessSpecifierPrivate)
+};
+DUMPER7_ASSERTS_FConvertVectorArrayTypesDataflowNode;
+
 // ScriptStruct DataflowCore.DataflowNumericArrayTypes
 // 0x0010 (0x0010 - 0x0000)
 struct FDataflowNumericArrayTypes final : public FDataflowAnyType
@@ -258,6 +285,16 @@ public:
 	TArray<double>                                Value;                                             // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 DUMPER7_ASSERTS_FDataflowNumericArrayTypes;
+
+// ScriptStruct DataflowCore.ConvertStringTypesDataflowNode
+// 0x0020 (0x02A0 - 0x0280)
+struct FConvertStringTypesDataflowNode final : public FDataflowNode
+{
+public:
+	struct FDataflowStringTypes                   In;                                                // 0x0280(0x0010)(NativeAccessSpecifierPrivate)
+	struct FDataflowStringTypes                   Out;                                               // 0x0290(0x0010)(NativeAccessSpecifierPrivate)
+};
+DUMPER7_ASSERTS_FConvertStringTypesDataflowNode;
 
 // ScriptStruct DataflowCore.DataflowStringArrayTypes
 // 0x0010 (0x0010 - 0x0000)
@@ -285,16 +322,6 @@ public:
 	TArray<struct FTransform>                     Value;                                             // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 DUMPER7_ASSERTS_FDataflowTransformArrayTypes;
-
-// ScriptStruct DataflowCore.ConvertTransformArrayTypesDataflowNode
-// 0x0020 (0x02A0 - 0x0280)
-struct FConvertTransformArrayTypesDataflowNode final : public FDataflowNode
-{
-public:
-	struct FDataflowTransformArrayTypes           In;                                                // 0x0280(0x0010)(NativeAccessSpecifierPrivate)
-	struct FDataflowTransformArrayTypes           Out;                                               // 0x0290(0x0010)(NativeAccessSpecifierPrivate)
-};
-DUMPER7_ASSERTS_FConvertTransformArrayTypesDataflowNode;
 
 // ScriptStruct DataflowCore.DataflowRotationTypes
 // 0x0018 (0x0018 - 0x0000)
@@ -334,26 +361,6 @@ public:
 	struct FDataflowVectorTypes                   Out;                                               // 0x02A0(0x0020)(NoDestructor, NativeAccessSpecifierPrivate)
 };
 DUMPER7_ASSERTS_FConvertVectorTypesDataflowNode;
-
-// ScriptStruct DataflowCore.ConvertStringTypesDataflowNode
-// 0x0020 (0x02A0 - 0x0280)
-struct FConvertStringTypesDataflowNode final : public FDataflowNode
-{
-public:
-	struct FDataflowStringTypes                   In;                                                // 0x0280(0x0010)(NativeAccessSpecifierPrivate)
-	struct FDataflowStringTypes                   Out;                                               // 0x0290(0x0010)(NativeAccessSpecifierPrivate)
-};
-DUMPER7_ASSERTS_FConvertStringTypesDataflowNode;
-
-// ScriptStruct DataflowCore.ConvertStringArrayTypesDataflowNode
-// 0x0020 (0x02A0 - 0x0280)
-struct FConvertStringArrayTypesDataflowNode final : public FDataflowNode
-{
-public:
-	struct FDataflowStringArrayTypes              In;                                                // 0x0280(0x0010)(NativeAccessSpecifierPrivate)
-	struct FDataflowStringArrayTypes              Out;                                               // 0x0290(0x0010)(NativeAccessSpecifierPrivate)
-};
-DUMPER7_ASSERTS_FConvertStringArrayTypesDataflowNode;
 
 // ScriptStruct DataflowCore.ConvertBoolTypesDataflowNode
 // 0x0008 (0x0288 - 0x0280)
@@ -399,16 +406,6 @@ public:
 };
 DUMPER7_ASSERTS_FConvertSelectionTypesDataflowNode;
 
-// ScriptStruct DataflowCore.ConvertVectorArrayTypesDataflowNode
-// 0x0020 (0x02A0 - 0x0280)
-struct FConvertVectorArrayTypesDataflowNode final : public FDataflowNode
-{
-public:
-	struct FDataflowVectorArrayTypes              In;                                                // 0x0280(0x0010)(NativeAccessSpecifierPrivate)
-	struct FDataflowVectorArrayTypes              Out;                                               // 0x0290(0x0010)(NativeAccessSpecifierPrivate)
-};
-DUMPER7_ASSERTS_FConvertVectorArrayTypesDataflowNode;
-
 // ScriptStruct DataflowCore.ConvertNumericArrayTypesDataflowNode
 // 0x0020 (0x02A0 - 0x0280)
 struct FConvertNumericArrayTypesDataflowNode final : public FDataflowNode
@@ -419,6 +416,16 @@ public:
 };
 DUMPER7_ASSERTS_FConvertNumericArrayTypesDataflowNode;
 
+// ScriptStruct DataflowCore.ConvertStringArrayTypesDataflowNode
+// 0x0020 (0x02A0 - 0x0280)
+struct FConvertStringArrayTypesDataflowNode final : public FDataflowNode
+{
+public:
+	struct FDataflowStringArrayTypes              In;                                                // 0x0280(0x0010)(NativeAccessSpecifierPrivate)
+	struct FDataflowStringArrayTypes              Out;                                               // 0x0290(0x0010)(NativeAccessSpecifierPrivate)
+};
+DUMPER7_ASSERTS_FConvertStringArrayTypesDataflowNode;
+
 // ScriptStruct DataflowCore.ConvertBoolArrayTypesDataflowNode
 // 0x0020 (0x02A0 - 0x0280)
 struct FConvertBoolArrayTypesDataflowNode final : public FDataflowNode
@@ -428,6 +435,16 @@ public:
 	struct FDataflowBoolArrayTypes                Out;                                               // 0x0290(0x0010)(NativeAccessSpecifierPrivate)
 };
 DUMPER7_ASSERTS_FConvertBoolArrayTypesDataflowNode;
+
+// ScriptStruct DataflowCore.ConvertTransformArrayTypesDataflowNode
+// 0x0020 (0x02A0 - 0x0280)
+struct FConvertTransformArrayTypesDataflowNode final : public FDataflowNode
+{
+public:
+	struct FDataflowTransformArrayTypes           In;                                                // 0x0280(0x0010)(NativeAccessSpecifierPrivate)
+	struct FDataflowTransformArrayTypes           Out;                                               // 0x0290(0x0010)(NativeAccessSpecifierPrivate)
+};
+DUMPER7_ASSERTS_FConvertTransformArrayTypesDataflowNode;
 
 // ScriptStruct DataflowCore.ConvertRotationDataflowNode
 // 0x0030 (0x02B0 - 0x0280)
@@ -617,16 +634,6 @@ struct FDataflowMathMaximumNode final : public FDataflowMathTwoInputsOperatorNod
 };
 DUMPER7_ASSERTS_FDataflowMathMaximumNode;
 
-// ScriptStruct DataflowCore.DataflowMathMaximumNode_v2
-// 0x0018 (0x0298 - 0x0280)
-struct FDataflowMathMaximumNode_v2 final : public FDataflowNode
-{
-public:
-	TArray<struct FDataflowNumericTypes>          Inputs;                                            // 0x0280(0x0010)(ZeroConstructor, NativeAccessSpecifierPrivate)
-	struct FDataflowNumericTypes                  Result;                                            // 0x0290(0x0008)(NoDestructor, NativeAccessSpecifierPrivate)
-};
-DUMPER7_ASSERTS_FDataflowMathMaximumNode_v2;
-
 // ScriptStruct DataflowCore.DataflowMathReciprocalNode
 // 0x0008 (0x0298 - 0x0290)
 struct FDataflowMathReciprocalNode final : public FDataflowMathOneInputOperatorNode
@@ -650,6 +657,13 @@ struct FDataflowMathCubeNode final : public FDataflowMathOneInputOperatorNode
 };
 DUMPER7_ASSERTS_FDataflowMathCubeNode;
 
+// ScriptStruct DataflowCore.DataflowMathSquareRootNode
+// 0x0000 (0x0290 - 0x0290)
+struct FDataflowMathSquareRootNode final : public FDataflowMathOneInputOperatorNode
+{
+};
+DUMPER7_ASSERTS_FDataflowMathSquareRootNode;
+
 // ScriptStruct DataflowCore.DataflowMathInverseSquareRootNode
 // 0x0008 (0x0298 - 0x0290)
 struct FDataflowMathInverseSquareRootNode final : public FDataflowMathOneInputOperatorNode
@@ -666,26 +680,12 @@ struct FDataflowMathAbsNode final : public FDataflowMathOneInputOperatorNode
 };
 DUMPER7_ASSERTS_FDataflowMathAbsNode;
 
-// ScriptStruct DataflowCore.DataflowMathFloorNode
-// 0x0000 (0x0290 - 0x0290)
-struct FDataflowMathFloorNode final : public FDataflowMathOneInputOperatorNode
-{
-};
-DUMPER7_ASSERTS_FDataflowMathFloorNode;
-
 // ScriptStruct DataflowCore.DataflowMathCeilNode
 // 0x0000 (0x0290 - 0x0290)
 struct FDataflowMathCeilNode final : public FDataflowMathOneInputOperatorNode
 {
 };
 DUMPER7_ASSERTS_FDataflowMathCeilNode;
-
-// ScriptStruct DataflowCore.DataflowMathTruncNode
-// 0x0000 (0x0290 - 0x0290)
-struct FDataflowMathTruncNode final : public FDataflowMathOneInputOperatorNode
-{
-};
-DUMPER7_ASSERTS_FDataflowMathTruncNode;
 
 // ScriptStruct DataflowCore.DataflowMathFracNode
 // 0x0000 (0x0290 - 0x0290)

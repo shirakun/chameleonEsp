@@ -38,6 +38,20 @@ void UWBP_VoiceChatUserSettings_C::Tick(const struct FGeometry& MyGeometry_Tick,
 }
 
 
+// Function WBP_VoiceChatUserSettings.WBP_VoiceChatUserSettings_C.Report
+// (BlueprintCallable, BlueprintEvent)
+
+void UWBP_VoiceChatUserSettings_C::Report()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("WBP_VoiceChatUserSettings_C", "Report");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
 // Function WBP_VoiceChatUserSettings.WBP_VoiceChatUserSettings_C.PreConstruct
 // (BlueprintCosmetic, Event, Public, BlueprintEvent)
 // Parameters:
@@ -69,6 +83,26 @@ void UWBP_VoiceChatUserSettings_C::PingCheck()
 		Func = Class->GetFunction("WBP_VoiceChatUserSettings_C", "PingCheck");
 
 	UObject::ProcessEvent(Func, nullptr);
+}
+
+
+// Function WBP_VoiceChatUserSettings.WBP_VoiceChatUserSettings_C.OnFinished_1657203944876F75161AA6986A7C9FD9
+// (HasOutParams, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// const struct FEOSPlayerReportResult&    Result                                                 (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
+
+void UWBP_VoiceChatUserSettings_C::OnFinished_1657203944876F75161AA6986A7C9FD9(const struct FEOSPlayerReportResult& Result)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("WBP_VoiceChatUserSettings_C", "OnFinished_1657203944876F75161AA6986A7C9FD9");
+
+	Params::WBP_VoiceChatUserSettings_C_OnFinished_1657203944876F75161AA6986A7C9FD9 Parms{};
+
+	Parms.Result = std::move(Result);
+
+	UObject::ProcessEvent(Func, &Parms);
 }
 
 

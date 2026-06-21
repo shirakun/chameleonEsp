@@ -10,11 +10,11 @@
 
 #include "Basic.hpp"
 
-#include "CoreUObject_structs.hpp"
-#include "EN_cLeonGameMode_structs.hpp"
 #include "EN_cLeonBodyType_structs.hpp"
-#include "ST_cLeonMapData_structs.hpp"
+#include "EN_cLeonGameMode_structs.hpp"
+#include "CoreUObject_structs.hpp"
 #include "Engine_structs.hpp"
+#include "ST_cLeonMapData_structs.hpp"
 
 
 SDK_NAMESPACE_START
@@ -848,7 +848,7 @@ public:
 DUMPER7_ASSERTS_BP_GameMode_cLeon_C_ControllerArrayToPlayerState;
 
 // Function BP_GameMode_cLeon.BP_GameMode_cLeon_C.BodyChange
-// 0x0430 (0x0430 - 0x0000)
+// 0x0420 (0x0420 - 0x0000)
 struct BP_GameMode_cLeon_C_BodyChange final
 {
 public:
@@ -885,21 +885,19 @@ public:
 	uint8                                         Pad_269[0x7];                                      // 0x0269(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
 	struct FTransform                             CallFunc_GetTransform_ReturnValue;                 // 0x0270(0x0060)(ConstParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	class UClass*                                 Temp_class_Variable_1;                             // 0x02D0(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-	class UClass*                                 Temp_class_Variable_2;                             // 0x02D8(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-	EN_cLeonBodyType                              Temp_byte_Variable;                                // 0x02E0(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	uint8                                         Pad_2E1[0x7];                                      // 0x02E1(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FVector                                CallFunc_BreakTransform_Location_2;                // 0x02E8(0x0018)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	struct FRotator                               CallFunc_BreakTransform_Rotation_2;                // 0x0300(0x0018)(ZeroConstructor, IsPlainOldData, NoDestructor)
-	struct FVector                                CallFunc_BreakTransform_Scale_2;                   // 0x0318(0x0018)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	class UClass*                                 K2Node_Select_Default;                             // 0x0330(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-	uint8                                         Pad_338[0x8];                                      // 0x0338(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FTransform                             CallFunc_MakeTransform_ReturnValue_1;              // 0x0340(0x0060)(IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	class AActor*                                 CallFunc_BeginDeferredActorSpawnFromClass_ReturnValue; // 0x03A0(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-	uint8                                         Pad_3A8[0x8];                                      // 0x03A8(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FTransform                             CallFunc_SelectTransform_ReturnValue;              // 0x03B0(0x0060)(IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	class AActor*                                 CallFunc_FinishSpawningActor_ReturnValue;          // 0x0410(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-	class ABP_FirstPersonCharacter_cLeon_Character_C* K2Node_DynamicCast_AsBP_First_Person_Character_C_Leon_Character_1; // 0x0418(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-	bool                                          K2Node_DynamicCast_bSuccess_2;                     // 0x0420(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	EN_cLeonBodyType                              Temp_byte_Variable;                                // 0x02D8(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	uint8                                         Pad_2D9[0x7];                                      // 0x02D9(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FVector                                CallFunc_BreakTransform_Location_2;                // 0x02E0(0x0018)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	struct FRotator                               CallFunc_BreakTransform_Rotation_2;                // 0x02F8(0x0018)(ZeroConstructor, IsPlainOldData, NoDestructor)
+	struct FVector                                CallFunc_BreakTransform_Scale_2;                   // 0x0310(0x0018)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	class UClass*                                 K2Node_Select_Default;                             // 0x0328(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+	struct FTransform                             CallFunc_MakeTransform_ReturnValue_1;              // 0x0330(0x0060)(IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	class AActor*                                 CallFunc_BeginDeferredActorSpawnFromClass_ReturnValue; // 0x0390(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+	uint8                                         Pad_398[0x8];                                      // 0x0398(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FTransform                             CallFunc_SelectTransform_ReturnValue;              // 0x03A0(0x0060)(IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	class AActor*                                 CallFunc_FinishSpawningActor_ReturnValue;          // 0x0400(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+	class ABP_FirstPersonCharacter_cLeon_Character_C* K2Node_DynamicCast_AsBP_First_Person_Character_C_Leon_Character_1; // 0x0408(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+	bool                                          K2Node_DynamicCast_bSuccess_2;                     // 0x0410(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 DUMPER7_ASSERTS_BP_GameMode_cLeon_C_BodyChange;
 

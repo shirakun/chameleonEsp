@@ -29,6 +29,20 @@ enum class EGameItemType : uint8
 	EGameItemType_MAX                        = 5,
 };
 
+// Enum PenguinHotel.EEOSPlayerReportCategory
+// NumValues: 0x0008
+enum class EEOSPlayerReportCategory : uint8
+{
+	Cheating                                 = 0,
+	Exploiting                               = 1,
+	OffensiveProfile                         = 2,
+	VerbalAbuse                              = 3,
+	Scamming                                 = 4,
+	Spamming                                 = 5,
+	Other                                    = 6,
+	EEOSPlayerReportCategory_MAX             = 7,
+};
+
 // Enum PenguinHotel.EPaintChannel
 // NumValues: 0x0007
 enum class EPaintChannel : uint8
@@ -84,6 +98,30 @@ enum class EPaintPerformancePreset : uint8
 	EPaintPerformancePreset_MAX              = 4,
 };
 
+// ScriptStruct PenguinHotel.CPP_BlockForceInfo
+// 0x0050 (0x0050 - 0x0000)
+struct FCPP_BlockForceInfo final
+{
+public:
+	TSet<class UPrimitiveComponent*>              BlockTargetPrimitives;                             // 0x0000(0x0050)(Edit, BlueprintVisible, ExportObject, ContainsInstancedReference, UObjectWrapper, NativeAccessSpecifierPublic, TObjectPtr)
+};
+DUMPER7_ASSERTS_FCPP_BlockForceInfo;
+
+// ScriptStruct PenguinHotel.BandwidthProbeResult
+// 0x0018 (0x0018 - 0x0000)
+struct FBandwidthProbeResult final
+{
+public:
+	bool                                          bSucceeded;                                        // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	float                                         MeasuredBytesPerSec;                               // 0x0004(0x0004)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         MeasuredPerClientBytesPerSec;                      // 0x0008(0x0004)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         BaselineAvgLagSeconds;                             // 0x000C(0x0004)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         PeakAvgLagSeconds;                                 // 0x0010(0x0004)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         NumClients;                                        // 0x0014(0x0004)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+DUMPER7_ASSERTS_FBandwidthProbeResult;
+
 // ScriptStruct PenguinHotel.BandwidthStats
 // 0x0020 (0x0020 - 0x0000)
 struct FBandwidthStats final
@@ -100,38 +138,17 @@ public:
 };
 DUMPER7_ASSERTS_FBandwidthStats;
 
-// ScriptStruct PenguinHotel.RuntimeBrushSettings
+// ScriptStruct PenguinHotel.EOSPlayerReportResult
 // 0x0028 (0x0028 - 0x0000)
-struct FRuntimeBrushSettings final
-{
-public:
-	float                                         Radius;                                            // 0x0000(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         Hardness;                                          // 0x0004(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         Opacity;                                           // 0x0008(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         Spacing;                                           // 0x000C(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EBrushFalloff                                 Falloff;                                           // 0x0010(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EPaintBlendMode                               BlendMode;                                         // 0x0011(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_12[0x6];                                       // 0x0012(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
-	class UTexture2D*                             BrushTexture;                                      // 0x0018(0x0008)(Edit, BlueprintVisible, ZeroConstructor, RepSkip, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         Rotation;                                          // 0x0020(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_24[0x4];                                       // 0x0024(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-DUMPER7_ASSERTS_FRuntimeBrushSettings;
-
-// ScriptStruct PenguinHotel.BandwidthProbeResult
-// 0x0018 (0x0018 - 0x0000)
-struct FBandwidthProbeResult final
+struct FEOSPlayerReportResult final
 {
 public:
 	bool                                          bSucceeded;                                        // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	float                                         MeasuredBytesPerSec;                               // 0x0004(0x0004)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         MeasuredPerClientBytesPerSec;                      // 0x0008(0x0004)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         BaselineAvgLagSeconds;                             // 0x000C(0x0004)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         PeakAvgLagSeconds;                                 // 0x0010(0x0004)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         NumClients;                                        // 0x0014(0x0004)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 ResultCode;                                        // 0x0008(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 ErrorMessage;                                      // 0x0018(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
-DUMPER7_ASSERTS_FBandwidthProbeResult;
+DUMPER7_ASSERTS_FEOSPlayerReportResult;
 
 // ScriptStruct PenguinHotel.CPP_TouchPointDatas
 // 0x0058 (0x0058 - 0x0000)
@@ -380,15 +397,6 @@ public:
 };
 DUMPER7_ASSERTS_FCPP_WaveInfo;
 
-// ScriptStruct PenguinHotel.CPP_BlockForceInfo
-// 0x0050 (0x0050 - 0x0000)
-struct FCPP_BlockForceInfo final
-{
-public:
-	TSet<class UPrimitiveComponent*>              BlockTargetPrimitives;                             // 0x0000(0x0050)(Edit, BlueprintVisible, ExportObject, ContainsInstancedReference, UObjectWrapper, NativeAccessSpecifierPublic, TObjectPtr)
-};
-DUMPER7_ASSERTS_FCPP_BlockForceInfo;
-
 // ScriptStruct PenguinHotel.PlanetInfo
 // 0x0010 (0x0010 - 0x0000)
 struct FPlanetInfo final
@@ -497,6 +505,24 @@ public:
 	uint8                                         Pad_7[0x1];                                        // 0x0007(0x0001)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 DUMPER7_ASSERTS_FPenTabletState;
+
+// ScriptStruct PenguinHotel.RuntimeBrushSettings
+// 0x0028 (0x0028 - 0x0000)
+struct FRuntimeBrushSettings final
+{
+public:
+	float                                         Radius;                                            // 0x0000(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         Hardness;                                          // 0x0004(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         Opacity;                                           // 0x0008(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         Spacing;                                           // 0x000C(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EBrushFalloff                                 Falloff;                                           // 0x0010(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EPaintBlendMode                               BlendMode;                                         // 0x0011(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_12[0x6];                                       // 0x0012(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
+	class UTexture2D*                             BrushTexture;                                      // 0x0018(0x0008)(Edit, BlueprintVisible, ZeroConstructor, RepSkip, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         Rotation;                                          // 0x0020(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_24[0x4];                                       // 0x0024(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+DUMPER7_ASSERTS_FRuntimeBrushSettings;
 
 // ScriptStruct PenguinHotel.PaintChannelData
 // 0x0020 (0x0020 - 0x0000)

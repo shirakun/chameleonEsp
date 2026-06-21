@@ -695,6 +695,34 @@ public:
 };
 DUMPER7_ASSERTS_UDynamicCapsulePhysicsDrivenLibrary;
 
+// Class PenguinHotel.EOSPlayerReportAsyncAction
+// 0x0060 (0x0090 - 0x0030)
+class UEOSPlayerReportAsyncAction final : public UBlueprintAsyncActionBase
+{
+public:
+	TMulticastInlineDelegate<void(const struct FEOSPlayerReportResult& Result)> OnFinished;          // 0x0030(0x0010)(ZeroConstructor, InstancedReference, BlueprintAssignable, NativeAccessSpecifierPublic)
+	TWeakObjectPtr<class UObject>                 WorldContextObject;                                // 0x0040(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	uint8                                         Pad_48[0x48];                                      // 0x0048(0x0048)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	static class UEOSPlayerReportAsyncAction* SendEOSPlayerReport(class UObject* WorldContextObject_0, const class FString& ReporterProductUserId, const class FString& ReportedProductUserId, EEOSPlayerReportCategory Category, const class FString& Message, const class FString& ContextJson);
+
+public:
+	static class UClass* StaticClass()
+	{
+		STATIC_CLASS_IMPL("EOSPlayerReportAsyncAction")
+	}
+	static const class FName& StaticName()
+	{
+		STATIC_NAME_IMPL(L"EOSPlayerReportAsyncAction")
+	}
+	static class UEOSPlayerReportAsyncAction* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UEOSPlayerReportAsyncAction>();
+	}
+};
+DUMPER7_ASSERTS_UEOSPlayerReportAsyncAction;
+
 // Class PenguinHotel.ModBlueprintLibrary
 // 0x0000 (0x0028 - 0x0028)
 class UModBlueprintLibrary final : public UBlueprintFunctionLibrary

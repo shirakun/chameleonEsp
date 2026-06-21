@@ -16,6 +16,127 @@
 
 SDK_NAMESPACE_START
 
+// Function IKRig.IKRetargetPinBoneController.ClearAllBonePairs
+// (Final, RequiredAPI, Native, Public, BlueprintCallable)
+
+void UIKRetargetPinBoneController::ClearAllBonePairs()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("IKRetargetPinBoneController", "ClearAllBonePairs");
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(Func, nullptr);
+
+	Func->FunctionFlags = Flgs;
+}
+
+
+// Function IKRig.IKRetargetPinBoneController.GetAllBonePairs
+// (Final, RequiredAPI, Native, Public, BlueprintCallable)
+// Parameters:
+// TMap<class FName, class FName>          ReturnValue                                            (Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
+
+TMap<class FName, class FName> UIKRetargetPinBoneController::GetAllBonePairs()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("IKRetargetPinBoneController", "GetAllBonePairs");
+
+	Params::IKRetargetPinBoneController_GetAllBonePairs Parms{};
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	Func->FunctionFlags = Flgs;
+
+	return Parms.ReturnValue;
+}
+
+
+// Function IKRig.IKRetargetPinBoneController.GetSettings
+// (Final, RequiredAPI, Native, Public, BlueprintCallable)
+// Parameters:
+// struct FIKRetargetPinBoneOpSettings     ReturnValue                                            (Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
+
+struct FIKRetargetPinBoneOpSettings UIKRetargetPinBoneController::GetSettings()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("IKRetargetPinBoneController", "GetSettings");
+
+	Params::IKRetargetPinBoneController_GetSettings Parms{};
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	Func->FunctionFlags = Flgs;
+
+	return Parms.ReturnValue;
+}
+
+
+// Function IKRig.IKRetargetPinBoneController.SetBonePair
+// (Final, RequiredAPI, Native, Public, BlueprintCallable)
+// Parameters:
+// const class FName                       InBoneToCopyFrom                                       (ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// const class FName                       InBoneToCopyTo                                         (ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+
+void UIKRetargetPinBoneController::SetBonePair(const class FName InBoneToCopyFrom, const class FName InBoneToCopyTo)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("IKRetargetPinBoneController", "SetBonePair");
+
+	Params::IKRetargetPinBoneController_SetBonePair Parms{};
+
+	Parms.InBoneToCopyFrom = InBoneToCopyFrom;
+	Parms.InBoneToCopyTo = InBoneToCopyTo;
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	Func->FunctionFlags = Flgs;
+}
+
+
+// Function IKRig.IKRetargetPinBoneController.SetSettings
+// (Final, RequiredAPI, Native, Public, BlueprintCallable)
+// Parameters:
+// const struct FIKRetargetPinBoneOpSettings&InSettings                                             (Parm, NativeAccessSpecifierPublic)
+
+void UIKRetargetPinBoneController::SetSettings(const struct FIKRetargetPinBoneOpSettings& InSettings)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("IKRetargetPinBoneController", "SetSettings");
+
+	Params::IKRetargetPinBoneController_SetSettings Parms{};
+
+	Parms.InSettings = std::move(InSettings);
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	Func->FunctionFlags = Flgs;
+}
+
+
 // Function IKRig.IKRetargetAlignPoleVectorController.GetSettings
 // (Final, RequiredAPI, Native, Public, BlueprintCallable)
 // Parameters:
@@ -166,6 +287,32 @@ void UIKRetargetCurveRemapController::SetSettings(const struct FIKRetargetCurveR
 }
 
 
+// Function IKRig.IKGoalCreatorInterface.AddIKGoals
+// (Native, Event, Public, HasOutParams, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// TMap<class FName, struct FIKRigGoal>*   OutGoals                                               (Parm, OutParm, NativeAccessSpecifierPublic)
+
+void IIKGoalCreatorInterface::AddIKGoals(TMap<class FName, struct FIKRigGoal>* OutGoals)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = AsUObject()->Class->GetFunction("IKGoalCreatorInterface", "AddIKGoals");
+
+	Params::IKGoalCreatorInterface_AddIKGoals Parms{};
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	AsUObject()->ProcessEvent(Func, &Parms);
+
+	Func->FunctionFlags = Flgs;
+
+	if (OutGoals != nullptr)
+		*OutGoals = std::move(Parms.OutGoals);
+}
+
+
 // Function IKRig.IKRetargetFKChainsController.GetSettings
 // (Final, RequiredAPI, Native, Public, BlueprintCallable)
 // Parameters:
@@ -213,6 +360,116 @@ void UIKRetargetFKChainsController::SetSettings(const struct FIKRetargetFKChains
 	UObject::ProcessEvent(Func, &Parms);
 
 	Func->FunctionFlags = Flgs;
+}
+
+
+// Function IKRig.IKRetargetIKChainsController.GetSettings
+// (Final, RequiredAPI, Native, Public, BlueprintCallable)
+// Parameters:
+// struct FIKRetargetIKChainsOpSettings    ReturnValue                                            (Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
+
+struct FIKRetargetIKChainsOpSettings UIKRetargetIKChainsController::GetSettings()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("IKRetargetIKChainsController", "GetSettings");
+
+	Params::IKRetargetIKChainsController_GetSettings Parms{};
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	Func->FunctionFlags = Flgs;
+
+	return Parms.ReturnValue;
+}
+
+
+// Function IKRig.IKRetargetIKChainsController.SetSettings
+// (Final, RequiredAPI, Native, Public, BlueprintCallable)
+// Parameters:
+// const struct FIKRetargetIKChainsOpSettings&InSettings                                             (Parm, NativeAccessSpecifierPublic)
+
+void UIKRetargetIKChainsController::SetSettings(const struct FIKRetargetIKChainsOpSettings& InSettings)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("IKRetargetIKChainsController", "SetSettings");
+
+	Params::IKRetargetIKChainsController_SetSettings Parms{};
+
+	Parms.InSettings = std::move(InSettings);
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	Func->FunctionFlags = Flgs;
+}
+
+
+// Function IKRig.RetargetProfileLibrary.CopyRetargetProfileFromRetargetAsset
+// (Final, Native, Static, Public, BlueprintCallable)
+// Parameters:
+// const class UIKRetargeter*              InRetargetAsset                                        (ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// struct FRetargetProfile                 ReturnValue                                            (Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
+
+struct FRetargetProfile URetargetProfileLibrary::CopyRetargetProfileFromRetargetAsset(const class UIKRetargeter* InRetargetAsset)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = StaticClass()->GetFunction("RetargetProfileLibrary", "CopyRetargetProfileFromRetargetAsset");
+
+	Params::RetargetProfileLibrary_CopyRetargetProfileFromRetargetAsset Parms{};
+
+	Parms.InRetargetAsset = InRetargetAsset;
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	GetDefaultObj()->ProcessEvent(Func, &Parms);
+
+	Func->FunctionFlags = Flgs;
+
+	return Parms.ReturnValue;
+}
+
+
+// Function IKRig.RetargetProfileLibrary.GetOpControllerFromRetargetProfile
+// (Final, Native, Static, Public, HasOutParams, BlueprintCallable, BlueprintPure)
+// Parameters:
+// struct FRetargetProfile&                InRetargetProfile                                      (Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+// const class FName                       InRetargetOpName                                       (ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// class UIKRetargetOpControllerBase*      ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+
+class UIKRetargetOpControllerBase* URetargetProfileLibrary::GetOpControllerFromRetargetProfile(struct FRetargetProfile& InRetargetProfile, const class FName InRetargetOpName)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = StaticClass()->GetFunction("RetargetProfileLibrary", "GetOpControllerFromRetargetProfile");
+
+	Params::RetargetProfileLibrary_GetOpControllerFromRetargetProfile Parms{};
+
+	Parms.InRetargetProfile = std::move(InRetargetProfile);
+	Parms.InRetargetOpName = InRetargetOpName;
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	GetDefaultObj()->ProcessEvent(Func, &Parms);
+
+	Func->FunctionFlags = Flgs;
+
+	InRetargetProfile = std::move(Parms.InRetargetProfile);
+
+	return Parms.ReturnValue;
 }
 
 
@@ -356,263 +613,6 @@ void UIKRetargetPelvisMotionController::SetTargetPelvisBone(const class FName In
 	Params::IKRetargetPelvisMotionController_SetTargetPelvisBone Parms{};
 
 	Parms.InTargetPelvisBone = InTargetPelvisBone;
-
-	auto Flgs = Func->FunctionFlags;
-	Func->FunctionFlags |= 0x400;
-
-	UObject::ProcessEvent(Func, &Parms);
-
-	Func->FunctionFlags = Flgs;
-}
-
-
-// Function IKRig.IKRetargetIKChainsController.GetSettings
-// (Final, RequiredAPI, Native, Public, BlueprintCallable)
-// Parameters:
-// struct FIKRetargetIKChainsOpSettings    ReturnValue                                            (Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
-
-struct FIKRetargetIKChainsOpSettings UIKRetargetIKChainsController::GetSettings()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("IKRetargetIKChainsController", "GetSettings");
-
-	Params::IKRetargetIKChainsController_GetSettings Parms{};
-
-	auto Flgs = Func->FunctionFlags;
-	Func->FunctionFlags |= 0x400;
-
-	UObject::ProcessEvent(Func, &Parms);
-
-	Func->FunctionFlags = Flgs;
-
-	return Parms.ReturnValue;
-}
-
-
-// Function IKRig.IKRetargetIKChainsController.SetSettings
-// (Final, RequiredAPI, Native, Public, BlueprintCallable)
-// Parameters:
-// const struct FIKRetargetIKChainsOpSettings&InSettings                                             (Parm, NativeAccessSpecifierPublic)
-
-void UIKRetargetIKChainsController::SetSettings(const struct FIKRetargetIKChainsOpSettings& InSettings)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("IKRetargetIKChainsController", "SetSettings");
-
-	Params::IKRetargetIKChainsController_SetSettings Parms{};
-
-	Parms.InSettings = std::move(InSettings);
-
-	auto Flgs = Func->FunctionFlags;
-	Func->FunctionFlags |= 0x400;
-
-	UObject::ProcessEvent(Func, &Parms);
-
-	Func->FunctionFlags = Flgs;
-}
-
-
-// Function IKRig.RetargetProfileLibrary.CopyRetargetProfileFromRetargetAsset
-// (Final, Native, Static, Public, BlueprintCallable)
-// Parameters:
-// const class UIKRetargeter*              InRetargetAsset                                        (ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-// struct FRetargetProfile                 ReturnValue                                            (Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
-
-struct FRetargetProfile URetargetProfileLibrary::CopyRetargetProfileFromRetargetAsset(const class UIKRetargeter* InRetargetAsset)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = StaticClass()->GetFunction("RetargetProfileLibrary", "CopyRetargetProfileFromRetargetAsset");
-
-	Params::RetargetProfileLibrary_CopyRetargetProfileFromRetargetAsset Parms{};
-
-	Parms.InRetargetAsset = InRetargetAsset;
-
-	auto Flgs = Func->FunctionFlags;
-	Func->FunctionFlags |= 0x400;
-
-	GetDefaultObj()->ProcessEvent(Func, &Parms);
-
-	Func->FunctionFlags = Flgs;
-
-	return Parms.ReturnValue;
-}
-
-
-// Function IKRig.RetargetProfileLibrary.GetOpControllerFromRetargetProfile
-// (Final, Native, Static, Public, HasOutParams, BlueprintCallable, BlueprintPure)
-// Parameters:
-// struct FRetargetProfile&                InRetargetProfile                                      (Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-// const class FName                       InRetargetOpName                                       (ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-// class UIKRetargetOpControllerBase*      ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-
-class UIKRetargetOpControllerBase* URetargetProfileLibrary::GetOpControllerFromRetargetProfile(struct FRetargetProfile& InRetargetProfile, const class FName InRetargetOpName)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = StaticClass()->GetFunction("RetargetProfileLibrary", "GetOpControllerFromRetargetProfile");
-
-	Params::RetargetProfileLibrary_GetOpControllerFromRetargetProfile Parms{};
-
-	Parms.InRetargetProfile = std::move(InRetargetProfile);
-	Parms.InRetargetOpName = InRetargetOpName;
-
-	auto Flgs = Func->FunctionFlags;
-	Func->FunctionFlags |= 0x400;
-
-	GetDefaultObj()->ProcessEvent(Func, &Parms);
-
-	Func->FunctionFlags = Flgs;
-
-	InRetargetProfile = std::move(Parms.InRetargetProfile);
-
-	return Parms.ReturnValue;
-}
-
-
-// Function IKRig.IKGoalCreatorInterface.AddIKGoals
-// (Native, Event, Public, HasOutParams, BlueprintCallable, BlueprintEvent)
-// Parameters:
-// TMap<class FName, struct FIKRigGoal>*   OutGoals                                               (Parm, OutParm, NativeAccessSpecifierPublic)
-
-void IIKGoalCreatorInterface::AddIKGoals(TMap<class FName, struct FIKRigGoal>* OutGoals)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = AsUObject()->Class->GetFunction("IKGoalCreatorInterface", "AddIKGoals");
-
-	Params::IKGoalCreatorInterface_AddIKGoals Parms{};
-
-	auto Flgs = Func->FunctionFlags;
-	Func->FunctionFlags |= 0x400;
-
-	AsUObject()->ProcessEvent(Func, &Parms);
-
-	Func->FunctionFlags = Flgs;
-
-	if (OutGoals != nullptr)
-		*OutGoals = std::move(Parms.OutGoals);
-}
-
-
-// Function IKRig.IKRetargetPinBoneController.ClearAllBonePairs
-// (Final, RequiredAPI, Native, Public, BlueprintCallable)
-
-void UIKRetargetPinBoneController::ClearAllBonePairs()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("IKRetargetPinBoneController", "ClearAllBonePairs");
-
-	auto Flgs = Func->FunctionFlags;
-	Func->FunctionFlags |= 0x400;
-
-	UObject::ProcessEvent(Func, nullptr);
-
-	Func->FunctionFlags = Flgs;
-}
-
-
-// Function IKRig.IKRetargetPinBoneController.GetAllBonePairs
-// (Final, RequiredAPI, Native, Public, BlueprintCallable)
-// Parameters:
-// TMap<class FName, class FName>          ReturnValue                                            (Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
-
-TMap<class FName, class FName> UIKRetargetPinBoneController::GetAllBonePairs()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("IKRetargetPinBoneController", "GetAllBonePairs");
-
-	Params::IKRetargetPinBoneController_GetAllBonePairs Parms{};
-
-	auto Flgs = Func->FunctionFlags;
-	Func->FunctionFlags |= 0x400;
-
-	UObject::ProcessEvent(Func, &Parms);
-
-	Func->FunctionFlags = Flgs;
-
-	return Parms.ReturnValue;
-}
-
-
-// Function IKRig.IKRetargetPinBoneController.GetSettings
-// (Final, RequiredAPI, Native, Public, BlueprintCallable)
-// Parameters:
-// struct FIKRetargetPinBoneOpSettings     ReturnValue                                            (Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
-
-struct FIKRetargetPinBoneOpSettings UIKRetargetPinBoneController::GetSettings()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("IKRetargetPinBoneController", "GetSettings");
-
-	Params::IKRetargetPinBoneController_GetSettings Parms{};
-
-	auto Flgs = Func->FunctionFlags;
-	Func->FunctionFlags |= 0x400;
-
-	UObject::ProcessEvent(Func, &Parms);
-
-	Func->FunctionFlags = Flgs;
-
-	return Parms.ReturnValue;
-}
-
-
-// Function IKRig.IKRetargetPinBoneController.SetBonePair
-// (Final, RequiredAPI, Native, Public, BlueprintCallable)
-// Parameters:
-// const class FName                       InBoneToCopyFrom                                       (ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-// const class FName                       InBoneToCopyTo                                         (ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-
-void UIKRetargetPinBoneController::SetBonePair(const class FName InBoneToCopyFrom, const class FName InBoneToCopyTo)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("IKRetargetPinBoneController", "SetBonePair");
-
-	Params::IKRetargetPinBoneController_SetBonePair Parms{};
-
-	Parms.InBoneToCopyFrom = InBoneToCopyFrom;
-	Parms.InBoneToCopyTo = InBoneToCopyTo;
-
-	auto Flgs = Func->FunctionFlags;
-	Func->FunctionFlags |= 0x400;
-
-	UObject::ProcessEvent(Func, &Parms);
-
-	Func->FunctionFlags = Flgs;
-}
-
-
-// Function IKRig.IKRetargetPinBoneController.SetSettings
-// (Final, RequiredAPI, Native, Public, BlueprintCallable)
-// Parameters:
-// const struct FIKRetargetPinBoneOpSettings&InSettings                                             (Parm, NativeAccessSpecifierPublic)
-
-void UIKRetargetPinBoneController::SetSettings(const struct FIKRetargetPinBoneOpSettings& InSettings)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("IKRetargetPinBoneController", "SetSettings");
-
-	Params::IKRetargetPinBoneController_SetSettings Parms{};
-
-	Parms.InSettings = std::move(InSettings);
 
 	auto Flgs = Func->FunctionFlags;
 	Func->FunctionFlags |= 0x400;

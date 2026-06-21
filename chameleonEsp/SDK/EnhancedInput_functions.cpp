@@ -863,68 +863,6 @@ bool UEnhancedInputUserSettings::IsMappingContextRegistered(const class UInputMa
 }
 
 
-// Function EnhancedInput.InputModifier.GetVisualizationColor
-// (RequiredAPI, Native, Event, Public, HasDefaults, BlueprintEvent, Const)
-// Parameters:
-// const struct FInputActionValue&         SampleValue                                            (Parm, NoDestructor, NativeAccessSpecifierPublic)
-// const struct FInputActionValue&         FinalValue                                             (Parm, NoDestructor, NativeAccessSpecifierPublic)
-// struct FLinearColor                     ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-
-struct FLinearColor UInputModifier::GetVisualizationColor(const struct FInputActionValue& SampleValue, const struct FInputActionValue& FinalValue) const
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("InputModifier", "GetVisualizationColor");
-
-	Params::InputModifier_GetVisualizationColor Parms{};
-
-	Parms.SampleValue = std::move(SampleValue);
-	Parms.FinalValue = std::move(FinalValue);
-
-	auto Flgs = Func->FunctionFlags;
-	Func->FunctionFlags |= 0x400;
-
-	UObject::ProcessEvent(Func, &Parms);
-
-	Func->FunctionFlags = Flgs;
-
-	return Parms.ReturnValue;
-}
-
-
-// Function EnhancedInput.InputModifier.ModifyRaw
-// (RequiredAPI, Native, Event, Public, BlueprintCallable, BlueprintEvent, BlueprintPure, Const)
-// Parameters:
-// const class UEnhancedPlayerInput*       PlayerInput                                            (ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-// const struct FInputActionValue&         CurrentValue                                           (Parm, NoDestructor, NativeAccessSpecifierPublic)
-// float                                   DeltaTime                                              (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-// struct FInputActionValue                ReturnValue                                            (Parm, OutParm, ReturnParm, NoDestructor, NativeAccessSpecifierPublic)
-
-struct FInputActionValue UInputModifier::ModifyRaw(const class UEnhancedPlayerInput* PlayerInput, const struct FInputActionValue& CurrentValue, float DeltaTime) const
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("InputModifier", "ModifyRaw");
-
-	Params::InputModifier_ModifyRaw Parms{};
-
-	Parms.PlayerInput = PlayerInput;
-	Parms.CurrentValue = std::move(CurrentValue);
-	Parms.DeltaTime = DeltaTime;
-
-	auto Flgs = Func->FunctionFlags;
-	Func->FunctionFlags |= 0x400;
-
-	UObject::ProcessEvent(Func, &Parms);
-
-	Func->FunctionFlags = Flgs;
-
-	return Parms.ReturnValue;
-}
-
-
 // Function EnhancedInput.EnhancedInputComponent.GetBoundActionValue
 // (Final, RequiredAPI, Native, Public, BlueprintCallable, BlueprintPure, Const)
 // Parameters:
@@ -2180,91 +2118,6 @@ TArray<struct FKey> IEnhancedInputSubsystemInterface::QueryKeysMappedToAction(co
 }
 
 
-// Function EnhancedInput.InputTrigger.UpdateState
-// (RequiredAPI, Native, Event, Public, BlueprintCallable, BlueprintEvent)
-// Parameters:
-// const class UEnhancedPlayerInput*       PlayerInput                                            (ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-// const struct FInputActionValue&         ModifiedValue                                          (Parm, NoDestructor, NativeAccessSpecifierPublic)
-// float                                   DeltaTime                                              (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-// ETriggerState                           ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-
-ETriggerState UInputTrigger::UpdateState(const class UEnhancedPlayerInput* PlayerInput, const struct FInputActionValue& ModifiedValue, float DeltaTime)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("InputTrigger", "UpdateState");
-
-	Params::InputTrigger_UpdateState Parms{};
-
-	Parms.PlayerInput = PlayerInput;
-	Parms.ModifiedValue = std::move(ModifiedValue);
-	Parms.DeltaTime = DeltaTime;
-
-	auto Flgs = Func->FunctionFlags;
-	Func->FunctionFlags |= 0x400;
-
-	UObject::ProcessEvent(Func, &Parms);
-
-	Func->FunctionFlags = Flgs;
-
-	return Parms.ReturnValue;
-}
-
-
-// Function EnhancedInput.InputTrigger.GetTriggerType
-// (RequiredAPI, Native, Event, Public, BlueprintCallable, BlueprintEvent, BlueprintPure, Const)
-// Parameters:
-// ETriggerType                            ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-
-ETriggerType UInputTrigger::GetTriggerType() const
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("InputTrigger", "GetTriggerType");
-
-	Params::InputTrigger_GetTriggerType Parms{};
-
-	auto Flgs = Func->FunctionFlags;
-	Func->FunctionFlags |= 0x400;
-
-	UObject::ProcessEvent(Func, &Parms);
-
-	Func->FunctionFlags = Flgs;
-
-	return Parms.ReturnValue;
-}
-
-
-// Function EnhancedInput.InputTrigger.IsActuated
-// (Final, Native, Public, HasOutParams, BlueprintCallable, BlueprintPure, Const)
-// Parameters:
-// const struct FInputActionValue&         ForValue                                               (ConstParm, Parm, OutParm, ReferenceParm, NoDestructor, NativeAccessSpecifierPublic)
-// bool                                    ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-
-bool UInputTrigger::IsActuated(const struct FInputActionValue& ForValue) const
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("InputTrigger", "IsActuated");
-
-	Params::InputTrigger_IsActuated Parms{};
-
-	Parms.ForValue = std::move(ForValue);
-
-	auto Flgs = Func->FunctionFlags;
-	Func->FunctionFlags |= 0x400;
-
-	UObject::ProcessEvent(Func, &Parms);
-
-	Func->FunctionFlags = Flgs;
-
-	return Parms.ReturnValue;
-}
-
-
 // Function EnhancedInput.EnhancedInputWorldSubsystem.AddActorInputComponent
 // (Final, RequiredAPI, Native, Public, BlueprintCallable)
 // Parameters:
@@ -2441,6 +2294,153 @@ void UInputMappingContext::UnmapKey(const class UInputAction* Action, const stru
 	UObject::ProcessEvent(Func, &Parms);
 
 	Func->FunctionFlags = Flgs;
+}
+
+
+// Function EnhancedInput.InputModifier.GetVisualizationColor
+// (RequiredAPI, Native, Event, Public, HasDefaults, BlueprintEvent, Const)
+// Parameters:
+// const struct FInputActionValue&         SampleValue                                            (Parm, NoDestructor, NativeAccessSpecifierPublic)
+// const struct FInputActionValue&         FinalValue                                             (Parm, NoDestructor, NativeAccessSpecifierPublic)
+// struct FLinearColor                     ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+
+struct FLinearColor UInputModifier::GetVisualizationColor(const struct FInputActionValue& SampleValue, const struct FInputActionValue& FinalValue) const
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("InputModifier", "GetVisualizationColor");
+
+	Params::InputModifier_GetVisualizationColor Parms{};
+
+	Parms.SampleValue = std::move(SampleValue);
+	Parms.FinalValue = std::move(FinalValue);
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	Func->FunctionFlags = Flgs;
+
+	return Parms.ReturnValue;
+}
+
+
+// Function EnhancedInput.InputModifier.ModifyRaw
+// (RequiredAPI, Native, Event, Public, BlueprintCallable, BlueprintEvent, BlueprintPure, Const)
+// Parameters:
+// const class UEnhancedPlayerInput*       PlayerInput                                            (ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// const struct FInputActionValue&         CurrentValue                                           (Parm, NoDestructor, NativeAccessSpecifierPublic)
+// float                                   DeltaTime                                              (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// struct FInputActionValue                ReturnValue                                            (Parm, OutParm, ReturnParm, NoDestructor, NativeAccessSpecifierPublic)
+
+struct FInputActionValue UInputModifier::ModifyRaw(const class UEnhancedPlayerInput* PlayerInput, const struct FInputActionValue& CurrentValue, float DeltaTime) const
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("InputModifier", "ModifyRaw");
+
+	Params::InputModifier_ModifyRaw Parms{};
+
+	Parms.PlayerInput = PlayerInput;
+	Parms.CurrentValue = std::move(CurrentValue);
+	Parms.DeltaTime = DeltaTime;
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	Func->FunctionFlags = Flgs;
+
+	return Parms.ReturnValue;
+}
+
+
+// Function EnhancedInput.InputTrigger.UpdateState
+// (RequiredAPI, Native, Event, Public, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// const class UEnhancedPlayerInput*       PlayerInput                                            (ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// const struct FInputActionValue&         ModifiedValue                                          (Parm, NoDestructor, NativeAccessSpecifierPublic)
+// float                                   DeltaTime                                              (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// ETriggerState                           ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+
+ETriggerState UInputTrigger::UpdateState(const class UEnhancedPlayerInput* PlayerInput, const struct FInputActionValue& ModifiedValue, float DeltaTime)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("InputTrigger", "UpdateState");
+
+	Params::InputTrigger_UpdateState Parms{};
+
+	Parms.PlayerInput = PlayerInput;
+	Parms.ModifiedValue = std::move(ModifiedValue);
+	Parms.DeltaTime = DeltaTime;
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	Func->FunctionFlags = Flgs;
+
+	return Parms.ReturnValue;
+}
+
+
+// Function EnhancedInput.InputTrigger.GetTriggerType
+// (RequiredAPI, Native, Event, Public, BlueprintCallable, BlueprintEvent, BlueprintPure, Const)
+// Parameters:
+// ETriggerType                            ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+
+ETriggerType UInputTrigger::GetTriggerType() const
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("InputTrigger", "GetTriggerType");
+
+	Params::InputTrigger_GetTriggerType Parms{};
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	Func->FunctionFlags = Flgs;
+
+	return Parms.ReturnValue;
+}
+
+
+// Function EnhancedInput.InputTrigger.IsActuated
+// (Final, Native, Public, HasOutParams, BlueprintCallable, BlueprintPure, Const)
+// Parameters:
+// const struct FInputActionValue&         ForValue                                               (ConstParm, Parm, OutParm, ReferenceParm, NoDestructor, NativeAccessSpecifierPublic)
+// bool                                    ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+
+bool UInputTrigger::IsActuated(const struct FInputActionValue& ForValue) const
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("InputTrigger", "IsActuated");
+
+	Params::InputTrigger_IsActuated Parms{};
+
+	Parms.ForValue = std::move(ForValue);
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	Func->FunctionFlags = Flgs;
+
+	return Parms.ReturnValue;
 }
 
 

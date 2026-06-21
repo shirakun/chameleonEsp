@@ -280,6 +280,18 @@ enum class ELandscapeTextureUsage : uint8
 	ELandscapeTextureUsage_MAX               = 3,
 };
 
+// ScriptStruct Landscape.WeightmapLayerAllocationInfo
+// 0x0010 (0x0010 - 0x0000)
+struct FWeightmapLayerAllocationInfo final
+{
+public:
+	class ULandscapeLayerInfoObject*              LayerInfo;                                         // 0x0000(0x0008)(ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic, TObjectPtr)
+	uint8                                         WeightmapTextureIndex;                             // 0x0008(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         WeightmapTextureChannel;                           // 0x0009(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_A[0x6];                                        // 0x000A(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+DUMPER7_ASSERTS_FWeightmapLayerAllocationInfo;
+
 // ScriptStruct Landscape.LandscapeLayerBrush
 // 0x0008 (0x0008 - 0x0000)
 struct alignas(0x08) FLandscapeLayerBrush final
@@ -310,21 +322,6 @@ public:
 };
 DUMPER7_ASSERTS_FLandscapeLayer;
 
-// ScriptStruct Landscape.LandscapeBrushParameters
-// 0x0080 (0x0080 - 0x0000)
-struct FLandscapeBrushParameters final
-{
-public:
-	struct FTransform                             RenderAreaWorldTransform;                          // 0x0000(0x0060)(Edit, BlueprintVisible, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FIntPoint                              RenderAreaSize;                                    // 0x0060(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class UTextureRenderTarget2D*                 CombinedResult;                                    // 0x0068(0x0008)(Edit, BlueprintVisible, ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic, TObjectPtr)
-	ELandscapeToolTargetType                      LayerType;                                         // 0x0070(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_71[0x3];                                       // 0x0071(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	class FName                                   WeightmapLayerName;                                // 0x0074(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_7C[0x4];                                       // 0x007C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-DUMPER7_ASSERTS_FLandscapeBrushParameters;
-
 // ScriptStruct Landscape.LandscapeEditToolRenderData
 // 0x0038 (0x0038 - 0x0000)
 struct FLandscapeEditToolRenderData final
@@ -341,37 +338,6 @@ public:
 	class UTexture2D*                             DirtyTexture;                                      // 0x0030(0x0008)(ZeroConstructor, NonTransactional, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic, TObjectPtr)
 };
 DUMPER7_ASSERTS_FLandscapeEditToolRenderData;
-
-// ScriptStruct Landscape.PhysicalMaterialInput
-// 0x0030 (0x0030 - 0x0000)
-struct FPhysicalMaterialInput final
-{
-public:
-	class UPhysicalMaterial*                      PhysicalMaterial;                                  // 0x0000(0x0008)(Edit, ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic, TObjectPtr)
-	struct FExpressionInput                       Input;                                             // 0x0008(0x0028)(NoDestructor, NativeAccessSpecifierPublic)
-};
-DUMPER7_ASSERTS_FPhysicalMaterialInput;
-
-// ScriptStruct Landscape.WeightmapLayerAllocationInfo
-// 0x0010 (0x0010 - 0x0000)
-struct FWeightmapLayerAllocationInfo final
-{
-public:
-	class ULandscapeLayerInfoObject*              LayerInfo;                                         // 0x0000(0x0008)(ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic, TObjectPtr)
-	uint8                                         WeightmapTextureIndex;                             // 0x0008(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         WeightmapTextureChannel;                           // 0x0009(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_A[0x6];                                        // 0x000A(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-DUMPER7_ASSERTS_FWeightmapLayerAllocationInfo;
-
-// ScriptStruct Landscape.HeightmapData
-// 0x0008 (0x0008 - 0x0000)
-struct FHeightmapData final
-{
-public:
-	class UTexture2D*                             Texture;                                           // 0x0000(0x0008)(ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic, TObjectPtr)
-};
-DUMPER7_ASSERTS_FHeightmapData;
 
 // ScriptStruct Landscape.LandscapeComponentMaterialOverride
 // 0x0010 (0x0010 - 0x0000)
@@ -405,6 +371,15 @@ public:
 	TArray<class ULandscapeWeightmapUsage*>       TextureUsages;                                     // 0x0020(0x0010)(ZeroConstructor, Transient, NonTransactional, UObjectWrapper, NativeAccessSpecifierPublic, TObjectPtr)
 };
 DUMPER7_ASSERTS_FWeightmapData;
+
+// ScriptStruct Landscape.HeightmapData
+// 0x0008 (0x0008 - 0x0000)
+struct FHeightmapData final
+{
+public:
+	class UTexture2D*                             Texture;                                           // 0x0000(0x0008)(ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic, TObjectPtr)
+};
+DUMPER7_ASSERTS_FHeightmapData;
 
 // ScriptStruct Landscape.LandscapeLayerComponentData
 // 0x0038 (0x0038 - 0x0000)
@@ -617,6 +592,21 @@ public:
 };
 DUMPER7_ASSERTS_FLayerBlendInput;
 
+// ScriptStruct Landscape.LandscapeBrushParameters
+// 0x0080 (0x0080 - 0x0000)
+struct FLandscapeBrushParameters final
+{
+public:
+	struct FTransform                             RenderAreaWorldTransform;                          // 0x0000(0x0060)(Edit, BlueprintVisible, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FIntPoint                              RenderAreaSize;                                    // 0x0060(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UTextureRenderTarget2D*                 CombinedResult;                                    // 0x0068(0x0008)(Edit, BlueprintVisible, ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic, TObjectPtr)
+	ELandscapeToolTargetType                      LayerType;                                         // 0x0070(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_71[0x3];                                       // 0x0071(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	class FName                                   WeightmapLayerName;                                // 0x0074(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_7C[0x4];                                       // 0x007C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+DUMPER7_ASSERTS_FLandscapeBrushParameters;
+
 // ScriptStruct Landscape.LandscapeInfoLayerSettings
 // 0x0010 (0x0010 - 0x0000)
 struct FLandscapeInfoLayerSettings final
@@ -676,5 +666,15 @@ public:
 	uint8                                         Pad_9[0x2F];                                       // 0x0009(0x002F)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 DUMPER7_ASSERTS_FLandscapeTexture2DMipMap;
+
+// ScriptStruct Landscape.PhysicalMaterialInput
+// 0x0030 (0x0030 - 0x0000)
+struct FPhysicalMaterialInput final
+{
+public:
+	class UPhysicalMaterial*                      PhysicalMaterial;                                  // 0x0000(0x0008)(Edit, ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic, TObjectPtr)
+	struct FExpressionInput                       Input;                                             // 0x0008(0x0028)(NoDestructor, NativeAccessSpecifierPublic)
+};
+DUMPER7_ASSERTS_FPhysicalMaterialInput;
 
 SDK_NAMESPACE_END

@@ -3088,6 +3088,44 @@ bool UDynamicCapsulePhysicsDrivenLibrary::CanSetCapsuleHalfHeight(class UCapsule
 }
 
 
+// Function PenguinHotel.EOSPlayerReportAsyncAction.SendEOSPlayerReport
+// (Final, Native, Static, Public, BlueprintCallable)
+// Parameters:
+// class UObject*                          WorldContextObject_0                                   (Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// const class FString&                    ReporterProductUserId                                  (Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// const class FString&                    ReportedProductUserId                                  (Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// EEOSPlayerReportCategory                Category                                               (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// const class FString&                    Message                                                (Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// const class FString&                    ContextJson                                            (Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// class UEOSPlayerReportAsyncAction*      ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+
+class UEOSPlayerReportAsyncAction* UEOSPlayerReportAsyncAction::SendEOSPlayerReport(class UObject* WorldContextObject_0, const class FString& ReporterProductUserId, const class FString& ReportedProductUserId, EEOSPlayerReportCategory Category, const class FString& Message, const class FString& ContextJson)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = StaticClass()->GetFunction("EOSPlayerReportAsyncAction", "SendEOSPlayerReport");
+
+	Params::EOSPlayerReportAsyncAction_SendEOSPlayerReport Parms{};
+
+	Parms.WorldContextObject_0 = WorldContextObject_0;
+	Parms.ReporterProductUserId = std::move(ReporterProductUserId);
+	Parms.ReportedProductUserId = std::move(ReportedProductUserId);
+	Parms.Category = Category;
+	Parms.Message = std::move(Message);
+	Parms.ContextJson = std::move(ContextJson);
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	GetDefaultObj()->ProcessEvent(Func, &Parms);
+
+	Func->FunctionFlags = Flgs;
+
+	return Parms.ReturnValue;
+}
+
+
 // Function PenguinHotel.ModBlueprintLibrary.GetDefaultLocalModsFolder
 // (Final, Native, Static, Public, BlueprintCallable, BlueprintPure)
 // Parameters:

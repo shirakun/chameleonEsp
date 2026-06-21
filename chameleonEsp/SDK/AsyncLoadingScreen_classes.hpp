@@ -11,8 +11,8 @@
 #include "Basic.hpp"
 
 #include "Engine_classes.hpp"
-#include "DeveloperSettings_classes.hpp"
 #include "AsyncLoadingScreen_structs.hpp"
+#include "DeveloperSettings_classes.hpp"
 
 
 SDK_NAMESPACE_START

@@ -295,30 +295,6 @@ public:
 };
 DUMPER7_ASSERTS_EnhancedInputUserSettings_IsMappingContextRegistered;
 
-// Function EnhancedInput.InputModifier.GetVisualizationColor
-// 0x0050 (0x0050 - 0x0000)
-struct InputModifier_GetVisualizationColor final
-{
-public:
-	struct FInputActionValue                      SampleValue;                                       // 0x0000(0x0020)(Parm, NoDestructor, NativeAccessSpecifierPublic)
-	struct FInputActionValue                      FinalValue;                                        // 0x0020(0x0020)(Parm, NoDestructor, NativeAccessSpecifierPublic)
-	struct FLinearColor                           ReturnValue;                                       // 0x0040(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-DUMPER7_ASSERTS_InputModifier_GetVisualizationColor;
-
-// Function EnhancedInput.InputModifier.ModifyRaw
-// 0x0050 (0x0050 - 0x0000)
-struct InputModifier_ModifyRaw final
-{
-public:
-	const class UEnhancedPlayerInput*             PlayerInput;                                       // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FInputActionValue                      CurrentValue;                                      // 0x0008(0x0020)(Parm, NoDestructor, NativeAccessSpecifierPublic)
-	float                                         DeltaTime;                                         // 0x0028(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2C[0x4];                                       // 0x002C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FInputActionValue                      ReturnValue;                                       // 0x0030(0x0020)(Parm, OutParm, ReturnParm, NoDestructor, NativeAccessSpecifierPublic)
-};
-DUMPER7_ASSERTS_InputModifier_ModifyRaw;
-
 // Function EnhancedInput.EnhancedInputComponent.GetBoundActionValue
 // 0x0028 (0x0028 - 0x0000)
 struct EnhancedInputComponent_GetBoundActionValue final
@@ -787,39 +763,6 @@ public:
 };
 DUMPER7_ASSERTS_EnhancedInputSubsystemInterface_QueryKeysMappedToAction;
 
-// Function EnhancedInput.InputTrigger.UpdateState
-// 0x0030 (0x0030 - 0x0000)
-struct InputTrigger_UpdateState final
-{
-public:
-	const class UEnhancedPlayerInput*             PlayerInput;                                       // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FInputActionValue                      ModifiedValue;                                     // 0x0008(0x0020)(Parm, NoDestructor, NativeAccessSpecifierPublic)
-	float                                         DeltaTime;                                         // 0x0028(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	ETriggerState                                 ReturnValue;                                       // 0x002C(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2D[0x3];                                       // 0x002D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-DUMPER7_ASSERTS_InputTrigger_UpdateState;
-
-// Function EnhancedInput.InputTrigger.GetTriggerType
-// 0x0001 (0x0001 - 0x0000)
-struct InputTrigger_GetTriggerType final
-{
-public:
-	ETriggerType                                  ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-DUMPER7_ASSERTS_InputTrigger_GetTriggerType;
-
-// Function EnhancedInput.InputTrigger.IsActuated
-// 0x0028 (0x0028 - 0x0000)
-struct InputTrigger_IsActuated final
-{
-public:
-	struct FInputActionValue                      ForValue;                                          // 0x0000(0x0020)(ConstParm, Parm, OutParm, ReferenceParm, NoDestructor, NativeAccessSpecifierPublic)
-	bool                                          ReturnValue;                                       // 0x0020(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_21[0x7];                                       // 0x0021(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-DUMPER7_ASSERTS_InputTrigger_IsActuated;
-
 // Function EnhancedInput.EnhancedInputWorldSubsystem.AddActorInputComponent
 // 0x0008 (0x0008 - 0x0000)
 struct EnhancedInputWorldSubsystem_AddActorInputComponent final
@@ -878,6 +821,63 @@ public:
 	struct FKey                                   Key;                                               // 0x0008(0x0018)(Parm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 DUMPER7_ASSERTS_InputMappingContext_UnmapKey;
+
+// Function EnhancedInput.InputModifier.GetVisualizationColor
+// 0x0050 (0x0050 - 0x0000)
+struct InputModifier_GetVisualizationColor final
+{
+public:
+	struct FInputActionValue                      SampleValue;                                       // 0x0000(0x0020)(Parm, NoDestructor, NativeAccessSpecifierPublic)
+	struct FInputActionValue                      FinalValue;                                        // 0x0020(0x0020)(Parm, NoDestructor, NativeAccessSpecifierPublic)
+	struct FLinearColor                           ReturnValue;                                       // 0x0040(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+DUMPER7_ASSERTS_InputModifier_GetVisualizationColor;
+
+// Function EnhancedInput.InputModifier.ModifyRaw
+// 0x0050 (0x0050 - 0x0000)
+struct InputModifier_ModifyRaw final
+{
+public:
+	const class UEnhancedPlayerInput*             PlayerInput;                                       // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FInputActionValue                      CurrentValue;                                      // 0x0008(0x0020)(Parm, NoDestructor, NativeAccessSpecifierPublic)
+	float                                         DeltaTime;                                         // 0x0028(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2C[0x4];                                       // 0x002C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FInputActionValue                      ReturnValue;                                       // 0x0030(0x0020)(Parm, OutParm, ReturnParm, NoDestructor, NativeAccessSpecifierPublic)
+};
+DUMPER7_ASSERTS_InputModifier_ModifyRaw;
+
+// Function EnhancedInput.InputTrigger.UpdateState
+// 0x0030 (0x0030 - 0x0000)
+struct InputTrigger_UpdateState final
+{
+public:
+	const class UEnhancedPlayerInput*             PlayerInput;                                       // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FInputActionValue                      ModifiedValue;                                     // 0x0008(0x0020)(Parm, NoDestructor, NativeAccessSpecifierPublic)
+	float                                         DeltaTime;                                         // 0x0028(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	ETriggerState                                 ReturnValue;                                       // 0x002C(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2D[0x3];                                       // 0x002D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+DUMPER7_ASSERTS_InputTrigger_UpdateState;
+
+// Function EnhancedInput.InputTrigger.GetTriggerType
+// 0x0001 (0x0001 - 0x0000)
+struct InputTrigger_GetTriggerType final
+{
+public:
+	ETriggerType                                  ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+DUMPER7_ASSERTS_InputTrigger_GetTriggerType;
+
+// Function EnhancedInput.InputTrigger.IsActuated
+// 0x0028 (0x0028 - 0x0000)
+struct InputTrigger_IsActuated final
+{
+public:
+	struct FInputActionValue                      ForValue;                                          // 0x0000(0x0020)(ConstParm, Parm, OutParm, ReferenceParm, NoDestructor, NativeAccessSpecifierPublic)
+	bool                                          ReturnValue;                                       // 0x0020(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_21[0x7];                                       // 0x0021(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+DUMPER7_ASSERTS_InputTrigger_IsActuated;
 
 // Function EnhancedInput.PlayerMappableInputConfig.GetConfigName
 // 0x0008 (0x0008 - 0x0000)

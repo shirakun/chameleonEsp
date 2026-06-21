@@ -995,6 +995,22 @@ public:
 };
 DUMPER7_ASSERTS_DynamicCapsulePhysicsDrivenLibrary_CanSetCapsuleHalfHeight;
 
+// Function PenguinHotel.EOSPlayerReportAsyncAction.SendEOSPlayerReport
+// 0x0058 (0x0058 - 0x0000)
+struct EOSPlayerReportAsyncAction_SendEOSPlayerReport final
+{
+public:
+	class UObject*                                WorldContextObject_0;                              // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 ReporterProductUserId;                             // 0x0008(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 ReportedProductUserId;                             // 0x0018(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EEOSPlayerReportCategory                      Category;                                          // 0x0028(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_29[0x7];                                       // 0x0029(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 Message;                                           // 0x0030(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 ContextJson;                                       // 0x0040(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UEOSPlayerReportAsyncAction*            ReturnValue;                                       // 0x0050(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+DUMPER7_ASSERTS_EOSPlayerReportAsyncAction_SendEOSPlayerReport;
+
 // Function PenguinHotel.ModBlueprintLibrary.GetDefaultLocalModsFolder
 // 0x0010 (0x0010 - 0x0000)
 struct ModBlueprintLibrary_GetDefaultLocalModsFolder final

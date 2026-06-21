@@ -17,7 +17,7 @@
 SDK_NAMESPACE_START
 
 // BlueprintGeneratedClass BPGI_Main.BPGI_Main_C
-// 0x0030 (0x0258 - 0x0228)
+// 0x0038 (0x0260 - 0x0228)
 class UBPGI_Main_C final : public URedpointGameInstance
 {
 public:
@@ -26,6 +26,7 @@ public:
 	class FString                                 InputDeviceName;                                   // 0x0238(0x0010)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, HasGetValueTypeHash)
 	class ULINK_ServerSaveData_C*                 LINK_ServerSaveData;                               // 0x0248(0x0008)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, NoDestructor, HasGetValueTypeHash)
 	class UBP_Online_SaveData_C*                  CreatedSaveGame;                                   // 0x0250(0x0008)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, NoDestructor, HasGetValueTypeHash)
+	bool                                          CloudSaveSuccess;                                  // 0x0258(0x0001)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
 public:
 	void ExecuteUbergraph_BPGI_Main(int32 EntryPoint);

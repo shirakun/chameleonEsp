@@ -11,15 +11,15 @@
 #include "Basic.hpp"
 
 #include "Engine_structs.hpp"
-#include "BP_FirstPersonGameMode_V2_classes.hpp"
 #include "EN_cLeonGameMode_structs.hpp"
+#include "BP_FirstPersonGameMode_V2_classes.hpp"
 #include "EN_cLeonBodyType_structs.hpp"
 
 
 SDK_NAMESPACE_START
 
 // BlueprintGeneratedClass BP_GameMode_cLeon.BP_GameMode_cLeon_C
-// 0x0078 (0x0430 - 0x03B8)
+// 0x0080 (0x0438 - 0x03B8)
 class ABP_GameMode_cLeon_C final : public ABP_FirstPersonGameMode_V2_C
 {
 public:
@@ -47,6 +47,8 @@ public:
 	int32                                         CurrentGameMapIndex;                               // 0x0424(0x0004)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	bool                                          CanModMap;                                         // 0x0428(0x0001)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	bool                                          IsModUse;                                          // 0x0429(0x0001)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	uint8                                         Pad_42A[0x6];                                      // 0x042A(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
+	class UClass*                                 SurvivorClass;                                     // 0x0430(0x0008)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, NoDestructor, HasGetValueTypeHash)
 
 public:
 	void TimerMinus();

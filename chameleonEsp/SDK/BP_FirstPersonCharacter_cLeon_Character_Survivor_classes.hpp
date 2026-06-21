@@ -17,31 +17,25 @@
 SDK_NAMESPACE_START
 
 // BlueprintGeneratedClass BP_FirstPersonCharacter_cLeon_Character_Survivor.BP_FirstPersonCharacter_cLeon_Character_Survivor_C
-// 0x0060 (0x0CF0 - 0x0C90)
-class ABP_FirstPersonCharacter_cLeon_Character_Survivor_C final : public ABP_FirstPersonCharacter_cLeon_Character_C
+// 0x0030 (0x0CC0 - 0x0C90)
+#pragma pack(push, 0x1)
+class SDK_ALIGN(0x10) ABP_FirstPersonCharacter_cLeon_Character_Survivor_C : public ABP_FirstPersonCharacter_cLeon_Character_C
 {
 public:
 	struct FPointerToUberGraphFrame               UberGraphFrame_BP_FirstPersonCharacter_cLeon_Character_Survivor_C; // 0x0C90(0x0008)(ZeroConstructor, Transient, DuplicateTransient)
-	class UCapsuleComponent*                      OverlapChecker_9;                                  // 0x0C98(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
-	class UCapsuleComponent*                      OverlapChecker_8;                                  // 0x0CA0(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
-	class UCapsuleComponent*                      OverlapChecker_7;                                  // 0x0CA8(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
-	class UCapsuleComponent*                      OverlapChecker_6;                                  // 0x0CB0(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
-	class UCapsuleComponent*                      OverlapChecker_5;                                  // 0x0CB8(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
-	class UCapsuleComponent*                      OverlapChecker_4;                                  // 0x0CC0(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
-	class UCapsuleComponent*                      OverlapChecker_3;                                  // 0x0CC8(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
-	class UCapsuleComponent*                      OverlapChecker_2;                                  // 0x0CD0(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
-	class USphereComponent*                       OverlapChecker_1;                                  // 0x0CD8(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
-	double                                        FilledValue;                                       // 0x0CE0(0x0008)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	int32                                         PreStencil;                                        // 0x0CE8(0x0004)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	double                                        FilledValue;                                       // 0x0C98(0x0008)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	int32                                         PreStencil;                                        // 0x0CA0(0x0004)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	uint8                                         Pad_CA4[0x4];                                      // 0x0CA4(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<class UCapsuleComponent*>              OverlapCheckCapsules;                              // 0x0CA8(0x0010)(Edit, BlueprintVisible, DisableEditOnInstance, ContainsInstancedReference)
 
 public:
-	void SetStencilValue_Server_(int32 StencilValue);
-	void ReceiveTick(float DeltaSeconds_ReceiveTick);
-	void ReceiveBeginPlay();
-	void PlayerControllerSetup();
-	void OverlapCheck();
-	void IsOverlap(int32* OverlapCountRezult);
 	void ExecuteUbergraph_BP_FirstPersonCharacter_cLeon_Character_Survivor(int32 EntryPoint);
+	void SetStencilValue_Server_(int32 StencilValue);
+	void ReceiveBeginPlay();
+	void OverlapCheck();
+	void ReceiveTick(float DeltaSeconds);
+	void PlayerControllerSetup();
+	void IsOverlap(int32* OverlapCountRezult);
 
 public:
 	static class UClass* StaticClass()
@@ -57,6 +51,7 @@ public:
 		return GetDefaultObjImpl<ABP_FirstPersonCharacter_cLeon_Character_Survivor_C>();
 	}
 };
+#pragma pack(pop)
 DUMPER7_ASSERTS_ABP_FirstPersonCharacter_cLeon_Character_Survivor_C;
 
 SDK_NAMESPACE_END

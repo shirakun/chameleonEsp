@@ -11,11 +11,11 @@
 #include "Basic.hpp"
 
 #include "GameplayTags_structs.hpp"
+#include "EnhancedInput_structs.hpp"
 #include "DeveloperSettings_structs.hpp"
 #include "DeveloperSettings_classes.hpp"
 #include "CoreUObject_structs.hpp"
 #include "CoreUObject_classes.hpp"
-#include "EnhancedInput_structs.hpp"
 #include "Engine_classes.hpp"
 #include "InputCore_structs.hpp"
 
@@ -143,50 +143,6 @@ public:
 };
 DUMPER7_ASSERTS_UEnhancedInputActionDelegateBinding;
 
-// Class EnhancedInput.InputModifier
-// 0x0000 (0x0028 - 0x0028)
-class UInputModifier : public UObject
-{
-public:
-	struct FLinearColor GetVisualizationColor(const struct FInputActionValue& SampleValue, const struct FInputActionValue& FinalValue) const;
-	struct FInputActionValue ModifyRaw(const class UEnhancedPlayerInput* PlayerInput, const struct FInputActionValue& CurrentValue, float DeltaTime) const;
-
-public:
-	static class UClass* StaticClass()
-	{
-		STATIC_CLASS_IMPL("InputModifier")
-	}
-	static const class FName& StaticName()
-	{
-		STATIC_NAME_IMPL(L"InputModifier")
-	}
-	static class UInputModifier* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<UInputModifier>();
-	}
-};
-DUMPER7_ASSERTS_UInputModifier;
-
-// Class EnhancedInput.InputModifierScaleByDeltaTime
-// 0x0000 (0x0028 - 0x0028)
-class UInputModifierScaleByDeltaTime final : public UInputModifier
-{
-public:
-	static class UClass* StaticClass()
-	{
-		STATIC_CLASS_IMPL("InputModifierScaleByDeltaTime")
-	}
-	static const class FName& StaticName()
-	{
-		STATIC_NAME_IMPL(L"InputModifierScaleByDeltaTime")
-	}
-	static class UInputModifierScaleByDeltaTime* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<UInputModifierScaleByDeltaTime>();
-	}
-};
-DUMPER7_ASSERTS_UInputModifierScaleByDeltaTime;
-
 // Class EnhancedInput.EnhancedInputActionValueBinding
 // 0x0010 (0x0038 - 0x0028)
 class UEnhancedInputActionValueBinding final : public UInputDelegateBinding
@@ -309,31 +265,6 @@ public:
 	}
 };
 DUMPER7_ASSERTS_UEnhancedInputLibrary;
-
-// Class EnhancedInput.InputModifierResponseCurveUser
-// 0x0018 (0x0040 - 0x0028)
-class UInputModifierResponseCurveUser final : public UInputModifier
-{
-public:
-	class UCurveFloat*                            ResponseX;                                         // 0x0028(0x0008)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnTemplate, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic, TObjectPtr)
-	class UCurveFloat*                            ResponseY;                                         // 0x0030(0x0008)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnTemplate, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic, TObjectPtr)
-	class UCurveFloat*                            ResponseZ;                                         // 0x0038(0x0008)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnTemplate, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic, TObjectPtr)
-
-public:
-	static class UClass* StaticClass()
-	{
-		STATIC_CLASS_IMPL("InputModifierResponseCurveUser")
-	}
-	static const class FName& StaticName()
-	{
-		STATIC_NAME_IMPL(L"InputModifierResponseCurveUser")
-	}
-	static class UInputModifierResponseCurveUser* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<UInputModifierResponseCurveUser>();
-	}
-};
-DUMPER7_ASSERTS_UInputModifierResponseCurveUser;
 
 // Class EnhancedInput.EnhancedInputPlatformData
 // 0x0050 (0x0078 - 0x0028)
@@ -475,38 +406,6 @@ public:
 };
 DUMPER7_ASSERTS_UEnhancedInputLocalPlayerSubsystem;
 
-// Class EnhancedInput.InputTrigger
-// 0x0028 (0x0050 - 0x0028)
-class UInputTrigger : public UObject
-{
-public:
-	float                                         ActuationThreshold;                                // 0x0028(0x0004)(Edit, BlueprintVisible, ZeroConstructor, Config, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bShouldAlwaysTick;                                 // 0x002C(0x0001)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, Config, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2D[0x3];                                       // 0x002D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FInputActionValue                      LastValue;                                         // 0x0030(0x0020)(BlueprintVisible, BlueprintReadOnly, NoDestructor, NativeAccessSpecifierPublic)
-
-public:
-	ETriggerState UpdateState(const class UEnhancedPlayerInput* PlayerInput, const struct FInputActionValue& ModifiedValue, float DeltaTime);
-
-	ETriggerType GetTriggerType() const;
-	bool IsActuated(const struct FInputActionValue& ForValue) const;
-
-public:
-	static class UClass* StaticClass()
-	{
-		STATIC_CLASS_IMPL("InputTrigger")
-	}
-	static const class FName& StaticName()
-	{
-		STATIC_NAME_IMPL(L"InputTrigger")
-	}
-	static class UInputTrigger* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<UInputTrigger>();
-	}
-};
-DUMPER7_ASSERTS_UInputTrigger;
-
 // Class EnhancedInput.EnhancedInputWorldSubsystem
 // 0x01C8 (0x01F8 - 0x0030)
 class UEnhancedInputWorldSubsystem final : public UWorldSubsystem
@@ -605,31 +504,6 @@ public:
 };
 DUMPER7_ASSERTS_UInputAction;
 
-// Class EnhancedInput.InputModifierFOVScaling
-// 0x0008 (0x0030 - 0x0028)
-class UInputModifierFOVScaling final : public UInputModifier
-{
-public:
-	float                                         FOVScale;                                          // 0x0028(0x0004)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnTemplate, Config, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EFOVScalingType                               FOVScalingType;                                    // 0x002C(0x0001)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnTemplate, Config, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2D[0x3];                                       // 0x002D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-
-public:
-	static class UClass* StaticClass()
-	{
-		STATIC_CLASS_IMPL("InputModifierFOVScaling")
-	}
-	static const class FName& StaticName()
-	{
-		STATIC_NAME_IMPL(L"InputModifierFOVScaling")
-	}
-	static class UInputModifierFOVScaling* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<UInputModifierFOVScaling>();
-	}
-};
-DUMPER7_ASSERTS_UInputModifierFOVScaling;
-
 // Class EnhancedInput.InputDebugKeyDelegateBinding
 // 0x0010 (0x0038 - 0x0028)
 class UInputDebugKeyDelegateBinding final : public UInputDelegateBinding
@@ -652,26 +526,6 @@ public:
 	}
 };
 DUMPER7_ASSERTS_UInputDebugKeyDelegateBinding;
-
-// Class EnhancedInput.InputTriggerReleased
-// 0x0000 (0x0050 - 0x0050)
-class UInputTriggerReleased final : public UInputTrigger
-{
-public:
-	static class UClass* StaticClass()
-	{
-		STATIC_CLASS_IMPL("InputTriggerReleased")
-	}
-	static const class FName& StaticName()
-	{
-		STATIC_NAME_IMPL(L"InputTriggerReleased")
-	}
-	static class UInputTriggerReleased* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<UInputTriggerReleased>();
-	}
-};
-DUMPER7_ASSERTS_UInputTriggerReleased;
 
 // Class EnhancedInput.InputMappingContext
 // 0x0078 (0x00A8 - 0x0030)
@@ -709,6 +563,30 @@ public:
 	}
 };
 DUMPER7_ASSERTS_UInputMappingContext;
+
+// Class EnhancedInput.InputModifier
+// 0x0000 (0x0028 - 0x0028)
+class UInputModifier : public UObject
+{
+public:
+	struct FLinearColor GetVisualizationColor(const struct FInputActionValue& SampleValue, const struct FInputActionValue& FinalValue) const;
+	struct FInputActionValue ModifyRaw(const class UEnhancedPlayerInput* PlayerInput, const struct FInputActionValue& CurrentValue, float DeltaTime) const;
+
+public:
+	static class UClass* StaticClass()
+	{
+		STATIC_CLASS_IMPL("InputModifier")
+	}
+	static const class FName& StaticName()
+	{
+		STATIC_NAME_IMPL(L"InputModifier")
+	}
+	static class UInputModifier* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UInputModifier>();
+	}
+};
+DUMPER7_ASSERTS_UInputModifier;
 
 // Class EnhancedInput.InputModifierSmoothDelta
 // 0x0040 (0x0068 - 0x0028)
@@ -786,6 +664,26 @@ public:
 };
 DUMPER7_ASSERTS_UInputModifierScalar;
 
+// Class EnhancedInput.InputModifierScaleByDeltaTime
+// 0x0000 (0x0028 - 0x0028)
+class UInputModifierScaleByDeltaTime final : public UInputModifier
+{
+public:
+	static class UClass* StaticClass()
+	{
+		STATIC_CLASS_IMPL("InputModifierScaleByDeltaTime")
+	}
+	static const class FName& StaticName()
+	{
+		STATIC_NAME_IMPL(L"InputModifierScaleByDeltaTime")
+	}
+	static class UInputModifierScaleByDeltaTime* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UInputModifierScaleByDeltaTime>();
+	}
+};
+DUMPER7_ASSERTS_UInputModifierScaleByDeltaTime;
+
 // Class EnhancedInput.InputModifierNegate
 // 0x0008 (0x0030 - 0x0028)
 class UInputModifierNegate final : public UInputModifier
@@ -858,6 +756,56 @@ public:
 };
 DUMPER7_ASSERTS_UInputModifierResponseCurveExponential;
 
+// Class EnhancedInput.InputModifierResponseCurveUser
+// 0x0018 (0x0040 - 0x0028)
+class UInputModifierResponseCurveUser final : public UInputModifier
+{
+public:
+	class UCurveFloat*                            ResponseX;                                         // 0x0028(0x0008)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnTemplate, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic, TObjectPtr)
+	class UCurveFloat*                            ResponseY;                                         // 0x0030(0x0008)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnTemplate, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic, TObjectPtr)
+	class UCurveFloat*                            ResponseZ;                                         // 0x0038(0x0008)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnTemplate, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic, TObjectPtr)
+
+public:
+	static class UClass* StaticClass()
+	{
+		STATIC_CLASS_IMPL("InputModifierResponseCurveUser")
+	}
+	static const class FName& StaticName()
+	{
+		STATIC_NAME_IMPL(L"InputModifierResponseCurveUser")
+	}
+	static class UInputModifierResponseCurveUser* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UInputModifierResponseCurveUser>();
+	}
+};
+DUMPER7_ASSERTS_UInputModifierResponseCurveUser;
+
+// Class EnhancedInput.InputModifierFOVScaling
+// 0x0008 (0x0030 - 0x0028)
+class UInputModifierFOVScaling final : public UInputModifier
+{
+public:
+	float                                         FOVScale;                                          // 0x0028(0x0004)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnTemplate, Config, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EFOVScalingType                               FOVScalingType;                                    // 0x002C(0x0001)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnTemplate, Config, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2D[0x3];                                       // 0x002D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	static class UClass* StaticClass()
+	{
+		STATIC_CLASS_IMPL("InputModifierFOVScaling")
+	}
+	static const class FName& StaticName()
+	{
+		STATIC_NAME_IMPL(L"InputModifierFOVScaling")
+	}
+	static class UInputModifierFOVScaling* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UInputModifierFOVScaling>();
+	}
+};
+DUMPER7_ASSERTS_UInputModifierFOVScaling;
+
 // Class EnhancedInput.InputModifierToWorldSpace
 // 0x0000 (0x0028 - 0x0028)
 class UInputModifierToWorldSpace final : public UInputModifier
@@ -901,6 +849,38 @@ public:
 	}
 };
 DUMPER7_ASSERTS_UInputModifierSwizzleAxis;
+
+// Class EnhancedInput.InputTrigger
+// 0x0028 (0x0050 - 0x0028)
+class UInputTrigger : public UObject
+{
+public:
+	float                                         ActuationThreshold;                                // 0x0028(0x0004)(Edit, BlueprintVisible, ZeroConstructor, Config, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bShouldAlwaysTick;                                 // 0x002C(0x0001)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, Config, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2D[0x3];                                       // 0x002D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FInputActionValue                      LastValue;                                         // 0x0030(0x0020)(BlueprintVisible, BlueprintReadOnly, NoDestructor, NativeAccessSpecifierPublic)
+
+public:
+	ETriggerState UpdateState(const class UEnhancedPlayerInput* PlayerInput, const struct FInputActionValue& ModifiedValue, float DeltaTime);
+
+	ETriggerType GetTriggerType() const;
+	bool IsActuated(const struct FInputActionValue& ForValue) const;
+
+public:
+	static class UClass* StaticClass()
+	{
+		STATIC_CLASS_IMPL("InputTrigger")
+	}
+	static const class FName& StaticName()
+	{
+		STATIC_NAME_IMPL(L"InputTrigger")
+	}
+	static class UInputTrigger* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UInputTrigger>();
+	}
+};
+DUMPER7_ASSERTS_UInputTrigger;
 
 // Class EnhancedInput.InputTriggerTimedBase
 // 0x0008 (0x0058 - 0x0050)
@@ -966,6 +946,26 @@ public:
 	}
 };
 DUMPER7_ASSERTS_UInputTriggerPressed;
+
+// Class EnhancedInput.InputTriggerReleased
+// 0x0000 (0x0050 - 0x0050)
+class UInputTriggerReleased final : public UInputTrigger
+{
+public:
+	static class UClass* StaticClass()
+	{
+		STATIC_CLASS_IMPL("InputTriggerReleased")
+	}
+	static const class FName& StaticName()
+	{
+		STATIC_NAME_IMPL(L"InputTriggerReleased")
+	}
+	static class UInputTriggerReleased* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UInputTriggerReleased>();
+	}
+};
+DUMPER7_ASSERTS_UInputTriggerReleased;
 
 // Class EnhancedInput.InputTriggerHold
 // 0x0010 (0x0068 - 0x0058)

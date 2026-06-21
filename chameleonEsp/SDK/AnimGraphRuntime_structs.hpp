@@ -501,19 +501,28 @@ public:
 };
 DUMPER7_ASSERTS_FAngularRangeLimit;
 
-// ScriptStruct AnimGraphRuntime.AnimNode_BlendSpaceGraph
-// 0x0000 (0x0068 - 0x0068)
-struct FAnimNode_BlendSpaceGraph final : public FAnimNode_BlendSpaceGraphBase
-{
-};
-DUMPER7_ASSERTS_FAnimNode_BlendSpaceGraph;
-
 // ScriptStruct AnimGraphRuntime.RigidBodyAnimNodeReference
 // 0x0000 (0x0010 - 0x0010)
 struct FRigidBodyAnimNodeReference final : public FAnimNodeReference
 {
 };
 DUMPER7_ASSERTS_FRigidBodyAnimNodeReference;
+
+// ScriptStruct AnimGraphRuntime.AnimNode_SequenceEvaluatorBase
+// 0x0008 (0x0040 - 0x0038)
+struct FAnimNode_SequenceEvaluatorBase : public FAnimNode_AssetPlayerBase
+{
+public:
+	uint8                                         Pad_38[0x8];                                       // 0x0038(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+DUMPER7_ASSERTS_FAnimNode_SequenceEvaluatorBase;
+
+// ScriptStruct AnimGraphRuntime.AnimNode_BlendSpaceGraph
+// 0x0000 (0x0068 - 0x0068)
+struct FAnimNode_BlendSpaceGraph final : public FAnimNode_BlendSpaceGraphBase
+{
+};
+DUMPER7_ASSERTS_FAnimNode_BlendSpaceGraph;
 
 // ScriptStruct AnimGraphRuntime.BlendSpacePlayerReference
 // 0x0000 (0x0010 - 0x0010)
@@ -549,27 +558,14 @@ struct FAnimNode_RefPose final : public FAnimNode_Base
 };
 DUMPER7_ASSERTS_FAnimNode_RefPose;
 
-// ScriptStruct AnimGraphRuntime.AnimNode_TwoWayBlend
-// 0x00B8 (0x00C8 - 0x0010)
-struct FAnimNode_TwoWayBlend final : public FAnimNode_Base
+// ScriptStruct AnimGraphRuntime.RBFEntry
+// 0x0010 (0x0010 - 0x0000)
+struct FRBFEntry
 {
 public:
-	struct FPoseLink                              A;                                                 // 0x0010(0x0010)(Edit, BlueprintVisible, NoDestructor, NativeAccessSpecifierPublic)
-	struct FPoseLink                              B;                                                 // 0x0020(0x0010)(Edit, BlueprintVisible, NoDestructor, NativeAccessSpecifierPublic)
-	EAnimAlphaInputType                           AlphaInputType;                                    // 0x0030(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         bAlphaBoolEnabled : 1;                             // 0x0031(0x0001)(BitIndex: 0x00, PropSize: 0x0001 (Edit, BlueprintVisible, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic))
-	uint8                                         BitPad_31_1 : 2;                                   // 0x0031(0x0001)(Fixing Bit-Field Size Between Bits [ Dumper-7 ])
-	uint8                                         bResetChildOnActivation : 1;                       // 0x0031(0x0001)(BitIndex: 0x03, PropSize: 0x0001 (Edit, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected))
-	uint8                                         bAlwaysUpdateChildren : 1;                         // 0x0031(0x0001)(BitIndex: 0x04, PropSize: 0x0001 (Edit, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected))
-	uint8                                         Pad_32[0x2];                                       // 0x0032(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
-	float                                         Alpha;                                             // 0x0034(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FInputScaleBias                        AlphaScaleBias;                                    // 0x0038(0x0008)(Edit, BlueprintVisible, NoDestructor, NativeAccessSpecifierPublic)
-	struct FInputAlphaBoolBlend                   AlphaBoolBlend;                                    // 0x0040(0x0048)(Edit, BlueprintVisible, NoDestructor, NativeAccessSpecifierPublic)
-	class FName                                   AlphaCurveName;                                    // 0x0088(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FInputScaleBiasClamp                   AlphaScaleBiasClamp;                               // 0x0090(0x0030)(Edit, BlueprintVisible, NoDestructor, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C0[0x8];                                       // 0x00C0(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	TArray<float>                                 Values;                                            // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
-DUMPER7_ASSERTS_FAnimNode_TwoWayBlend;
+DUMPER7_ASSERTS_FRBFEntry;
 
 // ScriptStruct AnimGraphRuntime.AnimNode_SkeletalControlBase
 // 0x00B8 (0x00C8 - 0x0010)
@@ -1143,15 +1139,6 @@ public:
 };
 DUMPER7_ASSERTS_FAnimNode_RotationOffsetBlendSpaceGraph;
 
-// ScriptStruct AnimGraphRuntime.AnimNode_SequenceEvaluatorBase
-// 0x0008 (0x0040 - 0x0038)
-struct FAnimNode_SequenceEvaluatorBase : public FAnimNode_AssetPlayerBase
-{
-public:
-	uint8                                         Pad_38[0x8];                                       // 0x0038(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-DUMPER7_ASSERTS_FAnimNode_SequenceEvaluatorBase;
-
 // ScriptStruct AnimGraphRuntime.AnimNode_SequenceEvaluator
 // 0x0000 (0x0040 - 0x0040)
 struct FAnimNode_SequenceEvaluator final : public FAnimNode_SequenceEvaluatorBase
@@ -1206,6 +1193,28 @@ public:
 	uint8                                         Pad_29[0x7];                                       // 0x0029(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 DUMPER7_ASSERTS_FAnimNode_Sync;
+
+// ScriptStruct AnimGraphRuntime.AnimNode_TwoWayBlend
+// 0x00B8 (0x00C8 - 0x0010)
+struct FAnimNode_TwoWayBlend final : public FAnimNode_Base
+{
+public:
+	struct FPoseLink                              A;                                                 // 0x0010(0x0010)(Edit, BlueprintVisible, NoDestructor, NativeAccessSpecifierPublic)
+	struct FPoseLink                              B;                                                 // 0x0020(0x0010)(Edit, BlueprintVisible, NoDestructor, NativeAccessSpecifierPublic)
+	EAnimAlphaInputType                           AlphaInputType;                                    // 0x0030(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         bAlphaBoolEnabled : 1;                             // 0x0031(0x0001)(BitIndex: 0x00, PropSize: 0x0001 (Edit, BlueprintVisible, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic))
+	uint8                                         BitPad_31_1 : 2;                                   // 0x0031(0x0001)(Fixing Bit-Field Size Between Bits [ Dumper-7 ])
+	uint8                                         bResetChildOnActivation : 1;                       // 0x0031(0x0001)(BitIndex: 0x03, PropSize: 0x0001 (Edit, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected))
+	uint8                                         bAlwaysUpdateChildren : 1;                         // 0x0031(0x0001)(BitIndex: 0x04, PropSize: 0x0001 (Edit, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected))
+	uint8                                         Pad_32[0x2];                                       // 0x0032(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
+	float                                         Alpha;                                             // 0x0034(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FInputScaleBias                        AlphaScaleBias;                                    // 0x0038(0x0008)(Edit, BlueprintVisible, NoDestructor, NativeAccessSpecifierPublic)
+	struct FInputAlphaBoolBlend                   AlphaBoolBlend;                                    // 0x0040(0x0048)(Edit, BlueprintVisible, NoDestructor, NativeAccessSpecifierPublic)
+	class FName                                   AlphaCurveName;                                    // 0x0088(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FInputScaleBiasClamp                   AlphaScaleBiasClamp;                               // 0x0090(0x0030)(Edit, BlueprintVisible, NoDestructor, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C0[0x8];                                       // 0x00C0(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+DUMPER7_ASSERTS_FAnimNode_TwoWayBlend;
 
 // ScriptStruct AnimGraphRuntime.AnimSequencerInstanceProxy
 // 0x0460 (0x0C00 - 0x07A0)
@@ -1816,15 +1825,6 @@ struct FModifyCurveAnimNodeReference final : public FAnimNodeReference
 {
 };
 DUMPER7_ASSERTS_FModifyCurveAnimNodeReference;
-
-// ScriptStruct AnimGraphRuntime.RBFEntry
-// 0x0010 (0x0010 - 0x0000)
-struct FRBFEntry
-{
-public:
-	TArray<float>                                 Values;                                            // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-DUMPER7_ASSERTS_FRBFEntry;
 
 // ScriptStruct AnimGraphRuntime.RBFTarget
 // 0x0090 (0x00A0 - 0x0010)

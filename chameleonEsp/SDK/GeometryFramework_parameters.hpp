@@ -10,8 +10,8 @@
 
 #include "Basic.hpp"
 
-#include "CoreUObject_structs.hpp"
 #include "GeometryFramework_structs.hpp"
+#include "CoreUObject_structs.hpp"
 
 
 SDK_NAMESPACE_START
@@ -27,6 +27,44 @@ public:
 	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 DUMPER7_ASSERTS_DynamicMeshProcessorBlueprint_ProcessDynamicMesh;
+
+// Function GeometryFramework.DynamicMeshActor.AllocateComputeMesh
+// 0x0008 (0x0008 - 0x0000)
+struct DynamicMeshActor_AllocateComputeMesh final
+{
+public:
+	class UDynamicMesh*                           ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+DUMPER7_ASSERTS_DynamicMeshActor_AllocateComputeMesh;
+
+// Function GeometryFramework.DynamicMeshActor.GetComputeMeshPool
+// 0x0008 (0x0008 - 0x0000)
+struct DynamicMeshActor_GetComputeMeshPool final
+{
+public:
+	class UDynamicMeshPool*                       ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+DUMPER7_ASSERTS_DynamicMeshActor_GetComputeMeshPool;
+
+// Function GeometryFramework.DynamicMeshActor.ReleaseComputeMesh
+// 0x0010 (0x0010 - 0x0000)
+struct DynamicMeshActor_ReleaseComputeMesh final
+{
+public:
+	class UDynamicMesh*                           Mesh;                                              // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          ReturnValue;                                       // 0x0008(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+DUMPER7_ASSERTS_DynamicMeshActor_ReleaseComputeMesh;
+
+// Function GeometryFramework.DynamicMeshActor.GetDynamicMeshComponent
+// 0x0008 (0x0008 - 0x0000)
+struct DynamicMeshActor_GetDynamicMeshComponent final
+{
+public:
+	class UDynamicMeshComponent*                  ReturnValue;                                       // 0x0000(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+DUMPER7_ASSERTS_DynamicMeshActor_GetDynamicMeshComponent;
 
 // Function GeometryFramework.BaseDynamicMeshComponent.GetDynamicMesh
 // 0x0008 (0x0008 - 0x0000)
@@ -436,44 +474,6 @@ public:
 	EDynamicMeshComponentTangentsMode             ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 DUMPER7_ASSERTS_DynamicMeshComponent_GetTangentsTypePure;
-
-// Function GeometryFramework.DynamicMeshActor.AllocateComputeMesh
-// 0x0008 (0x0008 - 0x0000)
-struct DynamicMeshActor_AllocateComputeMesh final
-{
-public:
-	class UDynamicMesh*                           ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-DUMPER7_ASSERTS_DynamicMeshActor_AllocateComputeMesh;
-
-// Function GeometryFramework.DynamicMeshActor.GetComputeMeshPool
-// 0x0008 (0x0008 - 0x0000)
-struct DynamicMeshActor_GetComputeMeshPool final
-{
-public:
-	class UDynamicMeshPool*                       ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-DUMPER7_ASSERTS_DynamicMeshActor_GetComputeMeshPool;
-
-// Function GeometryFramework.DynamicMeshActor.ReleaseComputeMesh
-// 0x0010 (0x0010 - 0x0000)
-struct DynamicMeshActor_ReleaseComputeMesh final
-{
-public:
-	class UDynamicMesh*                           Mesh;                                              // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          ReturnValue;                                       // 0x0008(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-DUMPER7_ASSERTS_DynamicMeshActor_ReleaseComputeMesh;
-
-// Function GeometryFramework.DynamicMeshActor.GetDynamicMeshComponent
-// 0x0008 (0x0008 - 0x0000)
-struct DynamicMeshActor_GetDynamicMeshComponent final
-{
-public:
-	class UDynamicMeshComponent*                  ReturnValue;                                       // 0x0000(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-DUMPER7_ASSERTS_DynamicMeshActor_GetDynamicMeshComponent;
 
 // Function GeometryFramework.DynamicMesh.Reset
 // 0x0008 (0x0008 - 0x0000)

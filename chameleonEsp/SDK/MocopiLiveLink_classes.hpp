@@ -10,8 +10,8 @@
 
 #include "Basic.hpp"
 
-#include "LiveLink_classes.hpp"
 #include "Engine_classes.hpp"
+#include "LiveLink_classes.hpp"
 #include "LiveLinkInterface_classes.hpp"
 #include "LiveLinkAnimationCore_classes.hpp"
 

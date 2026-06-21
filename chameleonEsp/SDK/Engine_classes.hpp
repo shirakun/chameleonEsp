@@ -12,16 +12,16 @@
 
 #include "CoreUObject_structs.hpp"
 #include "CoreUObject_classes.hpp"
+#include "RenderCore_structs.hpp"
 #include "Engine_structs.hpp"
 #include "AudioExtensions_structs.hpp"
 #include "AudioExtensions_classes.hpp"
 #include "InputCore_structs.hpp"
-#include "RenderCore_structs.hpp"
 #include "PhysicsCore_structs.hpp"
 #include "PhysicsCore_classes.hpp"
+#include "AudioPlatformConfiguration_structs.hpp"
 #include "ClothingSystemRuntimeInterface_structs.hpp"
 #include "FieldNotification_structs.hpp"
-#include "AudioPlatformConfiguration_structs.hpp"
 #include "DeveloperSettings_structs.hpp"
 #include "DeveloperSettings_classes.hpp"
 #include "Chaos_structs.hpp"
@@ -12045,9 +12045,9 @@ public:
 };
 DUMPER7_ASSERTS_UMaterialExpressionDistance;
 
-// Class Engine.spotlight
+// Class Engine.SpotLight
 // 0x0008 (0x02C0 - 0x02B8)
-class Aspotlight : public ALight
+class ASpotLight : public ALight
 {
 public:
 	class USpotLightComponent*                    SpotLightComponent;                                // 0x02B8(0x0008)(Edit, BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, EditConst, InstancedReference, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic, TObjectPtr)
@@ -12059,22 +12059,22 @@ public:
 public:
 	static class UClass* StaticClass()
 	{
-		STATIC_CLASS_IMPL("spotlight")
+		STATIC_CLASS_IMPL("SpotLight")
 	}
 	static const class FName& StaticName()
 	{
-		STATIC_NAME_IMPL(L"spotlight")
+		STATIC_NAME_IMPL(L"SpotLight")
 	}
-	static class Aspotlight* GetDefaultObj()
+	static class ASpotLight* GetDefaultObj()
 	{
-		return GetDefaultObjImpl<Aspotlight>();
+		return GetDefaultObjImpl<ASpotLight>();
 	}
 };
-DUMPER7_ASSERTS_Aspotlight;
+DUMPER7_ASSERTS_ASpotLight;
 
 // Class Engine.GeneratedMeshAreaLight
 // 0x0000 (0x02C0 - 0x02C0)
-class AGeneratedMeshAreaLight final : public Aspotlight
+class AGeneratedMeshAreaLight final : public ASpotLight
 {
 public:
 	static class UClass* StaticClass()

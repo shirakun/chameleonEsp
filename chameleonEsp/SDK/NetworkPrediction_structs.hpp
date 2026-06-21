@@ -81,15 +81,6 @@ public:
 };
 DUMPER7_ASSERTS_FReplicationProxy;
 
-// ScriptStruct NetworkPrediction.ServerReplicationRPCParameter
-// 0x0018 (0x0018 - 0x0000)
-struct alignas(0x08) FServerReplicationRPCParameter final
-{
-public:
-	uint8                                         Pad_0[0x18];                                       // 0x0000(0x0018)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-DUMPER7_ASSERTS_FServerReplicationRPCParameter;
-
 // ScriptStruct NetworkPrediction.NetworkPredictionSettings
 // 0x0030 (0x0030 - 0x0000)
 struct FNetworkPredictionSettings final
@@ -111,6 +102,15 @@ public:
 	int32                                         MaximumRemoteInputFaultLimit;                      // 0x002C(0x0004)(Edit, ZeroConstructor, Config, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 DUMPER7_ASSERTS_FNetworkPredictionSettings;
+
+// ScriptStruct NetworkPrediction.ServerReplicationRPCParameter
+// 0x0018 (0x0018 - 0x0000)
+struct alignas(0x08) FServerReplicationRPCParameter final
+{
+public:
+	uint8                                         Pad_0[0x18];                                       // 0x0000(0x0018)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+DUMPER7_ASSERTS_FServerReplicationRPCParameter;
 
 // ScriptStruct NetworkPrediction.NetworkPredictionDevHUDItem
 // 0x0028 (0x0028 - 0x0000)

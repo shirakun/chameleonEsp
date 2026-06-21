@@ -11,8 +11,8 @@
 #include "Basic.hpp"
 
 #include "CoreUObject_structs.hpp"
-#include "InputCore_structs.hpp"
 #include "UINavigation_structs.hpp"
+#include "InputCore_structs.hpp"
 #include "SlateCore_structs.hpp"
 #include "Engine_structs.hpp"
 
