@@ -11,10 +11,10 @@
 #include "Basic.hpp"
 
 #include "CoreUObject_structs.hpp"
-#include "EN_LINK_GamePhase_structs.hpp"
 #include "OnlineSubsystemBlueprints_structs.hpp"
 #include "UMG_structs.hpp"
 #include "Engine_structs.hpp"
+#include "EN_LINK_GamePhase_structs.hpp"
 
 
 SDK_NAMESPACE_START

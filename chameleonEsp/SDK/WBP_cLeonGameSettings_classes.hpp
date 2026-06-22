@@ -64,8 +64,8 @@ public:
 	TArray<class UWBP_BodySelect_C*>              BodySelects;                                       // 0x0628(0x0010)(Edit, BlueprintVisible, DisableEditOnInstance, ContainsInstancedReference)
 
 public:
-	void SelectMapMain(class UWBP_MapContents_C* SelfWidget, const struct FST_cLeonMapData& Mapdata);
-	void SelectMap(class UWBP_MapContents_C* SelfWidget, const struct FST_cLeonMapData& Mapdata);
+	void SelectMapMain(class UWBP_MapContents_C* SelfWidget, const struct FST_cLeonMapData& MapData);
+	void SelectMap(class UWBP_MapContents_C* SelfWidget, const struct FST_cLeonMapData& MapData);
 	void OnClickWithClass(class UWBP_BodySelect_C* SelfObject, class UClass* BodyClass);
 	void ExecuteUbergraph_WBP_cLeonGameSettings(int32 EntryPoint);
 	void Construct();

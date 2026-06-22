@@ -16,6 +16,20 @@
 
 SDK_NAMESPACE_START
 
+// Function BPGI_Main.BPGI_Main_C.CloudSaveSync
+// (BlueprintCallable, BlueprintEvent)
+
+void UBPGI_Main_C::CloudSaveSync()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("BPGI_Main_C", "CloudSaveSync");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
 // Function BPGI_Main.BPGI_Main_C.ExecuteUbergraph_BPGI_Main
 // (Final, UbergraphFunction, HasDefaults)
 // Parameters:
@@ -31,6 +45,32 @@ void UBPGI_Main_C::ExecuteUbergraph_BPGI_Main(int32 EntryPoint)
 	Params::BPGI_Main_C_ExecuteUbergraph_BPGI_Main Parms{};
 
 	Parms.EntryPoint = EntryPoint;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function BPGI_Main.BPGI_Main_C.OnCallFailed_0646E9BD4A18BBF176FCAEA43F9771E1
+// (HasOutParams, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// bool                                    bWasSuccessful                                         (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+// const struct FUniqueNetIdRepl&          UserId                                                 (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm, HasGetValueTypeHash)
+// const class FString&                    Filename                                               (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, HasGetValueTypeHash)
+// int64                                   BytesWritten                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UBPGI_Main_C::OnCallFailed_0646E9BD4A18BBF176FCAEA43F9771E1(bool bWasSuccessful, const struct FUniqueNetIdRepl& UserId, const class FString& Filename, int64 BytesWritten)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("BPGI_Main_C", "OnCallFailed_0646E9BD4A18BBF176FCAEA43F9771E1");
+
+	Params::BPGI_Main_C_OnCallFailed_0646E9BD4A18BBF176FCAEA43F9771E1 Parms{};
+
+	Parms.bWasSuccessful = bWasSuccessful;
+	Parms.UserId = std::move(UserId);
+	Parms.Filename = std::move(Filename);
+	Parms.BytesWritten = BytesWritten;
 
 	UObject::ProcessEvent(Func, &Parms);
 }
@@ -110,6 +150,32 @@ void UBPGI_Main_C::OnReadUserFileComplete_4473CEAA43FDA8DFD02079B1F2500B1B(bool 
 }
 
 
+// Function BPGI_Main.BPGI_Main_C.OnWriteUserFileCanceled_0646E9BD4A18BBF176FCAEA43F9771E1
+// (HasOutParams, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// bool                                    bWasSuccessful                                         (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+// const struct FUniqueNetIdRepl&          UserId                                                 (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm, HasGetValueTypeHash)
+// const class FString&                    Filename                                               (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, HasGetValueTypeHash)
+// int64                                   BytesWritten                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UBPGI_Main_C::OnWriteUserFileCanceled_0646E9BD4A18BBF176FCAEA43F9771E1(bool bWasSuccessful, const struct FUniqueNetIdRepl& UserId, const class FString& Filename, int64 BytesWritten)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("BPGI_Main_C", "OnWriteUserFileCanceled_0646E9BD4A18BBF176FCAEA43F9771E1");
+
+	Params::BPGI_Main_C_OnWriteUserFileCanceled_0646E9BD4A18BBF176FCAEA43F9771E1 Parms{};
+
+	Parms.bWasSuccessful = bWasSuccessful;
+	Parms.UserId = std::move(UserId);
+	Parms.Filename = std::move(Filename);
+	Parms.BytesWritten = BytesWritten;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
 // Function BPGI_Main.BPGI_Main_C.OnWriteUserFileCanceled_0646E9BD4A18BBF176FCAEA44F5EA191
 // (HasOutParams, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -136,6 +202,32 @@ void UBPGI_Main_C::OnWriteUserFileCanceled_0646E9BD4A18BBF176FCAEA44F5EA191(bool
 }
 
 
+// Function BPGI_Main.BPGI_Main_C.OnWriteUserFileComplete_0646E9BD4A18BBF176FCAEA43F9771E1
+// (HasOutParams, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// bool                                    bWasSuccessful                                         (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+// const struct FUniqueNetIdRepl&          UserId                                                 (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm, HasGetValueTypeHash)
+// const class FString&                    Filename                                               (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, HasGetValueTypeHash)
+// int64                                   BytesWritten                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UBPGI_Main_C::OnWriteUserFileComplete_0646E9BD4A18BBF176FCAEA43F9771E1(bool bWasSuccessful, const struct FUniqueNetIdRepl& UserId, const class FString& Filename, int64 BytesWritten)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("BPGI_Main_C", "OnWriteUserFileComplete_0646E9BD4A18BBF176FCAEA43F9771E1");
+
+	Params::BPGI_Main_C_OnWriteUserFileComplete_0646E9BD4A18BBF176FCAEA43F9771E1 Parms{};
+
+	Parms.bWasSuccessful = bWasSuccessful;
+	Parms.UserId = std::move(UserId);
+	Parms.Filename = std::move(Filename);
+	Parms.BytesWritten = BytesWritten;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
 // Function BPGI_Main.BPGI_Main_C.OnWriteUserFileComplete_0646E9BD4A18BBF176FCAEA44F5EA191
 // (HasOutParams, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -152,6 +244,32 @@ void UBPGI_Main_C::OnWriteUserFileComplete_0646E9BD4A18BBF176FCAEA44F5EA191(bool
 		Func = Class->GetFunction("BPGI_Main_C", "OnWriteUserFileComplete_0646E9BD4A18BBF176FCAEA44F5EA191");
 
 	Params::BPGI_Main_C_OnWriteUserFileComplete_0646E9BD4A18BBF176FCAEA44F5EA191 Parms{};
+
+	Parms.bWasSuccessful = bWasSuccessful;
+	Parms.UserId = std::move(UserId);
+	Parms.Filename = std::move(Filename);
+	Parms.BytesWritten = BytesWritten;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function BPGI_Main.BPGI_Main_C.OnWriteUserFileProgress64_0646E9BD4A18BBF176FCAEA43F9771E1
+// (HasOutParams, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// bool                                    bWasSuccessful                                         (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+// const struct FUniqueNetIdRepl&          UserId                                                 (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm, HasGetValueTypeHash)
+// const class FString&                    Filename                                               (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, HasGetValueTypeHash)
+// int64                                   BytesWritten                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UBPGI_Main_C::OnWriteUserFileProgress64_0646E9BD4A18BBF176FCAEA43F9771E1(bool bWasSuccessful, const struct FUniqueNetIdRepl& UserId, const class FString& Filename, int64 BytesWritten)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("BPGI_Main_C", "OnWriteUserFileProgress64_0646E9BD4A18BBF176FCAEA43F9771E1");
+
+	Params::BPGI_Main_C_OnWriteUserFileProgress64_0646E9BD4A18BBF176FCAEA43F9771E1 Parms{};
 
 	Parms.bWasSuccessful = bWasSuccessful;
 	Parms.UserId = std::move(UserId);
@@ -197,20 +315,6 @@ void UBPGI_Main_C::ReceiveInit()
 
 	if (Func == nullptr)
 		Func = Class->GetFunction("BPGI_Main_C", "ReceiveInit");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
-// Function BPGI_Main.BPGI_Main_C.SetupSaveData
-// (BlueprintCallable, BlueprintEvent)
-
-void UBPGI_Main_C::SetupSaveData()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("BPGI_Main_C", "SetupSaveData");
 
 	UObject::ProcessEvent(Func, nullptr);
 }

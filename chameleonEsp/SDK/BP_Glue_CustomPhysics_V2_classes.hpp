@@ -11,9 +11,9 @@
 #include "Basic.hpp"
 
 #include "Engine_structs.hpp"
-#include "EN_DamageType_structs.hpp"
 #include "CoreUObject_structs.hpp"
 #include "PenguinHotel_classes.hpp"
+#include "EN_DamageType_structs.hpp"
 #include "EN_StanType_structs.hpp"
 
 

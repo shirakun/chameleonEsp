@@ -10,8 +10,8 @@
 
 #include "Basic.hpp"
 
-#include "ST_ItemCoreDatas_structs.hpp"
 #include "CoreUObject_structs.hpp"
+#include "ST_ItemCoreDatas_structs.hpp"
 #include "EN_LINK_GamePhase_structs.hpp"
 #include "OnlineSubsystemBlueprints_structs.hpp"
 #include "ST_GenerateBoxLocation_structs.hpp"

@@ -10,15 +10,14 @@
 
 #include "Basic.hpp"
 
-#include "ENUM_ItemBindType_structs.hpp"
 #include "EN_DamageType_structs.hpp"
 #include "ST_ItemCoreDatas_structs.hpp"
-#include "CoreUObject_structs.hpp"
 #include "ENUM_ClassType_structs.hpp"
 #include "ENUM_HandType_structs.hpp"
-#include "Engine_structs.hpp"
-#include "MovieScene_structs.hpp"
+#include "CoreUObject_structs.hpp"
 #include "FinishFilter_structs.hpp"
+#include "ENUM_ItemBindType_structs.hpp"
+#include "Engine_structs.hpp"
 #include "Mover_structs.hpp"
 #include "PenguinHotel_structs.hpp"
 #include "EnhancedInput_structs.hpp"
@@ -26,6 +25,7 @@
 #include "InputCore_structs.hpp"
 #include "DeathType_structs.hpp"
 #include "EN_StanType_structs.hpp"
+#include "MovieScene_structs.hpp"
 
 
 SDK_NAMESPACE_START
@@ -93,7 +93,7 @@ public:
 	double                                        Temp_real_Variable;                                // 0x0290(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	double                                        Temp_real_Variable_0;                              // 0x0298(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	double                                        Temp_real_Variable_1;                              // 0x02A0(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	double                                        Temp_real_Variable_1;                              // 0x02A8(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	double                                        Temp_real_Variable_1_2;                            // 0x02A8(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	bool                                          Temp_bool_Variable;                                // 0x02B0(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	uint8                                         Pad_2B1[0x7];                                      // 0x02B1(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
 	double                                        Temp_real_Variable_1_0;                            // 0x02B8(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
