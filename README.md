@@ -6,6 +6,14 @@ Credits to [Dumper7](https://github.com/Encryqed/Dumper-7), [Unreal-Internal-Bas
 
 Inject with your favorite injector, I use [Xenos](https://github.com/darthton/xenos)
 
+### Build
+
+Build with these settings in Visual Studio:
+
+Platform Toolset: `v145 for Microsoft C++ Build Tools`
+Window SDK Version: `Windows 10.0 SDK (latest)`
+C++ Language Standard option: `/std:c++latest`
+
 ### Features
 
 - ESP (Box, Skeleton, Lines, Distance, Name, Role)
