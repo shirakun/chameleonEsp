@@ -37,6 +37,7 @@ void Settings::SaveSettings()
 		// bDumpBones is a transient runtime command, not a persisted setting - write it as
 		// its inert default so a saved config can't carry a pending bone dump.
 		Settings tmp = *this;
+		tmp.bMagnetEnabled = false;
 		tmp.bDumpBones = false;
 		fwrite(&tmp, sizeof(tmp), 1, file);
 		fclose(file);
