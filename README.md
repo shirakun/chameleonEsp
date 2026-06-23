@@ -7,3 +7,7 @@ credits to [Dumper7](https://github.com/Encryqed/Dumper-7), [Unreal-Internal-Bas
 inject with your favorite injector, i use [Xenos](https://github.com/darthton/xenos)
 
 <img width="1282" height="752" alt="PenguinHotel-Win64-Shipping_kJkLaVgomX" src="https://github.com/user-attachments/assets/c00a08d4-678e-48e5-be38-5c208dcda308" />
+
+## Disclaimer
+
+This project is intended solely for educational and research purposes. I am not responsible for any misuse, bans or other consequences that may arise from using this software. Use at your own risk.
