@@ -9,11 +9,13 @@ Inject with your favorite injector, I use [Xenos](https://github.com/darthton/xe
 ### Features
 
 - ESP (Box, Skeleton, Lines, Distance, Name, Role)
-- Teleport (Works only if you are the host as far as I've tested)
+- Teleport (works only if you are the host as far as I've tested)
+- Character Visibility (view other Survivors in Infection mode)
 - No Gun Cooldown (Hunters)
 - Anti Detection (Survivors)
 - Anti Server Kick
 - Magnet (Hunters) -> Press **G** to toggle on/off. This will magnetize survivors in front of the hunter.
+- Fov Changer
 - Dump Bones (for debugging)
 
 Use **INSERT** to open the menu, and **END** to unload.
