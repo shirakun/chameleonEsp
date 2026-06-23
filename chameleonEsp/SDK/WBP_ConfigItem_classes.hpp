@@ -10,10 +10,10 @@
 
 #include "Basic.hpp"
 
-#include "CoreUObject_structs.hpp"
 #include "Engine_structs.hpp"
-#include "UMG_classes.hpp"
+#include "CoreUObject_structs.hpp"
 #include "Enum_ConfigItem_structs.hpp"
+#include "UMG_classes.hpp"
 
 
 SDK_NAMESPACE_START

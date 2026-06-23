@@ -587,10 +587,10 @@ void ABP_FirstPersonCharacter_cLeon_Character_Hunter_C::OnBlendOut_12AC243E438FB
 // Function BP_FirstPersonCharacter_cLeon_Character_Hunter.BP_FirstPersonCharacter_cLeon_Character_Hunter_C.KillPlayer
 // (Net, NetReliable, NetServer, BlueprintCallable, BlueprintEvent)
 // Parameters:
-// class ABP_FirstPersonCharacter_cLeon_Character_C*FirstpersonCharacter                                   (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+// class ABP_FirstPersonCharacter_cLeon_Character_C*FirstPersonCharacter                                   (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
 // class ABP_FirstPersonPlayerState_C*     SourcePlayerState                                      (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
 
-void ABP_FirstPersonCharacter_cLeon_Character_Hunter_C::KillPlayer(class ABP_FirstPersonCharacter_cLeon_Character_C* FirstpersonCharacter, class ABP_FirstPersonPlayerState_C* SourcePlayerState)
+void ABP_FirstPersonCharacter_cLeon_Character_Hunter_C::KillPlayer(class ABP_FirstPersonCharacter_cLeon_Character_C* FirstPersonCharacter, class ABP_FirstPersonPlayerState_C* SourcePlayerState)
 {
 	static class UFunction* Func = nullptr;
 
@@ -599,7 +599,7 @@ void ABP_FirstPersonCharacter_cLeon_Character_Hunter_C::KillPlayer(class ABP_Fir
 
 	Params::BP_FirstPersonCharacter_cLeon_Character_Hunter_C_KillPlayer Parms{};
 
-	Parms.FirstpersonCharacter = FirstpersonCharacter;
+	Parms.FirstPersonCharacter = FirstPersonCharacter;
 	Parms.SourcePlayerState = SourcePlayerState;
 
 	UObject::ProcessEvent(Func, &Parms);
@@ -687,9 +687,9 @@ void ABP_FirstPersonCharacter_cLeon_Character_Hunter_C::InpActEvt_IA_Crouch_K2No
 // Function BP_FirstPersonCharacter_cLeon_Character_Hunter.BP_FirstPersonCharacter_cLeon_Character_Hunter_C.HitSuccess
 // (Net, NetReliable, NetClient, BlueprintCallable, BlueprintEvent)
 // Parameters:
-// class ABP_FirstPersonCharacter_cLeon_Character_C*FirstpersonCharacter                                   (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+// class ABP_FirstPersonCharacter_cLeon_Character_C*FirstPersonCharacter                                   (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
 
-void ABP_FirstPersonCharacter_cLeon_Character_Hunter_C::HitSuccess(class ABP_FirstPersonCharacter_cLeon_Character_C* FirstpersonCharacter)
+void ABP_FirstPersonCharacter_cLeon_Character_Hunter_C::HitSuccess(class ABP_FirstPersonCharacter_cLeon_Character_C* FirstPersonCharacter)
 {
 	static class UFunction* Func = nullptr;
 
@@ -698,7 +698,7 @@ void ABP_FirstPersonCharacter_cLeon_Character_Hunter_C::HitSuccess(class ABP_Fir
 
 	Params::BP_FirstPersonCharacter_cLeon_Character_Hunter_C_HitSuccess Parms{};
 
-	Parms.FirstpersonCharacter = FirstpersonCharacter;
+	Parms.FirstPersonCharacter = FirstPersonCharacter;
 
 	UObject::ProcessEvent(Func, &Parms);
 }

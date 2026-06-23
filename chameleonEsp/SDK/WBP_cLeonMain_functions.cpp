@@ -390,20 +390,6 @@ void UWBP_cLeonMain_C::eeyan(const class FString& Name_0)
 }
 
 
-// Function WBP_cLeonMain.WBP_cLeonMain_C.DecoyChange
-// (BlueprintCallable, BlueprintEvent)
-
-void UWBP_cLeonMain_C::DecoyChange()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("WBP_cLeonMain_C", "DecoyChange");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
 // Function WBP_cLeonMain.WBP_cLeonMain_C.Construct
 // (BlueprintCosmetic, Event, Public, BlueprintEvent)
 

@@ -10,16 +10,16 @@
 
 #include "Basic.hpp"
 
-#include "CoreUObject_structs.hpp"
-#include "ENUM_ClassType_structs.hpp"
-#include "ENUM_SaveDataUpdateType_structs.hpp"
+#include "EN_DamageType_structs.hpp"
 #include "Engine_structs.hpp"
 #include "Engine_classes.hpp"
-#include "ENUM_HandType_structs.hpp"
-#include "ENUM_ItemBindType_structs.hpp"
 #include "ST_ItemCoreDatas_structs.hpp"
+#include "ENUM_ItemBindType_structs.hpp"
+#include "CoreUObject_structs.hpp"
+#include "ENUM_ClassType_structs.hpp"
+#include "ENUM_HandType_structs.hpp"
+#include "ENUM_SaveDataUpdateType_structs.hpp"
 #include "EN_StanType_structs.hpp"
-#include "EN_DamageType_structs.hpp"
 
 
 SDK_NAMESPACE_START
@@ -75,7 +75,7 @@ public:
 	void StanDamage(EN_StanType StanType);
 	void SaveUpdateFunc();
 	void GetOwnerPlayerState(class ABP_FirstPersonPlayerState_C** MyPlayerState);
-	void GetParentCharacter(class ABP_FirstPersonCharacter_Main_C** FirstpersonCharacter);
+	void GetParentCharacter(class ABP_FirstPersonCharacter_Main_C** FirstPersonCharacter);
 	void GetKeyValues(TArray<class FString>* HaveKeys);
 	void GetParryState(bool* State);
 	void Damage(double DamageValue, int32 TeamIndex, EN_DamageType DamageType, const struct FTransform& SourceAgentPoint, bool UnAvoidable, class FName DamageName, class AActor* SourceActor, struct FFinishFilter* Finish);

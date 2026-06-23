@@ -28,7 +28,6 @@ public:
 	class FText                                   Text;                                              // 0x0930(0x0010)(Edit, BlueprintVisible, ExposeOnSpawn)
 	class UClass*                                 TargetClass;                                       // 0x0940(0x0008)(Edit, BlueprintVisible, ZeroConstructor, NoDestructor, ExposeOnSpawn, HasGetValueTypeHash)
 	TMulticastInlineDelegate<void(class UWBP_BodySelect_C* SelfObject, class UClass* BodyClass)> OnClickWithClass; // 0x0948(0x0010)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, BlueprintAssignable, BlueprintCallable)
-	class UTexture2D*                             Texture;                                           // 0x0958(0x0008)(Edit, BlueprintVisible, ZeroConstructor, NoDestructor, ExposeOnSpawn, HasGetValueTypeHash)
 
 public:
 	void SetSelectState(bool State);

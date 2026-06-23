@@ -10,8 +10,8 @@
 
 #include "Basic.hpp"
 
-#include "AsyncLoadingScreen_structs.hpp"
 #include "Engine_classes.hpp"
+#include "AsyncLoadingScreen_structs.hpp"
 #include "DeveloperSettings_classes.hpp"
 
 

@@ -14,13 +14,12 @@
 SDK_NAMESPACE_START
 
 // UserDefinedStruct ST_cLeonSurvivorVariation.ST_cLeonSurvivorVariation
-// 0x0020 (0x0020 - 0x0000)
+// 0x0018 (0x0018 - 0x0000)
 struct FST_cLeonSurvivorVariation final
 {
 public:
-	class UTexture2D*                             Image_8_CC4ABEFE4CF918D251F605A8F4242896;          // 0x0000(0x0008)(Edit, BlueprintVisible, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-	class UClass*                                 Class_2_122E65BB4F4033C2254DE1B1CBBC67DA;          // 0x0008(0x0008)(Edit, BlueprintVisible, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-	class FText                                   ShowText_5_121F4DEB4CBC58F3C3591CA00A436D2B;       // 0x0010(0x0010)(Edit, BlueprintVisible)
+	class UClass*                                 Class_2_122E65BB4F4033C2254DE1B1CBBC67DA;          // 0x0000(0x0008)(Edit, BlueprintVisible, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+	class FText                                   ShowText_5_121F4DEB4CBC58F3C3591CA00A436D2B;       // 0x0008(0x0010)(Edit, BlueprintVisible)
 };
 DUMPER7_ASSERTS_FST_cLeonSurvivorVariation;
 
