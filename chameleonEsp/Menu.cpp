@@ -105,16 +105,6 @@ void Menu::Init()
 			ImGui::EndTabItem();
 		}
 
-		if (ImGui::BeginTabItem("About"))
-		{
-			ImGui::BeginChild("##about_list", ImVec2(0, 0), false);
-
-			ImGui::Text("phxgg esp");
-
-			ImGui::EndChild();
-			ImGui::EndTabItem();
-		}
-
 		ImGui::EndTabBar();
 	}
 
