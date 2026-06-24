@@ -24,7 +24,7 @@ void CheatManager::Init()
 		if (!Players.IsValidIndex(i)) continue;
 
 		objActor = Players[i];
-		if (!objActor) continue;
+		if (!objActor || !IsObjectValid(objActor)) continue;
 		BaseClass = (SDK::ABP_FirstPersonCharacter_cLeon_Character_C*)objActor;
 		if (!BaseClass) continue;
 
@@ -49,7 +49,12 @@ void CheatManager::Init()
 					continue;
 				
 				if (cfg->bNoGunCooldown)
-					hunter->GunCoolTime = 0.0;
+				{
+					auto* hunterPtr = hunter;
+					QueueGameThreadAction([hunterPtr]() {
+						if (IsObjectValid(hunterPtr)) hunterPtr->GunCoolTime = 0.0;
+					});
+				}
 				
 				if (cfg->bMagnetEnabled)
 					HandleMagnet(currentActors, MyLocation, Players);
@@ -63,7 +68,12 @@ void CheatManager::Init()
 					continue;
 
 				if (cfg->bAntiDetection)
-					survivor->OverlapCheckCapsules.Clear();
+				{
+					auto* survivorPtr = survivor;
+					QueueGameThreadAction([survivorPtr]() {
+						if (IsObjectValid(survivorPtr)) survivorPtr->OverlapCheckCapsules.Clear();
+					});
+				}
 			}
 			continue;
 		}
@@ -167,20 +177,30 @@ std::string CheatManager::ResolvePlayerName()
 // Force the current actor's body visibility on/off, tracking who we touched so they can be restored.
 void CheatManager::UpdateForcedVisibility()
 {
-	// Cache the OnRep_BodyVisibility UFunction for the ProcessEvent hook (done once)
-	if (!g_fnOnRepBodyVisibilityFunc)
-		g_fnOnRepBodyVisibilityFunc = SDK::ABP_FirstPersonCharacter_cLeon_Character_C::StaticClass()->GetFunction("BP_FirstPersonCharacter_cLeon_Character_C", "OnRep_BodyVisibility");
-
 	if (cfg->bForceCharacterVisibility && !BaseClass->BodyVisibility)
 	{
-		BaseClass->BodyVisibility = true;
-		BaseClass->OnRep_BodyVisibility();
+		auto* target = BaseClass;
+		QueueGameThreadAction([target]() {
+			if (!IsObjectValid(target)) return;
+			// Resolve the function fresh from the object's current class at call time and invoke it
+			// directly, instead of the SDK wrapper's cached-once static which dangles after a round.
+			SDK::UFunction* fn = target->Class->GetFunction("BP_FirstPersonCharacter_cLeon_Character_C", "OnRep_BodyVisibility");
+			if (!fn) return;
+			target->BodyVisibility = true;
+			target->ProcessEvent(fn, nullptr);
+		});
 		forcedVisibleActors.insert(objActor);
 	}
 	else if (!cfg->bForceCharacterVisibility && forcedVisibleActors.count(objActor))
 	{
-		BaseClass->BodyVisibility = false;
-		BaseClass->OnRep_BodyVisibility();
+		auto* target = BaseClass;
+		QueueGameThreadAction([target]() {
+			if (!IsObjectValid(target)) return;
+			SDK::UFunction* fn = target->Class->GetFunction("BP_FirstPersonCharacter_cLeon_Character_C", "OnRep_BodyVisibility");
+			if (!fn) return;
+			target->BodyVisibility = false;
+			target->ProcessEvent(fn, nullptr);
+		});
 		forcedVisibleActors.erase(objActor);
 	}
 }
@@ -200,7 +220,7 @@ void CheatManager::UpdateForcedVisibility()
 // in Init() to avoid stale-pointer reuse.
 bool CheatManager::IsDead()
 {
-	if (BaseClass->Mesh && BaseClass->Mesh->IsAnySimulatingPhysics())
+	if (BaseClass->Mesh && IsObjectValid(BaseClass->Mesh) && BaseClass->Mesh->IsAnySimulatingPhysics())
 		deadActors.insert(objActor);
 	return deadActors.count(objActor) > 0;
 }
@@ -211,7 +231,7 @@ bool CheatManager::IsDead(SDK::AActor* actor)
 	auto* baseClass = static_cast<SDK::ABP_FirstPersonCharacter_cLeon_Character_C*>(actor);
 	if (!baseClass || !baseClass->Mesh) return false;
 
-	if (baseClass->Mesh->IsAnySimulatingPhysics())
+	if (baseClass->Mesh && IsObjectValid(baseClass->Mesh) && baseClass->Mesh->IsAnySimulatingPhysics())
 		deadActors.insert(actor);
 	return deadActors.count(actor) > 0;
 }
@@ -317,7 +337,7 @@ void CheatManager::DrawEsp(const std::string& PlayerName, SDK::FVector Location,
 	SDK::FVector2D BoxMin{}, BoxMax{};
 	bool bHasBox = false;
 
-	if (BaseClass->Mesh)
+	if (BaseClass->Mesh && IsObjectValid(BaseClass->Mesh))
 	{
 		if (cfg->bSkeleton)
 			DrawSkeleton(colEsp);
@@ -375,8 +395,13 @@ void CheatManager::HandleTeleport(const std::unordered_set<SDK::AActor*>& curren
 {
 	if (TeleportTarget && currentActors.count(TeleportTarget) && MyPlayer)
 	{
-		SDK::FRotator CurrentRotation = MyPlayer->K2_GetActorRotation();
-		MyPlayer->K2_TeleportTo(TeleportTarget->K2_GetActorLocation(), CurrentRotation);
+		SDK::AActor* target = TeleportTarget;
+		SDK::APawn* player = MyPlayer;
+		QueueGameThreadAction([player, target]() {
+			if (!IsObjectValid(player) || !IsObjectValid(target)) return;
+			SDK::FRotator CurrentRotation = player->K2_GetActorRotation();
+			player->K2_TeleportTo(target->K2_GetActorLocation(), CurrentRotation);
+		});
 	}
 	TeleportTarget = nullptr;
 }
@@ -421,7 +446,10 @@ void CheatManager::HandleMagnet(const std::unordered_set<SDK::AActor*>& currentA
 		// Spread players in depth to prevent stacking
 		float depthSpread = depthIndex * 120.0f;
 		SDK::FVector targetPosition = MyLocation + ForwardDirection * (150.0f + depthSpread);
-		otherBaseClass->K2_SetActorLocation(targetPosition, false, nullptr, true);
+		QueueGameThreadAction([otherBaseClass, targetPosition]() {
+			if (IsObjectValid(otherBaseClass))
+				otherBaseClass->K2_SetActorLocation(targetPosition, false, nullptr, true);
+		});
 		++depthIndex;
 	}
 }
@@ -433,7 +461,10 @@ void CheatManager::KillSurvivor(SDK::AActor* actor)
 
 	auto* hunter = static_cast<SDK::ABP_FirstPersonCharacter_cLeon_Character_Hunter_C*>(MyPlayer);
 	auto* survivor = static_cast<SDK::ABP_FirstPersonCharacter_cLeon_Character_Survivor_C*>(actor);
-	hunter->KillPlayer(survivor, hunter->MyPlayerState);
+	QueueGameThreadAction([hunter, survivor]() {
+		if (IsObjectValid(hunter) && IsObjectValid(survivor))
+			hunter->KillPlayer(survivor, hunter->MyPlayerState);
+	});
 }
 
 void CheatManager::HandleKillAllSurvivors(const std::unordered_set<SDK::AActor*>& currentActors)
@@ -447,6 +478,45 @@ void CheatManager::HandleKillAllSurvivors(const std::unordered_set<SDK::AActor*>
 		KillSurvivor(actor);
 		Sleep(50); // small delay to avoid overwhelming the server
 	}
+}
+
+// queue an action that touches game state so it runs on the game thread
+// instead of the render thread. see the GameThreadQueue comments
+void CheatManager::QueueGameThreadAction(std::function<void()> action)
+{
+	std::lock_guard<std::mutex> lock(GameThreadQueueMutex);
+	GameThreadQueue.push_back(std::move(action));
+}
+
+// called from hkProcessEvent, which UE only ever invokes from the game thread
+void CheatManager::FlushGameThreadActions()
+{
+	std::vector<std::function<void()>> actions;
+	{
+		std::lock_guard<std::mutex> lock(GameThreadQueueMutex);
+		if (GameThreadQueue.empty()) return;
+		actions.swap(GameThreadQueue);
+	}
+
+	// mark the nested ProcessEvent calls these actions trigger as self invoked,
+	// so we don't re-enter our hook logic in hkProcessEvent
+	struct FlushGuard {
+		FlushGuard()  { g_inGameThreadFlush = true; }
+		~FlushGuard() { g_inGameThreadFlush = false; }
+	} flushGuard;
+
+	for (auto& action : actions)
+		action();
+}
+
+// True if Obj is still a fully-live object. Queued actions capture raw pointers on the render
+// thread but only execute later on the game thread, so the actor may have been destroyed/GC'd
+// in the meantime - each queued lambda must re-check this right before touching its pointers.
+bool CheatManager::IsObjectValid(SDK::UObject* Obj)
+{
+	if (!Obj || Obj->Index < 0) return false;
+	if (SDK::UObject::GObjects->GetByIndex(Obj->Index) != Obj) return false;
+	return true;
 }
 
 void CheatManager::DumpBones()

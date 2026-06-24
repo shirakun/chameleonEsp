@@ -7,6 +7,8 @@
 #include <string>
 #include <unordered_set>
 #include <unordered_map>
+#include <functional>
+#include <mutex>
 #include <direct.h>
 #include <Psapi.h>
 #include <d3d12.h>
@@ -36,6 +38,12 @@
 #include "Settings.hpp"
 #include "Drawings.hpp"
 
+// Set while CheatManager::FlushGameThreadActions is executing queued actions. Those actions call
+// SDK functions that internally call UObject::ProcessEvent, which re-enters hkProcessEvent on this
+// same (game) thread. This flag lets the hook recognise those nested, self invoked calls and pass
+// them straight through to the engine.
+inline std::atomic<bool> g_inGameThreadFlush{ false };
+
 // Main global variables
 inline CheatManager* cheat;
 inline Menu* gui;
@@ -44,7 +52,6 @@ inline FILE* file;
 inline Drawings* draw;
 
 // Function pointers for event handling
-inline SDK::UFunction* g_fnOnRepBodyVisibilityFunc = nullptr;
 inline SDK::UFunction* g_fnKickLINK = nullptr;
 inline SDK::UFunction* g_fnKickOnline = nullptr;
 inline SDK::UFunction* g_fnClientWasKicked = nullptr;
