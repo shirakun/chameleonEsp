@@ -94,6 +94,7 @@ void CheatManager::Init()
 	}
 
 	HandleTeleport(currentActors);
+	HandleKillAllSurvivors(currentActors);
 }
 
 // Walk the world -> game instance -> local player -> controller -> pawn chain, plus the
@@ -422,6 +423,29 @@ void CheatManager::HandleMagnet(const std::unordered_set<SDK::AActor*>& currentA
 		SDK::FVector targetPosition = MyLocation + ForwardDirection * (150.0f + depthSpread);
 		otherBaseClass->K2_SetActorLocation(targetPosition, false, nullptr, true);
 		++depthIndex;
+	}
+}
+
+void CheatManager::KillSurvivor(SDK::AActor* actor)
+{
+	if (!MyPlayer || !actor || MyPlayer == actor || !IsHunter(MyPlayer) || !IsSurvivor(actor) || IsDead(actor))
+		return;
+
+	auto* hunter = static_cast<SDK::ABP_FirstPersonCharacter_cLeon_Character_Hunter_C*>(MyPlayer);
+	auto* survivor = static_cast<SDK::ABP_FirstPersonCharacter_cLeon_Character_Survivor_C*>(actor);
+	hunter->KillPlayer(survivor, hunter->MyPlayerState);
+}
+
+void CheatManager::HandleKillAllSurvivors(const std::unordered_set<SDK::AActor*>& currentActors)
+{
+	if (!bKillAllSurvivorsRequested)
+		return;
+	bKillAllSurvivorsRequested = false;
+
+	for (auto* actor : currentActors)
+	{
+		KillSurvivor(actor);
+		Sleep(50); // small delay to avoid overwhelming the server
 	}
 }
 

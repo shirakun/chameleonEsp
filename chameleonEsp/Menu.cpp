@@ -95,7 +95,10 @@ void Menu::Init()
 			ImGui::Checkbox("No Gun Cooldown (Hunters)", &cfg->bNoGunCooldown);
 			ImGui::Checkbox("Anti Server Kick", &cfg->bPreventKick);
 
-			if (ImGui::Button("Dump Bones"))
+			if (ImGui::Button("Kill All Survivors (Hunter)"))
+				cheat->RequestKillAllSurvivors();
+
+			if (ImGui::Button("Dump Bones (Debugging)"))
 				cfg->bDumpBones = true;
 
 			ImGui::EndChild();

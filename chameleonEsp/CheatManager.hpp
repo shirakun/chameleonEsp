@@ -33,9 +33,12 @@ private:
 	void DrawSkeleton(ImU32 colEsp);
 	bool ComputeBoundingBox(SDK::FVector2D& BoxMin, SDK::FVector2D& BoxMax);
 	void DrawEsp(const std::string& PlayerName, SDK::FVector Location, SDK::FVector MyLocation, bool IsVisible);
+	void KillSurvivor(SDK::AActor* actor);
 	void HandleTeleport(const std::unordered_set<SDK::AActor*>& currentActors);
 	void HandleMagnet(const std::unordered_set<SDK::AActor*>& currentActors, const SDK::FVector& MyLocation, SDK::TArray<SDK::AActor*>& Players);
+	void HandleKillAllSurvivors(const std::unordered_set<SDK::AActor*>& currentActors);
 	SDK::AActor* TeleportTarget = nullptr; // resolved by actor pointer, not list index, since PlayerInfos is rebuilt every frame
+	bool bKillAllSurvivorsRequested = false;
 public:
 	struct PlayerInfo {
 		std::string Name;
@@ -44,6 +47,7 @@ public:
 	};
 	std::vector<PlayerInfo> PlayerInfos;
 	void RequestTeleport(SDK::AActor* Actor) { TeleportTarget = Actor; }
+	void RequestKillAllSurvivors() { bKillAllSurvivorsRequested = true; }
 	std::unordered_set<SDK::AActor*> forcedVisibleActors;
 	std::unordered_set<SDK::AActor*> deadActors; // actors seen ragdolling; latched so ESP stays off after the corpse stops simulating physics
 	std::unordered_map<SDK::AActor*, std::string> playerNameCache; // last-known name per actor, so ESP survives PlayerState replication blips
