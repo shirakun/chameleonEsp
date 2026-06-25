@@ -98,6 +98,56 @@ void Menu::Init()
 			if (ImGui::Button("Kill All Survivors (Hunter)"))
 				cheat->RequestKillAllSurvivors();
 
+			ImGui::Separator();
+			ImGui::Text("Kill Specific Player (Hunter)");
+
+			// Track the pick by actor pointer, not list index - PlayerInfos is rebuilt every frame and
+			// indices can drift. Resolve the selected actor's current name for the combo preview, and
+			// drop the selection if that actor no longer exists this frame.
+			static SDK::AActor* selectedKillActor = nullptr;
+			const char* killPreview = "Select survivor";
+			bool killStillPresent = false;
+			int survivorCount = 0;
+			for (const auto& p : cheat->PlayerInfos)
+			{
+				if (!p.IsSurvivor) continue; // only survivors can be killed
+				survivorCount++;
+				if (p.Actor == selectedKillActor)
+				{
+					killPreview = p.Name.c_str();
+					killStillPresent = true;
+				}
+			}
+			if (!killStillPresent)
+				selectedKillActor = nullptr;
+			if (survivorCount == 0)
+				killPreview = "No survivors found";
+
+			// Combo on the left filling the row, fixed-width "Kill" button on the right.
+			const float killBtnW = ImGui::CalcTextSize("Kill").x + ImGui::GetStyle().FramePadding.x * 2.0f;
+			ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x - killBtnW - ImGui::GetStyle().ItemSpacing.x);
+			if (ImGui::BeginCombo("##kill_target", killPreview))
+			{
+				for (int i = 0; i < (int)cheat->PlayerInfos.size(); i++)
+				{
+					if (!cheat->PlayerInfos[i].IsSurvivor) continue;
+					ImGui::PushID(i);
+					const bool isSelected = (cheat->PlayerInfos[i].Actor == selectedKillActor);
+					if (ImGui::Selectable(cheat->PlayerInfos[i].Name.c_str(), isSelected))
+						selectedKillActor = cheat->PlayerInfos[i].Actor;
+					if (isSelected)
+						ImGui::SetItemDefaultFocus();
+					ImGui::PopID();
+				}
+				ImGui::EndCombo();
+			}
+
+			ImGui::SameLine();
+			if (ImGui::Button("Kill", ImVec2(killBtnW, 0)) && selectedKillActor)
+				cheat->RequestKillSurvivor(selectedKillActor);
+
+			ImGui::Separator();
+
 			if (ImGui::Button("Dump Bones (Debugging)"))
 				cfg->bDumpBones = true;
 

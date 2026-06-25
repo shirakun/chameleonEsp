@@ -31,6 +31,7 @@
 #include "SDK/BP_FirstPersonPlayerState_Online_cLeon_classes.hpp"
 #include "SDK/BP_FirstPersonCharacter_cLeon_Character_classes.hpp"
 #include "SDK/BP_FirstPersonCharacter_cLeon_Character_Hunter_classes.hpp"
+#include "SDK/BP_FirstPersonCharacter_cLeon_Character_Hunter_parameters.hpp"
 #include "SDK/BP_FirstPersonCharacter_cLeon_Character_Survivor_classes.hpp"
 #include "skeleton.hpp"
 #include "CheatManager.hpp"
@@ -43,6 +44,11 @@
 // same (game) thread. This flag lets the hook recognise those nested, self invoked calls and pass
 // them straight through to the engine.
 inline std::atomic<bool> g_inGameThreadFlush{ false };
+
+// Set by the render thread (hkPresent) once per frame to ask the game thread to refresh the ESP
+// snapshot. The game thread (hkProcessEvent) consumes it with exchange(false) and runs the world
+// scan there - never on the render thread, which would race the engine's actor list and fault.
+inline std::atomic<bool> g_gatherRequested{ false };
 
 // Main global variables
 inline CheatManager* cheat;

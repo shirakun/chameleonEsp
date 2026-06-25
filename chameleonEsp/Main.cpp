@@ -91,6 +91,19 @@ void __fastcall hkProcessEvent(SDK::UObject* pObject, SDK::UFunction* pFunction,
     if (cheat && GetCurrentThreadId() != g_RenderThreadId)
         cheat->FlushGameThreadActions();
 
+    // The render thread requests a world scan once per frame (g_gatherRequested). Run it here on the
+    // game thread, where walking the actor list is safe. The guard flags us as inside our own
+    // game-thread work so the many nested SDK calls Init() makes pass straight through this hook (top
+    // of the function) instead of recursively re-entering the flush/scan logic.
+    if (cheat && GetCurrentThreadId() != g_RenderThreadId && g_gatherRequested.exchange(false))
+    {
+        struct GatherGuard {
+            GatherGuard()  { g_inGameThreadFlush = true; }
+            ~GatherGuard() { g_inGameThreadFlush = false; }
+        } gatherGuard;
+        cheat->Init();
+    }
+
     // most likely we only need g_fnKickOnline, but let's hook all Kick funcs just to make sure
     // ensure we have initial cached pointers
     if (!g_fnKickLINK)
@@ -317,7 +330,13 @@ HRESULT __stdcall hkPresent(IDXGISwapChain3* pSwapChain, UINT SyncInterval, UINT
     ImGui::SetWindowSize(ImVec2(io.DisplaySize.x, io.DisplaySize.y), ImGuiCond_Always);
 
     if (cfg->bInitHooks)
-        cheat->Init();
+    {
+        // Ask the game thread to refresh the snapshot, then draw the latest one we have. The scan
+        // itself must NOT run here on the render thread (see hkProcessEvent) - that was the access
+        // violation. There's ~1 frame of latency between request and draw, which is fine for ESP.
+        g_gatherRequested.store(true);
+        cheat->RenderEsp();
+    }
 
     if (GetAsyncKeyState(0x47) & 1) // G key
         cfg->bMagnetEnabled = !cfg->bMagnetEnabled;

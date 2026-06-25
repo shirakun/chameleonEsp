@@ -1,10 +1,27 @@
 #include "includes.hpp"
 
+// GAME THREAD: scan the world and publish a render-ready snapshot.
+//
+// Everything that touches a live UObject - GetAllActorsOfClass, the per-actor reads, the screen
+// projections - happens here, on the thread the engine actually mutates the actor list from. Doing
+// it on the render thread (the old behaviour, called straight from hkPresent) raced the game thread
+// during round/level transitions and faulted deep inside the engine's GetAllActorsOfClass. The
+// render thread now only draws the snapshot we publish at the end (see RenderEsp).
 void CheatManager::Init()
 {
-	PlayerInfos.clear();
+	EspSnapshot snap;
 
-	if (!ResolveContext()) return;
+	if (!ResolveContext())
+	{
+		// Publish an empty snapshot so the overlay clears (rather than freezing on the last frame)
+		// while we have no valid world/player - main menu, loading screen, level transition.
+		std::lock_guard<std::mutex> lock(snapshotMutex);
+		pendingSnapshot = std::move(snap);
+		return;
+	}
+
+	snap.screenX = static_cast<float>(x);
+	snap.screenY = static_cast<float>(y);
 
 	const auto MyLocation = MyPlayer->K2_GetActorLocation();
 
@@ -57,7 +74,7 @@ void CheatManager::Init()
 				}
 				
 				if (cfg->bMagnetEnabled)
-					HandleMagnet(currentActors, MyLocation, Players);
+					HandleMagnet(currentActors, MyLocation, Players, snap);
 			}
 			// Survivor
 			else if (IsSurvivor())
@@ -78,7 +95,7 @@ void CheatManager::Init()
 			continue;
 		}
 
-		PlayerInfos.push_back({ PlayerName, Location, objActor });
+		snap.players.push_back({ PlayerName, Location, objActor, IsSurvivor() });
 
 		UpdateForcedVisibility();
 
@@ -90,7 +107,9 @@ void CheatManager::Init()
 		if (cfg->bEnemyOnly && !IsEnemy())
 			continue;
 
-		DrawEsp(PlayerName, Location, MyLocation, IsVisible);
+		EspEntry entry;
+		BuildEspEntry(entry, PlayerName, Location, MyLocation, IsVisible);
+		snap.entries.push_back(std::move(entry));
 	}
 
 	// Drop dead-latch entries for actors that no longer exist (round restart, corpse despawn),
@@ -104,7 +123,42 @@ void CheatManager::Init()
 	}
 
 	HandleTeleport(currentActors);
+	HandleKillTarget(currentActors);
 	HandleKillAllSurvivors(currentActors);
+
+	// Publish the finished frame for the render thread to draw.
+	std::lock_guard<std::mutex> lock(snapshotMutex);
+	pendingSnapshot = std::move(snap);
+}
+
+// RENDER THREAD: draw the most recently published snapshot. Touches only ImGui and the snapshot
+// copy - never a live UObject - so it cannot race the game thread's actor list. The game thread
+// fills pendingSnapshot in Init(); we copy it out under the lock and render from our private copy.
+void CheatManager::RenderEsp()
+{
+	{
+		std::lock_guard<std::mutex> lock(snapshotMutex);
+		drawSnapshot = pendingSnapshot;
+	}
+
+	// Hand the menu its teleport list (the same render thread reads PlayerInfos right after this).
+	PlayerInfos = drawSnapshot.players;
+
+	for (const auto& entry : drawSnapshot.entries)
+		DrawEntry(entry);
+
+	if (drawSnapshot.magnetActive)
+	{
+		const float redColor[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
+		const ImU32 colRed = ImGui::ColorConvertFloat4ToU32(*(ImVec4*)redColor);
+
+		const char* magnetText = "MAGNET ACTIVE";
+		const ImVec2 textSize = ImGui::CalcTextSize(magnetText);
+		const float textX = (drawSnapshot.screenX / 2.0f) - (textSize.x / 2.0f);
+		const float textY = drawSnapshot.screenY - 30.0f;
+
+		ImGui::GetForegroundDrawList()->AddText(ImVec2(textX, textY), colRed, magnetText);
+	}
 }
 
 // Walk the world -> game instance -> local player -> controller -> pawn chain, plus the
@@ -283,8 +337,9 @@ bool CheatManager::IsEnemy()
 	return MyChar->IsHunter != BaseClass->IsHunter;
 }
 
-// Draw the current actor's skeleton by connecting bone pairs in screen space.
-void CheatManager::DrawSkeleton(ImU32 colEsp)
+// GAME THREAD: project the current actor's skeleton (bone-pair segments) into screen space for the
+// render thread to draw later. Each projection is an SDK call, so it has to happen here.
+void CheatManager::BuildSkeletonLines(std::vector<std::pair<SDK::FVector2D, SDK::FVector2D>>& out)
 {
 	SDK::FVector2D BoneScreen, PrevBoneScreen;
 	for (const std::pair<int, int>& Connection : skeleton::Connections)
@@ -292,7 +347,7 @@ void CheatManager::DrawSkeleton(ImU32 colEsp)
 		const auto BoneLoc1 = BaseClass->Mesh->GetSocketLocation(BaseClass->Mesh->GetBoneName(Connection.first));
 		const auto BoneLoc2 = BaseClass->Mesh->GetSocketLocation(BaseClass->Mesh->GetBoneName(Connection.second));
 		if (PlayerController->ProjectWorldLocationToScreen(BoneLoc1, &BoneScreen, false) && PlayerController->ProjectWorldLocationToScreen(BoneLoc2, &PrevBoneScreen, false))
-			ImGui::GetForegroundDrawList()->AddLine(ImVec2(BoneScreen.X, BoneScreen.Y), ImVec2(PrevBoneScreen.X, PrevBoneScreen.Y), colEsp, 1.0f);
+			out.emplace_back(BoneScreen, PrevBoneScreen);
 	}
 }
 
@@ -324,66 +379,86 @@ bool CheatManager::ComputeBoundingBox(SDK::FVector2D& BoxMin, SDK::FVector2D& Bo
 	return bHasBox;
 }
 
-// Render the enabled ESP overlays (skeleton, box, name, distance, snapline) for the current actor.
-void CheatManager::DrawEsp(const std::string& PlayerName, SDK::FVector Location, SDK::FVector MyLocation, bool IsVisible)
+// GAME THREAD: project the current actor's world state (role, distance, skeleton, box, snapline)
+// into a render-ready EspEntry. All SDK/UObject access for one player's overlay lives here.
+void CheatManager::BuildEspEntry(EspEntry& entry, const std::string& PlayerName, SDK::FVector Location, SDK::FVector MyLocation, bool IsVisible)
 {
-	const ImU32 colEsp  = ImGui::ColorConvertFloat4ToU32(IsVisible ? *(ImVec4*)cfg->colVisible : *(ImVec4*)cfg->colNotVisible);
+	entry.name = PlayerName;
+	entry.isVisible = IsVisible;
+	entry.role = IsHunter() ? 1 : (IsSurvivor() ? 2 : 0);
+	entry.distanceMeters = MyLocation.GetDistanceToInMeters(Location);
+
+	if (BaseClass->Mesh && IsObjectValid(BaseClass->Mesh))
+	{
+		if (cfg->bSkeleton)
+			BuildSkeletonLines(entry.skeletonLines);
+
+		entry.hasBox = ComputeBoundingBox(entry.boxMin, entry.boxMax);
+	}
+
+	// snapline target: the player's world location projected to screen
+	if (cfg->bLines)
+	{
+		SDK::FVector2D Screen;
+		if (PlayerController->ProjectWorldLocationToScreen(Location, &Screen, false))
+		{
+			entry.hasSnapline = true;
+			entry.snaplineScreen = Screen;
+		}
+	}
+}
+
+// RENDER THREAD: draw the enabled ESP overlays (skeleton, box, name, role, distance, snapline) for
+// one prebuilt entry. ImGui only - no SDK calls, no UObject access (everything was resolved in
+// BuildEspEntry on the game thread).
+void CheatManager::DrawEntry(const EspEntry& entry)
+{
+	const ImU32 colEsp  = ImGui::ColorConvertFloat4ToU32(entry.isVisible ? *(ImVec4*)cfg->colVisible : *(ImVec4*)cfg->colNotVisible);
 	const ImU32 colLine = ImGui::ColorConvertFloat4ToU32(*(ImVec4*)cfg->colLines);
 
 	// white color
 	const float fff[4] = { 1.0f,  1.0f,  1.0f, 1.0f };
 	const ImU32 colWhite = ImGui::ColorConvertFloat4ToU32(*(ImVec4*)fff);
 
-	SDK::FVector2D BoxMin{}, BoxMax{};
-	bool bHasBox = false;
+	if (cfg->bSkeleton)
+		for (const auto& seg : entry.skeletonLines)
+			ImGui::GetForegroundDrawList()->AddLine(ImVec2(seg.first.X, seg.first.Y), ImVec2(seg.second.X, seg.second.Y), colEsp, 1.0f);
 
-	if (BaseClass->Mesh && IsObjectValid(BaseClass->Mesh))
-	{
-		if (cfg->bSkeleton)
-			DrawSkeleton(colEsp);
-
-		bHasBox = ComputeBoundingBox(BoxMin, BoxMax);
-	}
-
-	if (bHasBox)
+	if (entry.hasBox)
 	{
 		if (cfg->bNames)
-			ImGui::GetForegroundDrawList()->AddText(ImVec2(BoxMin.X, BoxMin.Y - 15), colEsp, PlayerName.c_str());
+			ImGui::GetForegroundDrawList()->AddText(ImVec2(entry.boxMin.X, entry.boxMin.Y - 15), colEsp, entry.name.c_str());
 
 		if (cfg->bRoles)
 		{
-			const char* roleText = nullptr;
-			if (IsHunter()) roleText = "Hunter";
-			else if (IsSurvivor()) roleText = "Survivor";
-
+			const char* roleText = entry.role == 1 ? "Hunter" : (entry.role == 2 ? "Survivor" : nullptr);
 			if (roleText)
 			{
-				const float nameWidth = cfg->bNames ? ImGui::CalcTextSize(PlayerName.c_str()).x + 5 : 0.0f;
-				ImGui::GetForegroundDrawList()->AddText(ImVec2(BoxMin.X + nameWidth, BoxMin.Y - 15), colWhite, roleText);
+				const float nameWidth = cfg->bNames ? ImGui::CalcTextSize(entry.name.c_str()).x + 5 : 0.0f;
+				ImGui::GetForegroundDrawList()->AddText(ImVec2(entry.boxMin.X + nameWidth, entry.boxMin.Y - 15), colWhite, roleText);
 			}
 		}
 
 		if (cfg->bBox)
-			draw->DrawBox(BoxMin.X, BoxMin.Y, BoxMax.X - BoxMin.X, BoxMax.Y - BoxMin.Y, colEsp, 1.0f);
+			draw->DrawBox(entry.boxMin.X, entry.boxMin.Y, entry.boxMax.X - entry.boxMin.X, entry.boxMax.Y - entry.boxMin.Y, colEsp, 1.0f);
 
 		if (cfg->bDistance)
 		{
 			char DistanceText[32];
-			snprintf(DistanceText, sizeof(DistanceText), "%.0fm", MyLocation.GetDistanceToInMeters(Location));
+			snprintf(DistanceText, sizeof(DistanceText), "%.0fm", entry.distanceMeters);
 
 			// center the label just under the box
 			const ImVec2 TextSize = ImGui::CalcTextSize(DistanceText);
-			const float TextX = (BoxMin.X + BoxMax.X) * 0.5f - TextSize.x * 0.5f;
-			ImGui::GetForegroundDrawList()->AddText(ImVec2(TextX, BoxMax.Y + 2), colEsp, DistanceText);
+			const float TextX = (entry.boxMin.X + entry.boxMax.X) * 0.5f - TextSize.x * 0.5f;
+			ImGui::GetForegroundDrawList()->AddText(ImVec2(TextX, entry.boxMax.Y + 2), colEsp, DistanceText);
 		}
 	}
 
 	// draw a snapline from the bottom-center of the screen to the player's world location
-	SDK::FVector2D Screen;
-	if (cfg->bLines && PlayerController->ProjectWorldLocationToScreen(Location, &Screen, false))
+	if (cfg->bLines && entry.hasSnapline)
 	{
 		const auto& io = ImGui::GetIO();
-		ImGui::GetForegroundDrawList()->AddLine(ImVec2(static_cast<float>(io.DisplaySize.x / 2), static_cast<float>(io.DisplaySize.y)), ImVec2(Screen.X, Screen.Y), colLine, 0.7f);
+		ImGui::GetForegroundDrawList()->AddLine(ImVec2(static_cast<float>(io.DisplaySize.x / 2), static_cast<float>(io.DisplaySize.y)), ImVec2(entry.snaplineScreen.X, entry.snaplineScreen.Y), colLine, 0.7f);
 	}
 }
 
@@ -406,18 +481,11 @@ void CheatManager::HandleTeleport(const std::unordered_set<SDK::AActor*>& curren
 	TeleportTarget = nullptr;
 }
 
-void CheatManager::HandleMagnet(const std::unordered_set<SDK::AActor*>& currentActors, const SDK::FVector& MyLocation, SDK::TArray<SDK::AActor*>& Players)
+void CheatManager::HandleMagnet(const std::unordered_set<SDK::AActor*>& currentActors, const SDK::FVector& MyLocation, SDK::TArray<SDK::AActor*>& Players, EspSnapshot& snap)
 {
-	// Draw "MAGNET ACTIVE" text at the bottom center in red
-	const float redColor[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
-	const ImU32 colRed = ImGui::ColorConvertFloat4ToU32(*(ImVec4*)redColor);
-
-	const char* magnetText = "MAGNET ACTIVE";
-	const ImVec2 textSize = ImGui::CalcTextSize(magnetText);
-	const float textX = (x / 2.0f) - (textSize.x / 2.0f);
-	const float textY = y - 30.0f;
-
-	ImGui::GetForegroundDrawList()->AddText(ImVec2(textX, textY), colRed, magnetText);
+	// Flag the overlay so the render thread draws the "MAGNET ACTIVE" banner (ImGui can't run here
+	// on the game thread).
+	snap.magnetActive = true;
 
 	// Get the player's forward direction from their rotation
 	SDK::FVector ForwardDirection = MyPlayer->GetActorForwardVector();
@@ -462,9 +530,33 @@ void CheatManager::KillSurvivor(SDK::AActor* actor)
 	auto* hunter = static_cast<SDK::ABP_FirstPersonCharacter_cLeon_Character_Hunter_C*>(MyPlayer);
 	auto* survivor = static_cast<SDK::ABP_FirstPersonCharacter_cLeon_Character_Survivor_C*>(actor);
 	QueueGameThreadAction([hunter, survivor]() {
-		if (IsObjectValid(hunter) && IsObjectValid(survivor))
-			hunter->KillPlayer(survivor, hunter->MyPlayerState);
+		if (!IsObjectValid(hunter) || !IsObjectValid(survivor))
+			return;
+
+		// Resolve the function fresh from the hunter's current class at call time and invoke it
+		// directly, instead of the SDK wrapper's cached-once static UFunction* (see KillPlayer in
+		// the generated functions.cpp). The engine recreates BP-generated functions between rounds,
+		// so that static dangles after a round transition and ProcessEvent then walks a freed
+		// function's garbage parameter layout - faulting with a write AV deep inside the engine.
+		SDK::UFunction* fn = hunter->Class->GetFunction("BP_FirstPersonCharacter_cLeon_Character_Hunter_C", "KillPlayer");
+		if (!fn)
+			return;
+
+		SDK::Params::BP_FirstPersonCharacter_cLeon_Character_Hunter_C_KillPlayer parms{};
+		parms.FirstpersonCharacter = survivor;
+		parms.SourcePlayerState = hunter->MyPlayerState;
+		hunter->ProcessEvent(fn, &parms);
 	});
+}
+
+// Kill a single requested survivor. Like HandleTeleport, the target is resolved by actor pointer and
+// confirmed against currentActors before use, since the snapshot/dead-latch is rebuilt every frame.
+// KillSurvivor itself re-validates role/liveness, so a wrong pick (e.g. a hunter) is just a no-op.
+void CheatManager::HandleKillTarget(const std::unordered_set<SDK::AActor*>& currentActors)
+{
+	if (KillTarget && currentActors.count(KillTarget))
+		KillSurvivor(KillTarget);
+	KillTarget = nullptr;
 }
 
 void CheatManager::HandleKillAllSurvivors(const std::unordered_set<SDK::AActor*>& currentActors)
