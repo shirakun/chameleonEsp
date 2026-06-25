@@ -341,6 +341,9 @@ bool CheatManager::IsEnemy()
 // render thread to draw later. Each projection is an SDK call, so it has to happen here.
 void CheatManager::BuildSkeletonLines(std::vector<std::pair<SDK::FVector2D, SDK::FVector2D>>& out)
 {
+	if (!BaseClass || !BaseClass->Mesh || !IsObjectValid(BaseClass->Mesh))
+		return;
+
 	SDK::FVector2D BoneScreen, PrevBoneScreen;
 	for (const std::pair<int, int>& Connection : skeleton::Connections)
 	{
@@ -388,7 +391,7 @@ void CheatManager::BuildEspEntry(EspEntry& entry, const std::string& PlayerName,
 	entry.role = IsHunter() ? 1 : (IsSurvivor() ? 2 : 0);
 	entry.distanceMeters = MyLocation.GetDistanceToInMeters(Location);
 
-	if (BaseClass->Mesh && IsObjectValid(BaseClass->Mesh))
+	if (BaseClass && BaseClass->Mesh && IsObjectValid(BaseClass->Mesh))
 	{
 		if (cfg->bSkeleton)
 			BuildSkeletonLines(entry.skeletonLines);
