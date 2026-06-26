@@ -10,14 +10,14 @@
 
 #include "Basic.hpp"
 
-#include "BP_cLeonDecoy_Base_classes.hpp"
+#include "BP_cLeonDecoy_BasicCollision_classes.hpp"
 
 
 SDK_NAMESPACE_START
 
 // BlueprintGeneratedClass BP_cLeonDecoy_Default_1point0.BP_cLeonDecoy_Default_1point0_C
-// 0x0000 (0x02B8 - 0x02B8)
-class ABP_cLeonDecoy_Default_1point0_C final : public ABP_cLeonDecoy_Base_C
+// 0x0000 (0x0328 - 0x0328)
+class ABP_cLeonDecoy_Default_1point0_C final : public ABP_cLeonDecoy_BasicCollision_C
 {
 public:
 	static class UClass* StaticClass()

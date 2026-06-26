@@ -852,7 +852,7 @@ public:
 DUMPER7_ASSERTS_UPenTabletBlueprintLibrary;
 
 // Class PenguinHotel.RuntimePaintCopyComponent
-// 0x0238 (0x02F0 - 0x00B8)
+// 0x02C8 (0x0380 - 0x00B8)
 class URuntimePaintCopyComponent final : public UActorComponent
 {
 public:
@@ -871,13 +871,15 @@ public:
 	bool                                          bReplicatedShareMaterialUntilReady;                // 0x016A(0x0001)(Net, ZeroConstructor, IsPlainOldData, RepNotify, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 	bool                                          bHasReplicatedDeferredCopySetup;                   // 0x016B(0x0001)(Net, ZeroConstructor, IsPlainOldData, RepNotify, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 	uint8                                         Pad_16C[0x4];                                      // 0x016C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class URuntimePaintableComponent*             SourcePaintComponentRef;                           // 0x0170(0x0008)(ExportObject, Net, ZeroConstructor, InstancedReference, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate, TObjectPtr)
-	TWeakObjectPtr<class UMeshComponent>          TargetMesh;                                        // 0x0178(0x0008)(ExportObject, ZeroConstructor, InstancedReference, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-	TWeakObjectPtr<class UMaterialInterface>      OriginalMaterial;                                  // 0x0180(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-	TWeakObjectPtr<class UMaterialInterface>      SharedSourceMaterial;                              // 0x0188(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-	TWeakObjectPtr<class URuntimePaintableComponent> PendingSourcePaintComponent;                    // 0x0190(0x0008)(ExportObject, ZeroConstructor, InstancedReference, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-	TWeakObjectPtr<class UMeshComponent>          PendingSourceMesh;                                 // 0x0198(0x0008)(ExportObject, ZeroConstructor, InstancedReference, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-	uint8                                         Pad_1A0[0x150];                                    // 0x01A0(0x0150)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	struct FRuntimeDecoyCopyPoseSnapshot          ReplicatedOverridePoseSnapshot;                    // 0x0170(0x0028)(Net, RepNotify, NativeAccessSpecifierPrivate)
+	int64                                         ReplicatedRequiredAppliedPaintSequence;            // 0x0198(0x0008)(Net, ZeroConstructor, IsPlainOldData, RepNotify, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	class URuntimePaintableComponent*             SourcePaintComponentRef;                           // 0x01A0(0x0008)(ExportObject, Net, ZeroConstructor, InstancedReference, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate, TObjectPtr)
+	TWeakObjectPtr<class UMeshComponent>          TargetMesh;                                        // 0x01A8(0x0008)(ExportObject, ZeroConstructor, InstancedReference, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	TWeakObjectPtr<class UMaterialInterface>      OriginalMaterial;                                  // 0x01B0(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	TWeakObjectPtr<class UMaterialInterface>      SharedSourceMaterial;                              // 0x01B8(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	TWeakObjectPtr<class URuntimePaintableComponent> PendingSourcePaintComponent;                    // 0x01C0(0x0008)(ExportObject, ZeroConstructor, InstancedReference, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	TWeakObjectPtr<class UMeshComponent>          PendingSourceMesh;                                 // 0x01C8(0x0008)(ExportObject, ZeroConstructor, InstancedReference, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	uint8                                         Pad_1D0[0x1B0];                                    // 0x01D0(0x01B0)(Fixing Struct Size After Last Property [ Dumper-7 ])
 
 public:
 	bool ApplyPaintSnapshot(const struct FRuntimePaintCopySnapshot& Snapshot, bool bApplyPoseToPoseableMesh);
@@ -889,6 +891,7 @@ public:
 
 	bool CapturePoseSnapshot(class UMeshComponent* SourceMeshComponent, struct FRuntimePaintCopyPoseSnapshot* OutPoseSnapshot) const;
 	class URuntimePaintableComponent* GetSourcePaintComponent() const;
+	class AActor* GetSourceParentActor() const;
 	bool IsCopyFinalized() const;
 	bool IsSharingSourceMaterial() const;
 	bool RestoreCopiedPoseToPoseableMesh(class UPoseableMeshComponent* PoseableMeshComponent) const;
@@ -915,9 +918,11 @@ class URuntimePaintRelayComponent final : public UActorComponent
 {
 public:
 	void RelayPaintToServer(class URuntimePaintableComponent* PaintComponent, const struct FPaintStroke& Stroke);
+	void RelaySpawnDecoyCopyToServer(class URuntimePaintableComponent* PaintComponent, const struct FGuid& CopyId, TSubclassOf<class AActor> DecoyActorClass, const struct FTransform& SpawnTransform, class FName DecoyMeshTag, bool bIncludePose, bool bApplyPoseToPoseableMesh, const struct FRuntimeDecoyCopyPoseSnapshot& SourcePoseSnapshot, int64 RequiredAppliedPaintSequence);
 	void RelayStrokeBatchToServer(class URuntimePaintableComponent* PaintComponent, const struct FPaintStrokeBatch& Batch);
 	void RelayTextureSyncToServer(class URuntimePaintableComponent* PaintComponent);
 	void ServerRelayPaint(class URuntimePaintableComponent* PaintComponent, const struct FPaintStroke& Stroke);
+	void ServerRelaySpawnDecoyCopy(class URuntimePaintableComponent* PaintComponent, const struct FGuid& CopyId, TSubclassOf<class AActor> DecoyActorClass, const struct FTransform& SpawnTransform, class FName DecoyMeshTag, bool bIncludePose, bool bApplyPoseToPoseableMesh, const struct FRuntimeDecoyCopyPoseSnapshot& SourcePoseSnapshot, int64 RequiredAppliedPaintSequence);
 	void ServerRelayStrokeBatch(class URuntimePaintableComponent* PaintComponent, const struct FPaintStrokeBatch& Batch);
 	void ServerRelayTextureSync(class URuntimePaintableComponent* PaintComponent);
 
@@ -1201,7 +1206,7 @@ public:
 	struct FScreenSpacePaintResult HitTestAtScreenPosition(class UMeshComponent* MeshComponent, const struct FVector2D& ScreenPosition, class APlayerController* PlayerController, bool bUseCachedTriangles);
 	bool ImportChannelFromBytes(EPaintChannel Channel, const TArray<uint8>& Data);
 	bool InitializePaint(class UMeshComponent* MeshComponent);
-	void MulticastApplyDecoyCopyFromLocalView(const struct FGuid& CopyId, class AActor* DecoyActor, class FName DecoyMeshTag, bool bIncludePose, bool bApplyPoseToPoseableMesh);
+	void MulticastApplyDecoyCopyFromLocalView(const struct FGuid& CopyId, class AActor* DecoyActor, class FName DecoyMeshTag, bool bIncludePose, bool bApplyPoseToPoseableMesh, const struct FRuntimeDecoyCopyPoseSnapshot& SourcePoseSnapshot, int64 RequiredAppliedPaintSequence);
 	void MulticastPaint(const struct FPaintStroke& Stroke);
 	void MulticastPaintBatch(const struct FPaintStrokeBatch& Batch);
 	void MulticastPaintBatchToOthers(const struct FPaintStrokeBatch& Batch);
@@ -1229,7 +1234,7 @@ public:
 	void ServerSendPaint(const struct FPaintStroke& Stroke);
 	void ServerSendStrokeBatch(const struct FPaintStrokeBatch& Batch);
 	void ServerSetMaxDecoySpawnCount(int32 NewMaxDecoySpawnCount);
-	void ServerSpawnDecoyCopyFromLocalView(const struct FGuid& CopyId, TSubclassOf<class AActor> DecoyActorClass, const struct FTransform& SpawnTransform, class FName DecoyMeshTag, bool bIncludePose, bool bApplyPoseToPoseableMesh);
+	void ServerSpawnDecoyCopyFromLocalView(const struct FGuid& CopyId, TSubclassOf<class AActor> DecoyActorClass, const struct FTransform& SpawnTransform, class FName DecoyMeshTag, bool bIncludePose, bool bApplyPoseToPoseableMesh, const struct FRuntimeDecoyCopyPoseSnapshot& SourcePoseSnapshot, int64 RequiredAppliedPaintSequence);
 	void SetBrushBlendMode(EPaintBlendMode BlendMode);
 	void SetBrushFalloff(EBrushFalloff Falloff);
 	void SetBrushHardness(float Hardness);

@@ -1303,6 +1303,15 @@ public:
 };
 DUMPER7_ASSERTS_RuntimePaintCopyComponent_GetSourcePaintComponent;
 
+// Function PenguinHotel.RuntimePaintCopyComponent.GetSourceParentActor
+// 0x0008 (0x0008 - 0x0000)
+struct RuntimePaintCopyComponent_GetSourceParentActor final
+{
+public:
+	class AActor*                                 ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+DUMPER7_ASSERTS_RuntimePaintCopyComponent_GetSourceParentActor;
+
 // Function PenguinHotel.RuntimePaintCopyComponent.IsCopyFinalized
 // 0x0001 (0x0001 - 0x0000)
 struct RuntimePaintCopyComponent_IsCopyFinalized final
@@ -1342,6 +1351,24 @@ public:
 };
 DUMPER7_ASSERTS_RuntimePaintRelayComponent_RelayPaintToServer;
 
+// Function PenguinHotel.RuntimePaintRelayComponent.RelaySpawnDecoyCopyToServer
+// 0x00C0 (0x00C0 - 0x0000)
+struct RuntimePaintRelayComponent_RelaySpawnDecoyCopyToServer final
+{
+public:
+	class URuntimePaintableComponent*             PaintComponent;                                    // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FGuid                                  CopyId;                                            // 0x0008(0x0010)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TSubclassOf<class AActor>                     DecoyActorClass;                                   // 0x0018(0x0008)(Parm, ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FTransform                             SpawnTransform;                                    // 0x0020(0x0060)(Parm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   DecoyMeshTag;                                      // 0x0080(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bIncludePose;                                      // 0x0088(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bApplyPoseToPoseableMesh;                          // 0x0089(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_8A[0x6];                                       // 0x008A(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FRuntimeDecoyCopyPoseSnapshot          SourcePoseSnapshot;                                // 0x0090(0x0028)(Parm, NativeAccessSpecifierPublic)
+	int64                                         RequiredAppliedPaintSequence;                      // 0x00B8(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+DUMPER7_ASSERTS_RuntimePaintRelayComponent_RelaySpawnDecoyCopyToServer;
+
 // Function PenguinHotel.RuntimePaintRelayComponent.RelayStrokeBatchToServer
 // 0x0018 (0x0018 - 0x0000)
 struct RuntimePaintRelayComponent_RelayStrokeBatchToServer final
@@ -1370,6 +1397,24 @@ public:
 	struct FPaintStroke                           Stroke;                                            // 0x0008(0x00E0)(Parm, NoDestructor, NativeAccessSpecifierPublic)
 };
 DUMPER7_ASSERTS_RuntimePaintRelayComponent_ServerRelayPaint;
+
+// Function PenguinHotel.RuntimePaintRelayComponent.ServerRelaySpawnDecoyCopy
+// 0x00C0 (0x00C0 - 0x0000)
+struct RuntimePaintRelayComponent_ServerRelaySpawnDecoyCopy final
+{
+public:
+	class URuntimePaintableComponent*             PaintComponent;                                    // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FGuid                                  CopyId;                                            // 0x0008(0x0010)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TSubclassOf<class AActor>                     DecoyActorClass;                                   // 0x0018(0x0008)(Parm, ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FTransform                             SpawnTransform;                                    // 0x0020(0x0060)(Parm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   DecoyMeshTag;                                      // 0x0080(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bIncludePose;                                      // 0x0088(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bApplyPoseToPoseableMesh;                          // 0x0089(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_8A[0x6];                                       // 0x008A(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FRuntimeDecoyCopyPoseSnapshot          SourcePoseSnapshot;                                // 0x0090(0x0028)(Parm, NativeAccessSpecifierPublic)
+	int64                                         RequiredAppliedPaintSequence;                      // 0x00B8(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+DUMPER7_ASSERTS_RuntimePaintRelayComponent_ServerRelaySpawnDecoyCopy;
 
 // Function PenguinHotel.RuntimePaintRelayComponent.ServerRelayStrokeBatch
 // 0x0018 (0x0018 - 0x0000)
@@ -1965,7 +2010,7 @@ public:
 DUMPER7_ASSERTS_RuntimePaintableComponent_InitializePaint;
 
 // Function PenguinHotel.RuntimePaintableComponent.MulticastApplyDecoyCopyFromLocalView
-// 0x0028 (0x0028 - 0x0000)
+// 0x0058 (0x0058 - 0x0000)
 struct RuntimePaintableComponent_MulticastApplyDecoyCopyFromLocalView final
 {
 public:
@@ -1974,7 +2019,9 @@ public:
 	class FName                                   DecoyMeshTag;                                      // 0x0018(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	bool                                          bIncludePose;                                      // 0x0020(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	bool                                          bApplyPoseToPoseableMesh;                          // 0x0021(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_22[0x6];                                       // 0x0022(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	uint8                                         Pad_22[0x6];                                       // 0x0022(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FRuntimeDecoyCopyPoseSnapshot          SourcePoseSnapshot;                                // 0x0028(0x0028)(Parm, NativeAccessSpecifierPublic)
+	int64                                         RequiredAppliedPaintSequence;                      // 0x0050(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 DUMPER7_ASSERTS_RuntimePaintableComponent_MulticastApplyDecoyCopyFromLocalView;
 
@@ -2222,7 +2269,7 @@ public:
 DUMPER7_ASSERTS_RuntimePaintableComponent_ServerSetMaxDecoySpawnCount;
 
 // Function PenguinHotel.RuntimePaintableComponent.ServerSpawnDecoyCopyFromLocalView
-// 0x0090 (0x0090 - 0x0000)
+// 0x00C0 (0x00C0 - 0x0000)
 struct RuntimePaintableComponent_ServerSpawnDecoyCopyFromLocalView final
 {
 public:
@@ -2233,7 +2280,9 @@ public:
 	class FName                                   DecoyMeshTag;                                      // 0x0080(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	bool                                          bIncludePose;                                      // 0x0088(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	bool                                          bApplyPoseToPoseableMesh;                          // 0x0089(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_8A[0x6];                                       // 0x008A(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	uint8                                         Pad_8A[0x6];                                       // 0x008A(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FRuntimeDecoyCopyPoseSnapshot          SourcePoseSnapshot;                                // 0x0090(0x0028)(Parm, NativeAccessSpecifierPublic)
+	int64                                         RequiredAppliedPaintSequence;                      // 0x00B8(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 DUMPER7_ASSERTS_RuntimePaintableComponent_ServerSpawnDecoyCopyFromLocalView;
 

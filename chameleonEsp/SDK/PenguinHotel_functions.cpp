@@ -3894,6 +3894,31 @@ class URuntimePaintableComponent* URuntimePaintCopyComponent::GetSourcePaintComp
 }
 
 
+// Function PenguinHotel.RuntimePaintCopyComponent.GetSourceParentActor
+// (Final, Native, Public, BlueprintCallable, BlueprintPure, Const)
+// Parameters:
+// class AActor*                           ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+
+class AActor* URuntimePaintCopyComponent::GetSourceParentActor() const
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("RuntimePaintCopyComponent", "GetSourceParentActor");
+
+	Params::RuntimePaintCopyComponent_GetSourceParentActor Parms{};
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	Func->FunctionFlags = Flgs;
+
+	return Parms.ReturnValue;
+}
+
+
 // Function PenguinHotel.RuntimePaintCopyComponent.IsCopyFinalized
 // (Final, Native, Public, BlueprintCallable, BlueprintPure, Const)
 // Parameters:
@@ -3999,6 +4024,47 @@ void URuntimePaintRelayComponent::RelayPaintToServer(class URuntimePaintableComp
 }
 
 
+// Function PenguinHotel.RuntimePaintRelayComponent.RelaySpawnDecoyCopyToServer
+// (Final, Native, Public, HasDefaults, BlueprintCallable)
+// Parameters:
+// class URuntimePaintableComponent*       PaintComponent                                         (Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// const struct FGuid&                     CopyId                                                 (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// TSubclassOf<class AActor>               DecoyActorClass                                        (Parm, ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// const struct FTransform&                SpawnTransform                                         (Parm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// class FName                             DecoyMeshTag                                           (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// bool                                    bIncludePose                                           (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// bool                                    bApplyPoseToPoseableMesh                               (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// const struct FRuntimeDecoyCopyPoseSnapshot&SourcePoseSnapshot                                     (Parm, NativeAccessSpecifierPublic)
+// int64                                   RequiredAppliedPaintSequence                           (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+
+void URuntimePaintRelayComponent::RelaySpawnDecoyCopyToServer(class URuntimePaintableComponent* PaintComponent, const struct FGuid& CopyId, TSubclassOf<class AActor> DecoyActorClass, const struct FTransform& SpawnTransform, class FName DecoyMeshTag, bool bIncludePose, bool bApplyPoseToPoseableMesh, const struct FRuntimeDecoyCopyPoseSnapshot& SourcePoseSnapshot, int64 RequiredAppliedPaintSequence)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("RuntimePaintRelayComponent", "RelaySpawnDecoyCopyToServer");
+
+	Params::RuntimePaintRelayComponent_RelaySpawnDecoyCopyToServer Parms{};
+
+	Parms.PaintComponent = PaintComponent;
+	Parms.CopyId = std::move(CopyId);
+	Parms.DecoyActorClass = DecoyActorClass;
+	Parms.SpawnTransform = std::move(SpawnTransform);
+	Parms.DecoyMeshTag = DecoyMeshTag;
+	Parms.bIncludePose = bIncludePose;
+	Parms.bApplyPoseToPoseableMesh = bApplyPoseToPoseableMesh;
+	Parms.SourcePoseSnapshot = std::move(SourcePoseSnapshot);
+	Parms.RequiredAppliedPaintSequence = RequiredAppliedPaintSequence;
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	Func->FunctionFlags = Flgs;
+}
+
+
 // Function PenguinHotel.RuntimePaintRelayComponent.RelayStrokeBatchToServer
 // (Final, Native, Public, HasOutParams, BlueprintCallable)
 // Parameters:
@@ -4068,6 +4134,47 @@ void URuntimePaintRelayComponent::ServerRelayPaint(class URuntimePaintableCompon
 
 	Parms.PaintComponent = PaintComponent;
 	Parms.Stroke = std::move(Stroke);
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	Func->FunctionFlags = Flgs;
+}
+
+
+// Function PenguinHotel.RuntimePaintRelayComponent.ServerRelaySpawnDecoyCopy
+// (Net, NetReliable, Native, Event, Protected, NetServer, HasDefaults, NetValidate)
+// Parameters:
+// class URuntimePaintableComponent*       PaintComponent                                         (Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// const struct FGuid&                     CopyId                                                 (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// TSubclassOf<class AActor>               DecoyActorClass                                        (Parm, ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// const struct FTransform&                SpawnTransform                                         (Parm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// class FName                             DecoyMeshTag                                           (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// bool                                    bIncludePose                                           (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// bool                                    bApplyPoseToPoseableMesh                               (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// const struct FRuntimeDecoyCopyPoseSnapshot&SourcePoseSnapshot                                     (Parm, NativeAccessSpecifierPublic)
+// int64                                   RequiredAppliedPaintSequence                           (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+
+void URuntimePaintRelayComponent::ServerRelaySpawnDecoyCopy(class URuntimePaintableComponent* PaintComponent, const struct FGuid& CopyId, TSubclassOf<class AActor> DecoyActorClass, const struct FTransform& SpawnTransform, class FName DecoyMeshTag, bool bIncludePose, bool bApplyPoseToPoseableMesh, const struct FRuntimeDecoyCopyPoseSnapshot& SourcePoseSnapshot, int64 RequiredAppliedPaintSequence)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("RuntimePaintRelayComponent", "ServerRelaySpawnDecoyCopy");
+
+	Params::RuntimePaintRelayComponent_ServerRelaySpawnDecoyCopy Parms{};
+
+	Parms.PaintComponent = PaintComponent;
+	Parms.CopyId = std::move(CopyId);
+	Parms.DecoyActorClass = DecoyActorClass;
+	Parms.SpawnTransform = std::move(SpawnTransform);
+	Parms.DecoyMeshTag = DecoyMeshTag;
+	Parms.bIncludePose = bIncludePose;
+	Parms.bApplyPoseToPoseableMesh = bApplyPoseToPoseableMesh;
+	Parms.SourcePoseSnapshot = std::move(SourcePoseSnapshot);
+	Parms.RequiredAppliedPaintSequence = RequiredAppliedPaintSequence;
 
 	auto Flgs = Func->FunctionFlags;
 	Func->FunctionFlags |= 0x400;
@@ -5946,8 +6053,10 @@ bool URuntimePaintableComponent::InitializePaint(class UMeshComponent* MeshCompo
 // class FName                             DecoyMeshTag                                           (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 // bool                                    bIncludePose                                           (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 // bool                                    bApplyPoseToPoseableMesh                               (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// const struct FRuntimeDecoyCopyPoseSnapshot&SourcePoseSnapshot                                     (Parm, NativeAccessSpecifierPublic)
+// int64                                   RequiredAppliedPaintSequence                           (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 
-void URuntimePaintableComponent::MulticastApplyDecoyCopyFromLocalView(const struct FGuid& CopyId, class AActor* DecoyActor, class FName DecoyMeshTag, bool bIncludePose, bool bApplyPoseToPoseableMesh)
+void URuntimePaintableComponent::MulticastApplyDecoyCopyFromLocalView(const struct FGuid& CopyId, class AActor* DecoyActor, class FName DecoyMeshTag, bool bIncludePose, bool bApplyPoseToPoseableMesh, const struct FRuntimeDecoyCopyPoseSnapshot& SourcePoseSnapshot, int64 RequiredAppliedPaintSequence)
 {
 	static class UFunction* Func = nullptr;
 
@@ -5961,6 +6070,8 @@ void URuntimePaintableComponent::MulticastApplyDecoyCopyFromLocalView(const stru
 	Parms.DecoyMeshTag = DecoyMeshTag;
 	Parms.bIncludePose = bIncludePose;
 	Parms.bApplyPoseToPoseableMesh = bApplyPoseToPoseableMesh;
+	Parms.SourcePoseSnapshot = std::move(SourcePoseSnapshot);
+	Parms.RequiredAppliedPaintSequence = RequiredAppliedPaintSequence;
 
 	auto Flgs = Func->FunctionFlags;
 	Func->FunctionFlags |= 0x400;
@@ -6680,8 +6791,10 @@ void URuntimePaintableComponent::ServerSetMaxDecoySpawnCount(int32 NewMaxDecoySp
 // class FName                             DecoyMeshTag                                           (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 // bool                                    bIncludePose                                           (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 // bool                                    bApplyPoseToPoseableMesh                               (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// const struct FRuntimeDecoyCopyPoseSnapshot&SourcePoseSnapshot                                     (Parm, NativeAccessSpecifierPublic)
+// int64                                   RequiredAppliedPaintSequence                           (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 
-void URuntimePaintableComponent::ServerSpawnDecoyCopyFromLocalView(const struct FGuid& CopyId, TSubclassOf<class AActor> DecoyActorClass, const struct FTransform& SpawnTransform, class FName DecoyMeshTag, bool bIncludePose, bool bApplyPoseToPoseableMesh)
+void URuntimePaintableComponent::ServerSpawnDecoyCopyFromLocalView(const struct FGuid& CopyId, TSubclassOf<class AActor> DecoyActorClass, const struct FTransform& SpawnTransform, class FName DecoyMeshTag, bool bIncludePose, bool bApplyPoseToPoseableMesh, const struct FRuntimeDecoyCopyPoseSnapshot& SourcePoseSnapshot, int64 RequiredAppliedPaintSequence)
 {
 	static class UFunction* Func = nullptr;
 
@@ -6696,6 +6809,8 @@ void URuntimePaintableComponent::ServerSpawnDecoyCopyFromLocalView(const struct 
 	Parms.DecoyMeshTag = DecoyMeshTag;
 	Parms.bIncludePose = bIncludePose;
 	Parms.bApplyPoseToPoseableMesh = bApplyPoseToPoseableMesh;
+	Parms.SourcePoseSnapshot = std::move(SourcePoseSnapshot);
+	Parms.RequiredAppliedPaintSequence = RequiredAppliedPaintSequence;
 
 	auto Flgs = Func->FunctionFlags;
 	Func->FunctionFlags |= 0x400;

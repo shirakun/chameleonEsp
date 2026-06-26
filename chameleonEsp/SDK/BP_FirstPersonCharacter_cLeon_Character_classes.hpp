@@ -21,8 +21,9 @@
 SDK_NAMESPACE_START
 
 // BlueprintGeneratedClass BP_FirstPersonCharacter_cLeon_Character.BP_FirstPersonCharacter_cLeon_Character_C
-// 0x0190 (0x0CC0 - 0x0B30)
-class ABP_FirstPersonCharacter_cLeon_Character_C : public ABP_FirstPersonCharacter_Main_C
+// 0x01A0 (0x0CD0 - 0x0B30)
+#pragma pack(push, 0x1)
+class SDK_ALIGN(0x10) ABP_FirstPersonCharacter_cLeon_Character_C : public ABP_FirstPersonCharacter_Main_C
 {
 public:
 	struct FPointerToUberGraphFrame               UberGraphFrame_BP_FirstPersonCharacter_cLeon_Character_C; // 0x0B30(0x0008)(ZeroConstructor, Transient, DuplicateTransient)
@@ -85,6 +86,7 @@ public:
 	TArray<double>                                DecoyCoolTimes;                                    // 0x0CA0(0x0010)(Edit, BlueprintVisible, DisableEditOnInstance)
 	double                                        DecoyCoolTimeDefault;                              // 0x0CB0(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	class UClass*                                 DecoyActorClass;                                   // 0x0CB8(0x0008)(Edit, BlueprintVisible, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+	bool                                          CanZoom;                                           // 0x0CC0(0x0001)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
 public:
 	void ExecuteUbergraph_BP_FirstPersonCharacter_cLeon_Character(int32 EntryPoint);
@@ -132,7 +134,7 @@ public:
 	void CustomCrouch_Client_(double Height, bool Is_Crouching_Input_0);
 	void BndEvt__BP_FirstPersonCharacter_cLeon_Character_ExtendedPhysicsCharacterMoverComponent_K2Node_ComponentBoundEvent_0_Mover_OnStanceChanged__DelegateSignature(EStanceMode OldStance, EStanceMode NewStance);
 	void CustomCrouch_Server_(double Height, bool Is_Crouching_Input_0);
-	void InpActEvt_IA_Crouch_K2Node_EnhancedInputActionEvent_0(const struct FInputActionValue& ActionValue, float ElapsedTime, float TriggeredTime, const class UInputAction* SourceAction);
+	void InpActEvt_IA_CopyCreate_K2Node_EnhancedInputActionEvent_0(const struct FInputActionValue& ActionValue, float ElapsedTime, float TriggeredTime, const class UInputAction* SourceAction);
 	void InpActEvt_IA_CopyDelete_K2Node_EnhancedInputActionEvent_1(const struct FInputActionValue& ActionValue, float ElapsedTime, float TriggeredTime, const class UInputAction* SourceAction);
 	void InpActEvt_IA_Shot_K2Node_EnhancedInputActionEvent_2(const struct FInputActionValue& ActionValue, float ElapsedTime, float TriggeredTime, const class UInputAction* SourceAction);
 	void InpActEvt_Five_K2Node_InputKeyEvent_0(const struct FKey& Key);
@@ -176,6 +178,7 @@ public:
 	void GetMoveSpeedMultiply(double* MultiplyValue);
 	void SetDecoyVisibility(bool Visibility);
 	void UseDecoy(bool* IsUse);
+	void cLeonGetPlayerState(class ABP_FirstPersonPlayerState_Online_cLeon_C** PlayerState_0);
 
 public:
 	static class UClass* StaticClass()
@@ -191,6 +194,7 @@ public:
 		return GetDefaultObjImpl<ABP_FirstPersonCharacter_cLeon_Character_C>();
 	}
 };
+#pragma pack(pop)
 DUMPER7_ASSERTS_ABP_FirstPersonCharacter_cLeon_Character_C;
 
 SDK_NAMESPACE_END

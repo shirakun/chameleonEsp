@@ -760,4 +760,16 @@ public:
 };
 DUMPER7_ASSERTS_FPaintMaterialPattern;
 
+// ScriptStruct PenguinHotel.RuntimeDecoyCopyPoseSnapshot
+// 0x0028 (0x0028 - 0x0000)
+struct FRuntimeDecoyCopyPoseSnapshot final
+{
+public:
+	bool                                          bIsValid;                                          // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<class FName>                           BoneNames;                                         // 0x0008(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FTransform>                     ComponentSpaceBoneTransforms;                      // 0x0018(0x0010)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+DUMPER7_ASSERTS_FRuntimeDecoyCopyPoseSnapshot;
+
 SDK_NAMESPACE_END

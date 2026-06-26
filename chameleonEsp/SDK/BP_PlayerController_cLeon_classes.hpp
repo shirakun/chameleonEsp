@@ -17,7 +17,7 @@
 SDK_NAMESPACE_START
 
 // BlueprintGeneratedClass BP_PlayerController_cLeon.BP_PlayerController_cLeon_C
-// 0x0078 (0x07E0 - 0x0768)
+// 0x0080 (0x07E8 - 0x0768)
 class ABP_PlayerController_cLeon_C final : public ABP_FirstPersonPlayerController_C
 {
 public:
@@ -38,6 +38,7 @@ public:
 	class AActor*                                 CurrentSelectActor;                                // 0x07C0(0x0008)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnTemplate, DisableEditOnInstance, NoDestructor, HasGetValueTypeHash)
 	TMulticastInlineDelegate<void(const class FString& Name_0)> eeyan;                               // 0x07C8(0x0010)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, BlueprintAssignable, BlueprintCallable)
 	class UWBP_ChooseBody_C*                      ChooseBody;                                        // 0x07D8(0x0008)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, InstancedReference, NoDestructor, HasGetValueTypeHash)
+	bool                                          CanPenterationForce;                               // 0x07E0(0x0001)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
 public:
 	void TeleportMovie();

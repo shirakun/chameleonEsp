@@ -10,18 +10,24 @@
 
 #include "Basic.hpp"
 
+#include "Engine_structs.hpp"
 #include "Engine_classes.hpp"
 
 
 SDK_NAMESPACE_START
 
 // BlueprintGeneratedClass BP_cLeonDecoy_Base.BP_cLeonDecoy_Base_C
-// 0x0010 (0x02B8 - 0x02A8)
+// 0x0018 (0x02C0 - 0x02A8)
 class ABP_cLeonDecoy_Base_C : public AActor
 {
 public:
-	class UPoseableMeshComponent*                 PoseableMesh;                                      // 0x02A8(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
-	class URuntimePaintCopyComponent*             RuntimePaintCopy;                                  // 0x02B0(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
+	struct FPointerToUberGraphFrame               UberGraphFrame;                                    // 0x02A8(0x0008)(ZeroConstructor, Transient, DuplicateTransient)
+	class UPoseableMeshComponent*                 PoseableMesh;                                      // 0x02B0(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
+	class URuntimePaintCopyComponent*             RuntimePaintCopy;                                  // 0x02B8(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
+
+public:
+	void ExecuteUbergraph_BP_cLeonDecoy_Base(int32 EntryPoint);
+	void ReceiveTick(float DeltaSeconds);
 
 public:
 	static class UClass* StaticClass()

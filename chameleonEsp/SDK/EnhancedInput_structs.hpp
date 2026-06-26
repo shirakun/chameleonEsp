@@ -218,6 +218,26 @@ enum class ETriggerEventsSupported : uint8
 	ETriggerEventsSupported_MAX              = 8,
 };
 
+// ScriptStruct EnhancedInput.InputActionValue
+// 0x0020 (0x0020 - 0x0000)
+struct alignas(0x08) FInputActionValue final
+{
+public:
+	uint8                                         Pad_0[0x20];                                       // 0x0000(0x0020)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+DUMPER7_ASSERTS_FInputActionValue;
+
+// ScriptStruct EnhancedInput.InjectedInput
+// 0x0040 (0x0040 - 0x0000)
+struct FInjectedInput final
+{
+public:
+	uint8                                         Pad_0[0x20];                                       // 0x0000(0x0020)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<class UInputTrigger*>                  Triggers;                                          // 0x0020(0x0010)(ZeroConstructor, Transient, UObjectWrapper, NativeAccessSpecifierPublic, TObjectPtr)
+	TArray<class UInputModifier*>                 Modifiers;                                         // 0x0030(0x0010)(ZeroConstructor, Transient, UObjectWrapper, NativeAccessSpecifierPublic, TObjectPtr)
+};
+DUMPER7_ASSERTS_FInjectedInput;
+
 // ScriptStruct EnhancedInput.PlayerKeyMapping
 // 0x00A8 (0x00A8 - 0x0000)
 struct FPlayerKeyMapping final
@@ -246,51 +266,14 @@ public:
 };
 DUMPER7_ASSERTS_FKeyMappingRow;
 
-// ScriptStruct EnhancedInput.InputActionValue
-// 0x0020 (0x0020 - 0x0000)
-struct alignas(0x08) FInputActionValue final
+// ScriptStruct EnhancedInput.InjectedInputArray
+// 0x0010 (0x0010 - 0x0000)
+struct FInjectedInputArray final
 {
 public:
-	uint8                                         Pad_0[0x20];                                       // 0x0000(0x0020)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	TArray<struct FInjectedInput>                 Injected;                                          // 0x0000(0x0010)(ZeroConstructor, Transient, NativeAccessSpecifierPublic)
 };
-DUMPER7_ASSERTS_FInputActionValue;
-
-// ScriptStruct EnhancedInput.InjectedInput
-// 0x0040 (0x0040 - 0x0000)
-struct FInjectedInput final
-{
-public:
-	uint8                                         Pad_0[0x20];                                       // 0x0000(0x0020)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<class UInputTrigger*>                  Triggers;                                          // 0x0020(0x0010)(ZeroConstructor, Transient, UObjectWrapper, NativeAccessSpecifierPublic, TObjectPtr)
-	TArray<class UInputModifier*>                 Modifiers;                                         // 0x0030(0x0010)(ZeroConstructor, Transient, UObjectWrapper, NativeAccessSpecifierPublic, TObjectPtr)
-};
-DUMPER7_ASSERTS_FInjectedInput;
-
-// ScriptStruct EnhancedInput.PlayerMappableKeyQueryOptions
-// 0x0028 (0x0028 - 0x0000)
-struct FPlayerMappableKeyQueryOptions final
-{
-public:
-	class FName                                   MappingName;                                       // 0x0000(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FKey                                   KeyToMatch;                                        // 0x0008(0x0018)(Edit, BlueprintVisible, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EPlayerMappableKeySlot                        SlotToMatch;                                       // 0x0020(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         bMatchBasicKeyTypes : 1;                           // 0x0021(0x0001)(BitIndex: 0x00, PropSize: 0x0001 (Edit, BlueprintVisible, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic))
-	uint8                                         bMatchKeyAxisType : 1;                             // 0x0021(0x0001)(BitIndex: 0x01, PropSize: 0x0001 (Edit, BlueprintVisible, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic))
-	EHardwareDevicePrimaryType                    RequiredDeviceType;                                // 0x0022(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_23[0x1];                                       // 0x0023(0x0001)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         RequiredDeviceFlags;                               // 0x0024(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-DUMPER7_ASSERTS_FPlayerMappableKeyQueryOptions;
-
-// ScriptStruct EnhancedInput.AppliedInputContextData
-// 0x0008 (0x0008 - 0x0000)
-struct FAppliedInputContextData final
-{
-public:
-	int32                                         Priority;                                          // 0x0000(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         RegistrationCount;                                 // 0x0004(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-DUMPER7_ASSERTS_FAppliedInputContextData;
+DUMPER7_ASSERTS_FInjectedInputArray;
 
 // ScriptStruct EnhancedInput.MapPlayerKeyArgs
 // 0x0050 (0x0050 - 0x0000)
@@ -325,6 +308,22 @@ public:
 	uint8                                         Pad_39[0x7];                                       // 0x0039(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 DUMPER7_ASSERTS_FPlayerMappableKeyProfileCreationArgs;
+
+// ScriptStruct EnhancedInput.PlayerMappableKeyQueryOptions
+// 0x0028 (0x0028 - 0x0000)
+struct FPlayerMappableKeyQueryOptions final
+{
+public:
+	class FName                                   MappingName;                                       // 0x0000(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FKey                                   KeyToMatch;                                        // 0x0008(0x0018)(Edit, BlueprintVisible, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EPlayerMappableKeySlot                        SlotToMatch;                                       // 0x0020(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         bMatchBasicKeyTypes : 1;                           // 0x0021(0x0001)(BitIndex: 0x00, PropSize: 0x0001 (Edit, BlueprintVisible, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic))
+	uint8                                         bMatchKeyAxisType : 1;                             // 0x0021(0x0001)(BitIndex: 0x01, PropSize: 0x0001 (Edit, BlueprintVisible, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic))
+	EHardwareDevicePrimaryType                    RequiredDeviceType;                                // 0x0022(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_23[0x1];                                       // 0x0023(0x0001)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         RequiredDeviceFlags;                               // 0x0024(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+DUMPER7_ASSERTS_FPlayerMappableKeyQueryOptions;
 
 // ScriptStruct EnhancedInput.MappingQueryIssue
 // 0x0018 (0x0018 - 0x0000)
@@ -401,14 +400,15 @@ public:
 };
 DUMPER7_ASSERTS_FKeyConsumptionOptions;
 
-// ScriptStruct EnhancedInput.InjectedInputArray
-// 0x0010 (0x0010 - 0x0000)
-struct FInjectedInputArray final
+// ScriptStruct EnhancedInput.AppliedInputContextData
+// 0x0008 (0x0008 - 0x0000)
+struct FAppliedInputContextData final
 {
 public:
-	TArray<struct FInjectedInput>                 Injected;                                          // 0x0000(0x0010)(ZeroConstructor, Transient, NativeAccessSpecifierPublic)
+	int32                                         Priority;                                          // 0x0000(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         RegistrationCount;                                 // 0x0004(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
-DUMPER7_ASSERTS_FInjectedInputArray;
+DUMPER7_ASSERTS_FAppliedInputContextData;
 
 // ScriptStruct EnhancedInput.InputActionInstance
 // 0x0060 (0x0060 - 0x0000)

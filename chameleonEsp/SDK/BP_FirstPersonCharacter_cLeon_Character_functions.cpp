@@ -766,7 +766,7 @@ void ABP_FirstPersonCharacter_cLeon_Character_C::CustomCrouch_Server_(double Hei
 }
 
 
-// Function BP_FirstPersonCharacter_cLeon_Character.BP_FirstPersonCharacter_cLeon_Character_C.InpActEvt_IA_Crouch_K2Node_EnhancedInputActionEvent_0
+// Function BP_FirstPersonCharacter_cLeon_Character.BP_FirstPersonCharacter_cLeon_Character_C.InpActEvt_IA_CopyCreate_K2Node_EnhancedInputActionEvent_0
 // (BlueprintEvent)
 // Parameters:
 // const struct FInputActionValue&         ActionValue                                            (BlueprintVisible, BlueprintReadOnly, Parm, NoDestructor)
@@ -774,14 +774,14 @@ void ABP_FirstPersonCharacter_cLeon_Character_C::CustomCrouch_Server_(double Hei
 // float                                   TriggeredTime                                          (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 // const class UInputAction*               SourceAction                                           (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
 
-void ABP_FirstPersonCharacter_cLeon_Character_C::InpActEvt_IA_Crouch_K2Node_EnhancedInputActionEvent_0(const struct FInputActionValue& ActionValue, float ElapsedTime, float TriggeredTime, const class UInputAction* SourceAction)
+void ABP_FirstPersonCharacter_cLeon_Character_C::InpActEvt_IA_CopyCreate_K2Node_EnhancedInputActionEvent_0(const struct FInputActionValue& ActionValue, float ElapsedTime, float TriggeredTime, const class UInputAction* SourceAction)
 {
 	static class UFunction* Func = nullptr;
 
 	if (Func == nullptr)
-		Func = Class->GetFunction("BP_FirstPersonCharacter_cLeon_Character_C", "InpActEvt_IA_Crouch_K2Node_EnhancedInputActionEvent_0");
+		Func = Class->GetFunction("BP_FirstPersonCharacter_cLeon_Character_C", "InpActEvt_IA_CopyCreate_K2Node_EnhancedInputActionEvent_0");
 
-	Params::BP_FirstPersonCharacter_cLeon_Character_C_InpActEvt_IA_Crouch_K2Node_EnhancedInputActionEvent_0 Parms{};
+	Params::BP_FirstPersonCharacter_cLeon_Character_C_InpActEvt_IA_CopyCreate_K2Node_EnhancedInputActionEvent_0 Parms{};
 
 	Parms.ActionValue = std::move(ActionValue);
 	Parms.ElapsedTime = ElapsedTime;
@@ -1646,7 +1646,7 @@ void ABP_FirstPersonCharacter_cLeon_Character_C::ProduceInput(int32 SimTimeMs, s
 
 
 // Function BP_FirstPersonCharacter_cLeon_Character.BP_FirstPersonCharacter_cLeon_Character_C.OnRep_BodyShadow
-// (BlueprintCallable, BlueprintEvent)
+// (HasDefaults, BlueprintCallable, BlueprintEvent)
 
 void ABP_FirstPersonCharacter_cLeon_Character_C::OnRep_BodyShadow()
 {
@@ -1786,6 +1786,27 @@ void ABP_FirstPersonCharacter_cLeon_Character_C::UseDecoy(bool* IsUse)
 
 	if (IsUse != nullptr)
 		*IsUse = Parms.IsUse;
+}
+
+
+// Function BP_FirstPersonCharacter_cLeon_Character.BP_FirstPersonCharacter_cLeon_Character_C.cLeonGetPlayerState
+// (Public, HasOutParams, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// class ABP_FirstPersonPlayerState_Online_cLeon_C**PlayerState_0                                          (Parm, OutParm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+
+void ABP_FirstPersonCharacter_cLeon_Character_C::cLeonGetPlayerState(class ABP_FirstPersonPlayerState_Online_cLeon_C** PlayerState_0)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("BP_FirstPersonCharacter_cLeon_Character_C", "cLeonGetPlayerState");
+
+	Params::BP_FirstPersonCharacter_cLeon_Character_C_cLeonGetPlayerState Parms{};
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	if (PlayerState_0 != nullptr)
+		*PlayerState_0 = Parms.PlayerState_0;
 }
 
 

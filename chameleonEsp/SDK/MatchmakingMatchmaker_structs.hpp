@@ -40,38 +40,6 @@ enum class EMatchmakerHostConfigurationAttributeFilterComparison : uint8
 	EMatchmakerHostConfigurationAttributeFilterComparison_MAX = 6,
 };
 
-// ScriptStruct MatchmakingMatchmaker.MatchmakerProgressInfo
-// 0x0038 (0x0038 - 0x0000)
-struct FMatchmakerProgressInfo final
-{
-public:
-	class FName                                   StepName;                                          // 0x0000(0x0008)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, EditConst, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FText                                   CurrentStatus;                                     // 0x0008(0x0010)(Edit, BlueprintVisible, BlueprintReadOnly, EditConst, NativeAccessSpecifierPublic)
-	class FText                                   CurrentDetail;                                     // 0x0018(0x0010)(Edit, BlueprintVisible, BlueprintReadOnly, EditConst, NativeAccessSpecifierPublic)
-	float                                         CurrentProgress;                                   // 0x0028(0x0004)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, EditConst, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2C[0x4];                                       // 0x002C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FDateTime                              EstimatedTimeOfCompletion;                         // 0x0030(0x0008)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, EditConst, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-DUMPER7_ASSERTS_FMatchmakerProgressInfo;
-
-// ScriptStruct MatchmakingMatchmaker.MatchmakerResultTeam
-// 0x0050 (0x0050 - 0x0000)
-struct FMatchmakerResultTeam final
-{
-public:
-	TMap<int32, struct FUniqueNetIdRepl>          Slots;                                             // 0x0000(0x0050)(Edit, BlueprintVisible, BlueprintReadOnly, EditConst, NativeAccessSpecifierPublic)
-};
-DUMPER7_ASSERTS_FMatchmakerResultTeam;
-
-// ScriptStruct MatchmakingMatchmaker.MatchmakerResult
-// 0x0010 (0x0010 - 0x0000)
-struct FMatchmakerResult final
-{
-public:
-	TArray<struct FMatchmakerResultTeam>          Teams;                                             // 0x0000(0x0010)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, EditConst, NativeAccessSpecifierPublic)
-};
-DUMPER7_ASSERTS_FMatchmakerResult;
-
 // ScriptStruct MatchmakingMatchmaker.MatchmakerHostConfigurationAttributeFilter
 // 0x0038 (0x0038 - 0x0000)
 struct FMatchmakerHostConfigurationAttributeFilter final
@@ -113,5 +81,37 @@ public:
 	TMap<struct FUniqueNetIdRepl, int32>          UserTeamAssignments;                               // 0x00B8(0x0050)(Edit, BlueprintVisible, NativeAccessSpecifierPublic)
 };
 DUMPER7_ASSERTS_FMatchmakerHostConfiguration;
+
+// ScriptStruct MatchmakingMatchmaker.MatchmakerResultTeam
+// 0x0050 (0x0050 - 0x0000)
+struct FMatchmakerResultTeam final
+{
+public:
+	TMap<int32, struct FUniqueNetIdRepl>          Slots;                                             // 0x0000(0x0050)(Edit, BlueprintVisible, BlueprintReadOnly, EditConst, NativeAccessSpecifierPublic)
+};
+DUMPER7_ASSERTS_FMatchmakerResultTeam;
+
+// ScriptStruct MatchmakingMatchmaker.MatchmakerResult
+// 0x0010 (0x0010 - 0x0000)
+struct FMatchmakerResult final
+{
+public:
+	TArray<struct FMatchmakerResultTeam>          Teams;                                             // 0x0000(0x0010)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, EditConst, NativeAccessSpecifierPublic)
+};
+DUMPER7_ASSERTS_FMatchmakerResult;
+
+// ScriptStruct MatchmakingMatchmaker.MatchmakerProgressInfo
+// 0x0038 (0x0038 - 0x0000)
+struct FMatchmakerProgressInfo final
+{
+public:
+	class FName                                   StepName;                                          // 0x0000(0x0008)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, EditConst, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FText                                   CurrentStatus;                                     // 0x0008(0x0010)(Edit, BlueprintVisible, BlueprintReadOnly, EditConst, NativeAccessSpecifierPublic)
+	class FText                                   CurrentDetail;                                     // 0x0018(0x0010)(Edit, BlueprintVisible, BlueprintReadOnly, EditConst, NativeAccessSpecifierPublic)
+	float                                         CurrentProgress;                                   // 0x0028(0x0004)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, EditConst, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2C[0x4];                                       // 0x002C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FDateTime                              EstimatedTimeOfCompletion;                         // 0x0030(0x0008)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, EditConst, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+DUMPER7_ASSERTS_FMatchmakerProgressInfo;
 
 SDK_NAMESPACE_END
