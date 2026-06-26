@@ -81,9 +81,8 @@ LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 }
 
 // The world scan (CheatManager::Init) - which both reads the actor list and applies our game-state
-// mutations inline - must run ONLY on the engine's game thread. UE dispatches ProcessEvent from
-// worker/task threads too, so "not the render thread" is not a safe proxy for "the game thread";
-// using it let the scan race the real game thread's actor list and fault deep inside
+// mutations inline - must run ONLY on the engine's game thread.
+// Using it let the scan race the real game thread's actor list and fault deep inside
 // GetAllActorsOfClass. We positively identify the game thread by the name UE gives it ("GameThread",
 // set during FEngineLoop::PreInit) and only run that work when the current TID matches - resolved
 // once in hkPresent via FindGameThreadId, then checked in hkProcessEvent.
