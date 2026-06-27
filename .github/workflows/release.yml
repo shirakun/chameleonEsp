@@ -47,11 +47,20 @@ jobs:
           $stage = "artifacts\x64"
           New-Item -ItemType Directory -Force -Path $stage | Out-Null
 
-          Get-ChildItem -Path $outDir -Include *.dll,*.pdb -Recurse |
+          # Use Where-Object instead of -Include: PowerShell's -Include with a
+          # literal directory path + -Recurse is unreliable and can miss root-
+          # level matches (here it skipped chameleonEsp.dll / chameleonEsp.pdb).
+          Get-ChildItem -Path $outDir -File -Recurse |
+            Where-Object { $_.Extension -in '.dll', '.pdb' } |
             Copy-Item -Destination $stage -Force
 
           Write-Host "Staged files:"
           Get-ChildItem $stage
+
+          if (-not (Get-ChildItem $stage -Filter *.dll)) {
+            Write-Error "No DLL was staged. Build output may have moved."
+            exit 1
+          }
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
