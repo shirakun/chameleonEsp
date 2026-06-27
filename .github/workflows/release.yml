@@ -37,20 +37,27 @@ jobs:
       - name: Stage artifacts
         shell: pwsh
         run: |
-          $outDir = "chameleonEsp\x64\Release"
+          # The .slnx sits at the repo root, so MSBuild's SolutionDir is the
+          # workspace root and link output (chameleonEsp.dll + chameleonEsp.pdb)
+          # lands in <workspace>\x64\Release. The chameleonEsp\x64\Release sub-
+          # directory only holds the compiler intermediate vc145.pdb, which we
+          # don't want to ship.
+          $outDir = "x64\Release"
           if (-not (Test-Path $outDir)) {
             Write-Error "Build output directory not found: $outDir"
-            Get-ChildItem -Recurse -Filter "*.dll" | ForEach-Object { Write-Host $_.FullName }
+            Write-Host "All build outputs under the workspace:"
+            Get-ChildItem -Recurse -Include *.dll,*.pdb |
+              ForEach-Object { Write-Host $_.FullName }
             exit 1
           }
+
+          Write-Host "Contents of $outDir:"
+          Get-ChildItem $outDir
 
           $stage = "artifacts\x64"
           New-Item -ItemType Directory -Force -Path $stage | Out-Null
 
-          # Use Where-Object instead of -Include: PowerShell's -Include with a
-          # literal directory path + -Recurse is unreliable and can miss root-
-          # level matches (here it skipped chameleonEsp.dll / chameleonEsp.pdb).
-          Get-ChildItem -Path $outDir -File -Recurse |
+          Get-ChildItem -Path $outDir -File |
             Where-Object { $_.Extension -in '.dll', '.pdb' } |
             Copy-Item -Destination $stage -Force
 
