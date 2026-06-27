@@ -13,88 +13,38 @@ on:
 
 jobs:
   build:
-    name: Build ${{ matrix.platform }}
+    name: Build x64
     runs-on: windows-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        platform: [x64, Win32]
-        configuration: [Release]
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Visual Studio 2026 Insiders Build Tools (v145 toolset)
-        shell: pwsh
-        run: |
-          $ErrorActionPreference = "Stop"
-          $bootstrapper = "$env:RUNNER_TEMP\vs_BuildTools.exe"
-          # VS 2026 Insiders / channel 18 bootstrapper
-          Invoke-WebRequest -Uri "https://aka.ms/vs/18/insiders/vs_buildtools.exe" -OutFile $bootstrapper
+      # windows-latest (Windows Server 2025 + Visual Studio 2026) already ships
+      # MSVC v145. See https://github.com/actions/runner-images/issues/14017
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
 
-          $components = @(
-            "Microsoft.VisualStudio.Workload.VCTools",
-            "Microsoft.VisualStudio.Component.VC.v14.45.x86.x64",
-            "Microsoft.VisualStudio.Component.Windows11SDK.22621"
-          )
-          $addArgs = $components | ForEach-Object { @("--add", $_) }
-
-          $args = @(
-            "--quiet", "--wait", "--norestart", "--nocache",
-            "--installPath", "C:\BuildTools-vs2026"
-          ) + $addArgs
-
-          Write-Host "Running: $bootstrapper $args"
-          $p = Start-Process -FilePath $bootstrapper -ArgumentList $args -Wait -PassThru
-          # Installer exit codes: 0 = success, 3010 = success but reboot required
-          if ($p.ExitCode -ne 0 -and $p.ExitCode -ne 3010) {
-            Write-Error "VS Build Tools install failed with exit code $($p.ExitCode)"
-            exit $p.ExitCode
-          }
-
-      - name: Locate MSBuild from VS 2026 Insiders
-        id: msbuild
-        shell: pwsh
-        run: |
-          $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
-          $msbuild = & $vswhere -prerelease -latest -requires Microsoft.Component.MSBuild -find "MSBuild\**\Bin\MSBuild.exe" | Select-Object -First 1
-          if (-not $msbuild) {
-            Write-Error "MSBuild from VS 2026 Insiders not found"
-            exit 1
-          }
-          Write-Host "MSBuild: $msbuild"
-          "path=$msbuild" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
-
-      - name: Build solution
+      - name: Build solution (Release|x64)
         shell: cmd
         run: |
-          "${{ steps.msbuild.outputs.path }}" chameleonEsp.slnx ^
+          msbuild chameleonEsp.slnx ^
             /t:Rebuild ^
-            /p:Configuration=${{ matrix.configuration }} ^
-            /p:Platform=${{ matrix.platform }} ^
-            /p:PlatformToolset=v145 ^
+            /p:Configuration=Release ^
+            /p:Platform=x64 ^
             /m /nologo /v:minimal
 
       - name: Stage artifacts
         shell: pwsh
         run: |
-          $platform = "${{ matrix.platform }}"
-          $config = "${{ matrix.configuration }}"
-          $outDir = if ($platform -eq "Win32") {
-            "chameleonEsp\$config"
-          } else {
-            "chameleonEsp\$platform\$config"
-          }
-
+          $outDir = "chameleonEsp\x64\Release"
           if (-not (Test-Path $outDir)) {
             Write-Error "Build output directory not found: $outDir"
             Get-ChildItem -Recurse -Filter "*.dll" | ForEach-Object { Write-Host $_.FullName }
             exit 1
           }
 
-          $stage = "artifacts\$platform"
+          $stage = "artifacts\x64"
           New-Item -ItemType Directory -Force -Path $stage | Out-Null
 
           Get-ChildItem -Path $outDir -Include *.dll,*.pdb -Recurse |
@@ -106,8 +56,8 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: chameleonEsp-${{ matrix.platform }}
-          path: artifacts/${{ matrix.platform }}/**
+          name: chameleonEsp-x64
+          path: artifacts/x64/**
           if-no-files-found: error
 
   release:
@@ -118,9 +68,6 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Resolve tag name
         id: tag
         shell: bash
@@ -131,21 +78,18 @@ jobs:
             echo "name=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Download all artifacts
+      - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          path: artifacts
+          name: chameleonEsp-x64
+          path: artifacts/x64
 
-      - name: Package per-platform zips
+      - name: Package zip
         shell: bash
         run: |
           mkdir -p release
-          cd artifacts
-          for dir in */; do
-            name="${dir%/}"
-            (cd "$dir" && zip -r "../../release/${name}-${{ steps.tag.outputs.name }}.zip" .)
-          done
-          ls -la ../release
+          (cd artifacts/x64 && zip -r "../../release/chameleonEsp-x64-${{ steps.tag.outputs.name }}.zip" .)
+          ls -la release
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
