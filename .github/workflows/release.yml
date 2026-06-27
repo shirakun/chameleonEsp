@@ -1,0 +1,156 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Release tag name (e.g. v1.0.0)'
+        required: true
+        default: 'v0.0.0'
+
+jobs:
+  build:
+    name: Build ${{ matrix.platform }}
+    runs-on: windows-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [x64, Win32]
+        configuration: [Release]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Visual Studio 2026 Insiders Build Tools (v145 toolset)
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          $bootstrapper = "$env:RUNNER_TEMP\vs_BuildTools.exe"
+          # VS 2026 Insiders / channel 18 bootstrapper
+          Invoke-WebRequest -Uri "https://aka.ms/vs/18/insiders/vs_buildtools.exe" -OutFile $bootstrapper
+
+          $components = @(
+            "Microsoft.VisualStudio.Workload.VCTools",
+            "Microsoft.VisualStudio.Component.VC.v14.45.x86.x64",
+            "Microsoft.VisualStudio.Component.Windows11SDK.22621"
+          )
+          $addArgs = $components | ForEach-Object { @("--add", $_) }
+
+          $args = @(
+            "--quiet", "--wait", "--norestart", "--nocache",
+            "--installPath", "C:\BuildTools-vs2026"
+          ) + $addArgs
+
+          Write-Host "Running: $bootstrapper $args"
+          $p = Start-Process -FilePath $bootstrapper -ArgumentList $args -Wait -PassThru
+          # Installer exit codes: 0 = success, 3010 = success but reboot required
+          if ($p.ExitCode -ne 0 -and $p.ExitCode -ne 3010) {
+            Write-Error "VS Build Tools install failed with exit code $($p.ExitCode)"
+            exit $p.ExitCode
+          }
+
+      - name: Locate MSBuild from VS 2026 Insiders
+        id: msbuild
+        shell: pwsh
+        run: |
+          $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+          $msbuild = & $vswhere -prerelease -latest -requires Microsoft.Component.MSBuild -find "MSBuild\**\Bin\MSBuild.exe" | Select-Object -First 1
+          if (-not $msbuild) {
+            Write-Error "MSBuild from VS 2026 Insiders not found"
+            exit 1
+          }
+          Write-Host "MSBuild: $msbuild"
+          "path=$msbuild" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+
+      - name: Build solution
+        shell: cmd
+        run: |
+          "${{ steps.msbuild.outputs.path }}" chameleonEsp.slnx ^
+            /t:Rebuild ^
+            /p:Configuration=${{ matrix.configuration }} ^
+            /p:Platform=${{ matrix.platform }} ^
+            /p:PlatformToolset=v145 ^
+            /m /nologo /v:minimal
+
+      - name: Stage artifacts
+        shell: pwsh
+        run: |
+          $platform = "${{ matrix.platform }}"
+          $config = "${{ matrix.configuration }}"
+          $outDir = if ($platform -eq "Win32") {
+            "chameleonEsp\$config"
+          } else {
+            "chameleonEsp\$platform\$config"
+          }
+
+          if (-not (Test-Path $outDir)) {
+            Write-Error "Build output directory not found: $outDir"
+            Get-ChildItem -Recurse -Filter "*.dll" | ForEach-Object { Write-Host $_.FullName }
+            exit 1
+          }
+
+          $stage = "artifacts\$platform"
+          New-Item -ItemType Directory -Force -Path $stage | Out-Null
+
+          Get-ChildItem -Path $outDir -Include *.dll,*.pdb -Recurse |
+            Copy-Item -Destination $stage -Force
+
+          Write-Host "Staged files:"
+          Get-ChildItem $stage
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: chameleonEsp-${{ matrix.platform }}
+          path: artifacts/${{ matrix.platform }}/**
+          if-no-files-found: error
+
+  release:
+    name: Publish Release
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Resolve tag name
+        id: tag
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "name=${{ github.event.inputs.tag_name }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "name=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Package per-platform zips
+        shell: bash
+        run: |
+          mkdir -p release
+          cd artifacts
+          for dir in */; do
+            name="${dir%/}"
+            (cd "$dir" && zip -r "../../release/${name}-${{ steps.tag.outputs.name }}.zip" .)
+          done
+          ls -la ../release
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.name }}
+          name: ${{ steps.tag.outputs.name }}
+          generate_release_notes: true
+          files: release/*.zip
