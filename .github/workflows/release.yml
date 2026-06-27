@@ -37,22 +37,23 @@ jobs:
       - name: Stage artifacts
         shell: pwsh
         run: |
-          # The .slnx sits at the repo root, so MSBuild's SolutionDir is the
-          # workspace root and link output (chameleonEsp.dll + chameleonEsp.pdb)
-          # lands in <workspace>\x64\Release. The chameleonEsp\x64\Release sub-
-          # directory only holds the compiler intermediate vc145.pdb, which we
-          # don't want to ship.
+          # MSBuild log line:
+          #   chameleonEsp.vcxproj -> D:\a\chameleonEsp\chameleonEsp\x64\Release\chameleonEsp.dll
+          # The runner workspace is D:\a\<repo>\<repo>\ (here D:\a\chameleonEsp\chameleonEsp\),
+          # so relative to the workspace the linker output lives at x64\Release\.
+          # The chameleonEsp\x64\Release subfolder only holds the compiler
+          # intermediate vc145.pdb, which is what shipped in v1.0.1.
           $outDir = "x64\Release"
           if (-not (Test-Path $outDir)) {
-            Write-Error "Build output directory not found: $outDir"
-            Write-Host "All build outputs under the workspace:"
+            Write-Error "Build output directory not found: ${outDir}"
+            Write-Host "All dll/pdb under the workspace:"
             Get-ChildItem -Recurse -Include *.dll,*.pdb |
               ForEach-Object { Write-Host $_.FullName }
             exit 1
           }
 
-          Write-Host "Contents of $outDir:"
-          Get-ChildItem $outDir
+          Write-Host "Contents of ${outDir}:"
+          Get-ChildItem $outDir | Format-Table -AutoSize | Out-String | Write-Host
 
           $stage = "artifacts\x64"
           New-Item -ItemType Directory -Force -Path $stage | Out-Null
@@ -62,7 +63,7 @@ jobs:
             Copy-Item -Destination $stage -Force
 
           Write-Host "Staged files:"
-          Get-ChildItem $stage
+          Get-ChildItem $stage | Format-Table -AutoSize | Out-String | Write-Host
 
           if (-not (Get-ChildItem $stage -Filter *.dll)) {
             Write-Error "No DLL was staged. Build output may have moved."
